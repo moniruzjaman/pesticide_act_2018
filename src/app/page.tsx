@@ -18,21 +18,22 @@ import {
   ChevronRight,
   Search,
   FileText,
-  Volume2,
   Pause,
   Play,
   Square,
-  Languages,
-  ExternalLink,
   Copy,
   CheckCircle2,
   ListTree,
   Scale,
   AlertTriangle,
   ShieldCheck,
+  Send,
+  MessageCircle,
+  Loader2,
+  WifiOff,
+  Share2,
 } from "lucide-react";
 
-const QWEN_URL = "https://chat.qwen.ai/s/deploy/t_8e6f0064-5286-4512-9b2a-4b0f79c1507b";
 const TOTAL_SLIDES = 47;
 
 // 7 chapter overview (mirrors the deck's TOC)
@@ -46,25 +47,87 @@ const CHAPTERS = [
   { num: "০৭", title: "খুচরা বিক্রেতার সম্মানের পথ", range: "স্লাইড ৪০–৪৭", summary: "IRM প্রচার, নৈতিক অনুশীলন ও গ্রাহক শিক্ষার মাধ্যমে সম্মান — বিক্রেতা কৃষকের রক্ষক।" },
 ];
 
-const QWEN_SUGGESTIONS = [
-  { q: "বালাইনাশক আইন ২০১৮-এর ধারা ১৮ অনুযায়ী খুচরা বিক্রেতার লাইসেন্সিং শর্ত কী কী?", tag: "ধারা ১৮" },
-  { q: "ভেজাল বালাইনাশক কীভাবে শনাক্ত করব? প্যাকেজিং, লেবেল ও হোলোগ্রাম রেড ফ্ল্যাগ কী?", tag: "শনাক্তকরণ" },
-  { q: "বালাইনাশক আইন লঙ্ঘনের শাস্তি কত? জরিমানা ও কারাদণের বিস্তারিত বলো।", tag: "শাস্তি" },
-  { q: "পরিদর্শকের ক্ষমতা কী কী? নমুনা সংগ্রহ প্রক্রিয়া কিভাবে কাজ করে?", tag: "পরিদর্শক" },
-  { q: "খুচরা বিক্রেতার ৭টি মৌলিক দায়িত্ব কী কী?", tag: "দায়িত্ব" },
-  { q: "MRP (সর্বোচ্চ খুচরা মূল্য) কীভাবে নির্ধারিত হয় এবং লঙ্ঘন করলে কী হবে?", tag: "MRP" },
-  { q: "IRM (Insecticide Resistance Management) কী এবং বিক্রেতার ভূমিকা কী?", tag: "IRM" },
-  { q: "কীটপতঙ্গের প্রতিরোধ ক্ষমতা কেন তৈরি হয়? বাংলাদেশে কোন কোন পোকা প্রতিরোধী?", tag: "রেজিস্ট্যান্স" },
+const AI_SUGGESTIONS = [
+  { q: "খুচরা বিক্রেতার লাইসেন্সিং শর্ত কী কী?", tag: "ধারা ১৮" },
+  { q: "ভেজাল বালাইনাশক কীভাবে শনাক্ত করব?", tag: "শনাক্তকরণ" },
+  { q: "বালাইনাশক আইন লঙ্ঘনের শাস্তি কত?", tag: "শাস্তি" },
+  { q: "পরিদর্শকের ক্ষমতা কী কী?", tag: "পরিদর্শক" },
+  { q: "খুচরা বিক্রেতার মূল দায়িত্ব কী?", tag: "দায়িত্ব" },
+  { q: "MRP কীভাবে নির্ধারিত হয়?", tag: "MRP" },
+  { q: "নিবন্ধনের মেয়াদ কত বছর?", tag: "নিবন্ধন" },
+  { q: "লেবেলে কী কী তথ্য বাধ্যতামূলক?", tag: "লেবেল" },
 ];
 
-type TabId = "overview" | "act" | "slides" | "downloads" | "qwen";
+type TabId = "overview" | "act" | "slides" | "downloads" | "ai";
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<TabId>("overview");
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [qwenOpen, setQwenOpen] = useState(false);
-  const [copied, setCopied] = useState<string | null>(null);
+  const [online, setOnline] = useState<boolean>(() => (typeof navigator !== "undefined" ? navigator.onLine : true));
+  const [installPrompt, setInstallPrompt] = useState<any>(null);
   const { toast } = useToast();
+
+  // Online/offline event listeners (no setState in effect body)
+  useEffect(() => {
+    const on = () => setOnline(true);
+    const off = () => setOnline(false);
+    window.addEventListener("online", on);
+    window.addEventListener("offline", off);
+    return () => {
+      window.removeEventListener("online", on);
+      window.removeEventListener("offline", off);
+    };
+  }, []);
+
+  // PWA install prompt capture
+  useEffect(() => {
+    const handler = (e: any) => {
+      e.preventDefault();
+      setInstallPrompt(e);
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  const handleInstall = async () => {
+    if (!installPrompt) return;
+    installPrompt.prompt();
+    const { outcome } = await installPrompt.userChoice;
+    if (outcome === "accepted") {
+      toast({ title: "অ্যাপ ইনস্টল হচ্ছে", description: "হোম স্ক্রিনে আইকন যোগ হবে" });
+    }
+    setInstallPrompt(null);
+  };
+
+  // Read tab from URL query (?tab=ai) — runs once on mount
+  const [initialTab] = useState<TabId>(() => {
+    if (typeof window === "undefined") return "overview";
+    const params = new URLSearchParams(window.location.search);
+    const t = params.get("tab");
+    if (t && ["overview", "act", "slides", "downloads", "ai"].includes(t)) {
+      return t as TabId;
+    }
+    return "overview";
+  });
+  const [activeTab, setActiveTab] = useState<TabId>(initialTab);
+
+  // Web Share API
+  const handleShare = async () => {
+    const shareData = {
+      title: "বালাইনাশক আইন, ২০১৮ — সমন্বিত ফিল্ড গাইড",
+      text: "৩৬ ধারা · ৪৭ স্লাইড · অফলাইন AI · বাংলা — খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড",
+      url: window.location.href,
+    };
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch {}
+    } else {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        toast({ title: "লিঙ্ক কপি হয়েছে", description: "শেয়ার করতে পেস্ট করুন" });
+      } catch {}
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF6EE]">
@@ -91,14 +154,22 @@ export default function Home() {
             <TabButton id="act" active={activeTab} onClick={setActiveTab}>আইন</TabButton>
             <TabButton id="slides" active={activeTab} onClick={setActiveTab}>স্লাইড</TabButton>
             <TabButton id="downloads" active={activeTab} onClick={setActiveTab}>ডাউনলোড</TabButton>
-            <TabButton id="qwen" active={activeTab} onClick={setActiveTab}>Qwen AI</TabButton>
+            <TabButton id="ai" active={activeTab} onClick={setActiveTab}>AI সহায়ক</TabButton>
           </nav>
 
           <div className="flex items-center gap-2">
+            <button
+              onClick={handleShare}
+              className="hidden sm:inline-flex items-center justify-center w-8 h-8 rounded-md border border-[#D9D2BF] text-[#1E4D3B] hover:bg-[#F2ECDD]"
+              title="শেয়ার করুন"
+              aria-label="শেয়ার"
+            >
+              <Share2 className="w-4 h-4" />
+            </button>
             <Button
               size="sm"
               className="bg-[#C7912C] hover:bg-[#9A6E1E] text-white hidden sm:inline-flex"
-              onClick={() => { setQwenOpen(true); setActiveTab("qwen"); }}
+              onClick={() => setActiveTab("ai")}
             >
               <Sparkles className="w-4 h-4 mr-1.5" /> AI
             </Button>
@@ -120,10 +191,26 @@ export default function Home() {
             <TabButton id="act" active={activeTab} onClick={(t) => { setActiveTab(t); setMobileNavOpen(false); }} full>আইন</TabButton>
             <TabButton id="slides" active={activeTab} onClick={(t) => { setActiveTab(t); setMobileNavOpen(false); }} full>স্লাইড</TabButton>
             <TabButton id="downloads" active={activeTab} onClick={(t) => { setActiveTab(t); setMobileNavOpen(false); }} full>ডাউনলোড</TabButton>
-            <TabButton id="qwen" active={activeTab} onClick={(t) => { setActiveTab(t); setMobileNavOpen(false); }} full>Qwen AI</TabButton>
+            <TabButton id="ai" active={activeTab} onClick={(t) => { setActiveTab(t); setMobileNavOpen(false); }} full>AI সহায়ক</TabButton>
           </div>
         )}
       </header>
+
+      {/* Offline indicator + install banner */}
+      {!online && (
+        <div className="bg-[#B23A2A] text-white text-center py-1.5 text-xs md:text-sm font-sans-bn flex items-center justify-center gap-2">
+          <WifiOff className="w-3.5 h-3.5" />
+          আপনি অফলাইনে আছেন — তবে আইন, স্লাইড ও AI সহায়ক কাজ করবে
+        </div>
+      )}
+      {installPrompt && (
+        <div className="bg-[#1E4D3B] text-[#FAF6EE] py-2 px-4 text-xs md:text-sm flex items-center justify-between gap-3">
+          <span className="font-sans-bn">📱 অ্যাপ হোম স্ক্রিনে ইনস্টল করুন — অফলাইনে ব্যবহার করুন</span>
+          <button onClick={handleInstall} className="bg-[#C7912C] hover:bg-[#9A6E1E] text-white px-3 py-1 rounded text-xs font-semibold">
+            ইনস্টল
+          </button>
+        </div>
+      )}
 
       {/* Main content */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-6 md:py-10">
@@ -131,25 +218,23 @@ export default function Home() {
         {activeTab === "act" && <ActTab />}
         {activeTab === "slides" && <SlidesTab />}
         {activeTab === "downloads" && <DownloadsTab />}
-        {activeTab === "qwen" && <QwenTab onCopied={setCopied} />}
+        {activeTab === "ai" && <AiTab />}
       </main>
 
       {/* Footer */}
       <footer className="bg-[#14342A] text-[#CDE6DD] text-center py-5 text-xs md:text-sm">
-        বালাইনাশক আইন, ২০১৮ · খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড · সমন্বিত সংস্করণ ২০২৬ · Qwen AI সহ
+        বালাইনাশক আইন, ২০১৮ · খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড · সমন্বিত সংস্করণ ২০২৬ · অফলাইন AI সহ
       </footer>
 
-      {/* Floating Qwen button */}
-      {!qwenOpen && (
-        <button
-          onClick={() => { setQwenOpen(true); setActiveTab("qwen"); }}
-          className="fixed bottom-5 right-5 z-50 bg-[#C7912C] hover:bg-[#9A6E1E] text-white rounded-full shadow-2xl px-4 py-3 md:px-5 md:py-4 flex items-center gap-2 transition-all hover:scale-105"
-          aria-label="Qwen AI চ্যাট খুলুন"
-        >
-          <Sparkles className="w-5 h-5" />
-          <span className="font-sans-bn font-semibold text-sm hidden sm:inline">Ask Qwen AI</span>
-        </button>
-      )}
+      {/* Floating AI button */}
+      <button
+        onClick={() => setActiveTab("ai")}
+        className="fixed bottom-5 right-5 z-50 bg-[#C7912C] hover:bg-[#9A6E1E] text-white rounded-full shadow-2xl px-4 py-3 md:px-5 md:py-4 flex items-center gap-2 transition-all hover:scale-105"
+        aria-label="AI সহায়ক খুলুন"
+      >
+        <Sparkles className="w-5 h-5" />
+        <span className="font-sans-bn font-semibold text-sm hidden sm:inline">AI সহায়ক</span>
+      </button>
 
       <Toaster />
     </div>
@@ -212,8 +297,8 @@ function OverviewTab({ onNavigate }: { onNavigate: (t: TabId) => void }) {
           <Button onClick={() => onNavigate("slides")} variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white/20 hover:text-white">
             <Presentation className="w-4 h-4 mr-2" /> স্লাইড দেখুন
           </Button>
-          <Button onClick={() => onNavigate("qwen")} variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white/20 hover:text-white">
-            <Sparkles className="w-4 h-4 mr-2" /> Qwen AI
+          <Button onClick={() => onNavigate("ai")} variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white/20 hover:text-white">
+            <Sparkles className="w-4 h-4 mr-2" /> AI সহায়ক
           </Button>
         </div>
       </Card>
@@ -270,8 +355,8 @@ function OverviewTab({ onNavigate }: { onNavigate: (t: TabId) => void }) {
         </Card>
         <Card className="p-5 border-[#D9D2BF]">
           <Sparkles className="w-7 h-7 text-[#C7912C] mb-2" />
-          <h4 className="font-serif-bn font-bold text-[#14342A] mb-1">Qwen AI সহায়ক</h4>
-          <p className="text-sm text-[#4A4A4A]">আইন, শনাক্তকরণ, শাস্তি — যেকোনো প্রশ্নে Qwen AI দিয়ে স্মার্ট উত্তর পান।</p>
+          <h4 className="font-serif-bn font-bold text-[#14342A] mb-1">অফলাইন AI সহায়ক</h4>
+          <p className="text-sm text-[#4A4A4A]">আইনের ৩৬ ধারার উপর ভিত্তি করে স্মার্ট উত্তর — সম্পূর্ণ অফলাইনে, কোনো ইন্টারনেট ছাড়াই।</p>
         </Card>
       </div>
     </div>
@@ -693,125 +778,251 @@ ${s.p === 1 ? "[এই ধারায় শাস্তি বিধান র
 }
 
 /* ============== Qwen AI Tab ============== */
-function QwenTab({ onCopied }: { onCopied: (s: string | null) => void }) {
-  const { toast } = useToast();
-  const [customQ, setCustomQ] = useState("");
-  const qwenRef = useRef<Window | null>(null);
+/* ============== AI Tab — offline Q&A based on Act 2018 ============== */
 
-  const openQwen = () => {
-    const w = 900, h = 700;
-    const left = window.screenX + window.outerWidth - w - 20;
-    const top = window.screenY + 80;
-    qwenRef.current = window.open(QWEN_URL, "qwen-chat", `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`);
-    if (!qwenRef.current) {
-      toast({ title: "পপআপ ব্লক হয়েছে", description: "অনুগ্রহ করে পপআপ অনুমোদন করুন অথবা সরাসরি লিঙ্কে যান।", variant: "destructive" });
+type Message = { role: "user" | "assistant"; text: string; refs?: string[] };
+
+// Keyword → section number mapping (Bengali + English keywords)
+const KEYWORD_MAP: { keys: string[]; sections: string[]; topic: string }[] = [
+  { keys: ["নিবন্ধন", "রেজিস্ট্রেশন", "registration", "নবায়ন", "renewal", "মেয়াদ"], sections: ["৪", "৫", "৬", "৭", "৮"], topic: "নিবন্ধন" },
+  { keys: ["লাইসেন্স", "licence", "license", "লাইসেন্সিং", "খুচরা", "retailer"], sections: ["৯", "১০", "১১", "১২", "১৩", "১৪"], topic: "লাইসেন্সিং" },
+  { keys: ["লেবেল", "label", "প্যাকেজ", "package", "প্যাকেজিং"], sections: ["১৬", "২৯"], topic: "লেবেলিং" },
+  { keys: ["mrp", "মূল্য", "দাম", "price", "সর্বোচ্চ"], sections: ["১৭"], topic: "MRP" },
+  { keys: ["পরিদর্শক", "inspector", "পরিদর্শন", "নমুনা", "sample"], sections: ["২৪", "২৫", "২৬", "২৭"], topic: "পরিদর্শক" },
+  { keys: ["শাস্তি", "দণ্ড", "জরিমানা", "কারাদণ", "penalty", "fine", "imprisonment"], sections: ["২৯", "৩০", "৩১", "৩২"], topic: "শাস্তি" },
+  { keys: ["বাজেয়াপ্ত", "জব্দ", "forfeit", "seizure", "বাতিল"], sections: ["৩২", "৩৩", "৩৪"], topic: "বাজেয়াপ্তকরণ" },
+  { keys: ["আমদানি", "import", "পাচার"], sections: ["১৫"], topic: "আমদানি নিয়ন্ত্রণ" },
+  { keys: ["বিশ্লেষক", "analyst", "পরীক্ষাগার", "laboratory", "lab"], sections: ["২০", "২১", "২২", "২৩"], topic: "বিশ্লেষক ও পরীক্ষাগার" },
+  { keys: ["সংজ্ঞা", "definition", "ভেজাল", "adulterated"], sections: ["২"], topic: "সংজ্ঞা" },
+  { keys: ["বিজ্ঞাপন", "advertisement", "প্রচার"], sections: ["৪"], topic: "বিজ্ঞাপন" },
+  { keys: ["মজুত", "storage", "সংরক্ষণ", "ব্যবহার"], sections: ["১৮"], topic: "মজুত ও ব্যবহার" },
+];
+
+function AiTab() {
+  const [sections, setSections] = useState<any[]>([]);
+  const sectionsRef = useRef<any[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: "assistant",
+      text: "আসসালামু আলাইকুম! আমি বালাইনাশক আইন, ২০১৮-এর অফলাইন সহায়ক। ৩৬টি ধারার যেকোনো বিষয়ে প্রশ্ন করুন — আমি সম্পূর্ণ অফলাইনে, আইনের উপর ভিত্তি করে উত্তর দেব।",
+    },
+  ]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    fetch("/assets/sections.json")
+      .then((r) => r.json())
+      .then((data) => {
+        sectionsRef.current = data;
+        setSections(data);
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-    return qwenRef.current;
-  };
+  }, [messages, loading]);
 
-  const askQuestion = async (q: string) => {
-    try {
-      await navigator.clipboard.writeText(q);
-      onCopied(q);
-      toast({
-        title: "প্রশ্ন কপি হয়েছে",
-        description: "Qwen উইন্ডোতে গিয়ে Ctrl+V চাপুন।",
-      });
-      const w = openQwen();
-      if (w) {
-        setTimeout(() => {
-          try { w.focus(); } catch {}
-        }, 300);
+  const findAnswer = (q: string): { text: string; refs: string[] } => {
+    const secs = sectionsRef.current;
+    const lower = q.toLowerCase().trim();
+    if (!lower) return { text: "দয়া করে একটি প্রশ্ন লিখুন।", refs: [] };
+
+    // Find matching topic
+    const matches: { sectionNum: string; score: number }[] = [];
+    for (const mapping of KEYWORD_MAP) {
+      for (const key of mapping.keys) {
+        if (lower.includes(key.toLowerCase())) {
+          for (const secNum of mapping.sections) {
+            matches.push({ sectionNum: secNum, score: 3 });
+          }
+          break;
+        }
       }
-    } catch {
-      toast({ title: "কপি ব্যর্থ", description: "ম্যানুয়ালি প্রশ্নটি কপি করুন।", variant: "destructive" });
     }
+
+    // Also search in section content
+    for (const s of secs) {
+      const sectionText = `${s.bn} ${s.bd} ${s.en} ${s.be}`.toLowerCase();
+      const words = lower.split(/\s+/).filter((w) => w.length > 2);
+      let score = 0;
+      for (const w of words) {
+        if (sectionText.includes(w)) score += 1;
+      }
+      if (score > 0) {
+        matches.push({ sectionNum: s.n, score });
+      }
+    }
+
+    // Aggregate scores
+    const sectionScores: Record<string, number> = {};
+    for (const m of matches) {
+      sectionScores[m.sectionNum] = (sectionScores[m.sectionNum] || 0) + m.score;
+    }
+
+    const topSections = Object.entries(sectionScores)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 3)
+      .map(([n]) => n);
+
+    if (topSections.length === 0 || secs.length === 0) {
+      return {
+        text: secs.length === 0
+          ? "আইনের ধারাগুলো এখনও লোড হচ্ছে। কয়েক সেকেন্ড পর আবার চেষ্টা করুন।"
+          : "দুঃখিত, আপনার প্রশ্নের সাথে সরাসরি মিলে যাওয়া কোনো ধারা পাইনি। অনুগ্রহ করে অন্য শব্দে প্রশ্নটি লিখুন বা নিচের সাজেস্টেড প্রশ্নগুলো দেখুন। আপনি 'আইন' ট্যাবে গিয়ে সব ৩৬টি ধারা পড়তে পারেন।",
+        refs: [],
+      };
+    }
+
+    // Build answer from matched sections
+    const matchedSections = topSections
+      .map((n) => secs.find((s) => s.n === n))
+      .filter(Boolean);
+
+    let text = "";
+    if (matchedSections.length === 1) {
+      const s = matchedSections[0];
+      text = `ধারা ${s.n}: ${s.bn}\n\n${s.bd}`;
+      if (s.be) text += `\n\n(English: ${s.en} — ${s.be})`;
+    } else {
+      text = "আপনার প্রশ্নের সাথে প্রাসঙ্গিক ধারাগুলো নিচে দেওয়া হলো:\n";
+      for (const s of matchedSections) {
+        text += `\n▸ ধারা ${s.n}: ${s.bn}\n  ${s.bd}\n`;
+      }
+    }
+    text += `\n\n⚠ এটি আইনের ধারা থেকে সরাসরি নেওয়া। বিস্তারিত জন্য 'আইন' ট্যাবে পূর্ণ রেফারেন্স দেখুন।`;
+
+    return { text, refs: topSections };
   };
 
-  const askCustom = () => {
-    if (!customQ.trim()) return;
-    askQuestion(customQ.trim());
-    setCustomQ("");
+  const sendQuestion = (q: string) => {
+    const question = q.trim();
+    if (!question || loading) return;
+
+    setMessages((m) => [...m, { role: "user", text: question }]);
+    setInput("");
+    setLoading(true);
+
+    // Brief delay for UX, then compute answer using latest sections from ref
+    setTimeout(() => {
+      const { text, refs } = findAnswer(question);
+      setMessages((m) => [...m, { role: "assistant", text, refs }]);
+      setLoading(false);
+    }, 500);
   };
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#14342A] flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-[#C7912C]" /> Qwen AI — বালাইনাশক আইন সহায়ক
-          </h3>
-          <p className="text-sm text-[#4A4A4A] mt-1">আইন, শনাক্তকরণ, শাস্তি — যেকোনো প্রশ্ন করুন</p>
-        </div>
-        <Button onClick={openQwen} className="bg-[#C7912C] hover:bg-[#9A6E1E] text-white">
-          <ExternalLink className="w-4 h-4 mr-2" /> Qwen চ্যাট খুলুন
-        </Button>
+    <div className="space-y-4">
+      <div>
+        <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#14342A] flex items-center gap-2">
+          <Sparkles className="w-5 h-5 text-[#C7912C]" /> AI সহায়ক — বালাইনাশক আইন, ২০১৮
+        </h3>
+        <p className="text-sm text-[#4A4A4A] mt-1 flex items-center gap-1.5">
+          <ShieldCheck className="w-3.5 h-3.5 text-[#2E7D44]" />
+          সম্পূর্ণ অফলাইন · ৩৬টি ধারার উপর ভিত্তি · কোনো ইন্টারনেট প্রয়োজন নেই
+        </p>
       </div>
 
-      {/* How it works */}
-      <Card className="p-4 bg-[#F2ECDD] border-[#D9D2BF]">
-        <div className="flex gap-3">
-          <ShieldCheck className="w-5 h-5 text-[#1E4D3B] flex-shrink-0 mt-0.5" />
-          <div className="text-sm text-[#4A4A4A]">
-            <p className="font-semibold text-[#14342A] mb-1">Qwen AI কীভাবে কাজ করে?</p>
-            <ol className="list-decimal list-inside space-y-1 text-xs md:text-sm">
-              <li>নিচের সাজেস্টেড প্রশ্নে ক্লিক করুন অথবা নিজের প্রশ্ন টাইপ করুন।</li>
-              <li>প্রশ্নটি স্বয়ংক্রিয়ভাবে কপিবোর্ডে কপি হবে এবং Qwen চ্যাট নতুন উইন্ডোতে খুলবে।</li>
-              <li>Qwen উইন্ডোতে <kbd className="bg-white px-1.5 py-0.5 rounded border border-[#D9D2BF] text-xs">Ctrl+V</kbd> চাপুন, তারপর Send।</li>
-              <li>Qwen বাংলায় বিস্তারিত উত্তর দেবে — আইনি ধারা, শাস্তি, পরামর্শ সহ।</li>
-            </ol>
-          </div>
+      {/* Chat window */}
+      <Card className="border-[#D9D2BF] overflow-hidden">
+        <div
+          ref={scrollRef}
+          className="bg-[#FAF6EE] p-4 space-y-3 max-h-[400px] overflow-y-auto"
+        >
+          {messages.map((m, i) => (
+            <div key={i} className={`flex gap-2.5 ${m.role === "user" ? "flex-row-reverse" : ""}`}>
+              <div
+                className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-white text-xs ${
+                  m.role === "user" ? "bg-[#C7912C]" : "bg-[#1E4D3B]"
+                }`}
+              >
+                {m.role === "user" ? "আপ" : "⚖"}
+              </div>
+              <div
+                className={`max-w-[80%] rounded-lg p-3 text-sm whitespace-pre-wrap leading-relaxed ${
+                  m.role === "user"
+                    ? "bg-[#C7912C] text-white"
+                    : "bg-white border border-[#D9D2BF] text-[#1A1A1A]"
+                }`}
+              >
+                {m.text}
+                {m.refs && m.refs.length > 0 && (
+                  <div className="mt-2 pt-2 border-t border-[#D9D2BF] flex flex-wrap gap-1">
+                    {m.refs.map((r) => (
+                      <span key={r} className="text-[10px] bg-[#F2ECDD] text-[#1E4D3B] px-2 py-0.5 rounded">
+                        ধারা {r}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+          {loading && (
+            <div className="flex gap-2.5">
+              <div className="w-8 h-8 rounded-full bg-[#1E4D3B] text-white flex items-center justify-center text-xs">⚖</div>
+              <div className="bg-white border border-[#D9D2BF] rounded-lg p-3 text-sm text-[#6B6B6B] flex items-center gap-2">
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                চিন্তা করছি...
+              </div>
+            </div>
+          )}
         </div>
-      </Card>
 
-      {/* Custom question */}
-      <Card className="p-4 border-[#D9D2BF]">
-        <label className="text-sm font-semibold text-[#14342A] mb-2 block">নিজের প্রশ্ন লিখুন</label>
-        <div className="flex gap-2">
+        {/* Input */}
+        <div className="border-t border-[#D9D2BF] p-3 bg-white flex gap-2">
           <Input
-            value={customQ}
-            onChange={(e) => setCustomQ(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && askCustom()}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && sendQuestion(input)}
             placeholder="যেমন: ভেজাল বালাইনাশক বিক্রি করলে কী শাস্তি?"
             className="border-[#D9D2BF]"
+            disabled={loading}
           />
-          <Button onClick={askCustom} className="bg-[#1E4D3B] hover:bg-[#14342A] text-white">
-            <Sparkles className="w-4 h-4 mr-1.5" /> জিজ্ঞাসা
+          <Button
+            onClick={() => sendQuestion(input)}
+            className="bg-[#1E4D3B] hover:bg-[#14342A] text-white"
+            disabled={loading || !input.trim()}
+          >
+            <Send className="w-4 h-4" />
           </Button>
         </div>
       </Card>
 
       {/* Suggested questions */}
       <div>
-        <h4 className="font-serif-bn font-bold text-[#14342A] mb-3 flex items-center gap-2">
-          <AlertTriangle className="w-4 h-4 text-[#C7912C]" /> সাজেস্টেড প্রশ্ন — এক ক্লিকে জিজ্ঞাসা
+        <h4 className="font-serif-bn font-bold text-[#14342A] mb-3 flex items-center gap-2 text-sm">
+          <MessageCircle className="w-4 h-4 text-[#C7912C]" /> সাজেস্টেড প্রশ্ন — এক ক্লিকে জিজ্ঞাসা
         </h4>
-        <div className="grid md:grid-cols-2 gap-2">
-          {QWEN_SUGGESTIONS.map((s, i) => (
+        <div className="grid sm:grid-cols-2 gap-2">
+          {AI_SUGGESTIONS.map((s, i) => (
             <button
               key={i}
-              onClick={() => askQuestion(s.q)}
-              className="text-left p-3 bg-white border border-[#D9D2BF] rounded-lg hover:border-[#C7912C] hover:shadow-sm transition-all flex gap-3 items-start"
+              onClick={() => sendQuestion(s.q)}
+              disabled={loading}
+              className="text-left p-2.5 bg-white border border-[#D9D2BF] rounded-lg hover:border-[#C7912C] hover:shadow-sm transition-all flex gap-2.5 items-center disabled:opacity-50"
             >
-              <Badge className="bg-[#F2ECDD] text-[#1E4D3B] hover:bg-[#F2ECDD] text-xs flex-shrink-0">{s.tag}</Badge>
-              <span className="text-sm text-[#1A1A1A] leading-relaxed flex-1">{s.q}</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#6B6B6B] flex-shrink-0 mt-0.5" />
+              <Badge className="bg-[#F2ECDD] text-[#1E4D3B] hover:bg-[#F2ECDD] text-[10px] flex-shrink-0">{s.tag}</Badge>
+              <span className="text-xs text-[#1A1A1A] leading-relaxed flex-1">{s.q}</span>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Qwen iframe alternative (informational) */}
-      <Card className="p-4 border-[#D9D2BF] bg-white">
-        <p className="text-xs text-[#6B6B6B] mb-2 flex items-center gap-1.5">
-          <Sparkles className="w-3.5 h-3.5 text-[#C7912C]" />
-          Qwen চ্যাট সরাসরি এই পেজে এম্বেড করা যায় না (নিরাপত্তা নীতি)। তাই পপআপ উইন্ডো ব্যবহার করা হয়েছে।
+      {/* Info card */}
+      <Card className="p-3 border-[#D9D2BF] bg-[#F2ECDD]">
+        <p className="text-xs text-[#4A4A4A] flex items-start gap-2">
+          <ShieldCheck className="w-3.5 h-3.5 text-[#1E4D3B] flex-shrink-0 mt-0.5" />
+          <span>
+            এই AI সহায়ক সম্পূর্ণ অফলাইনে কাজ করে — কোনো ডেটা সার্ভারে পাঠানো হয় না।
+            উত্তরগুলো সরাসরি বালাইনাশক আইন, ২০১৮-এর ৩৬টি ধারা থেকে নেওয়া। জটিল প্রশ্নের জন্য
+            সংশ্লিষ্ট ধারা উল্লেখ সহ উত্তর দেওয়া হয়।
+          </span>
         </p>
-        <Button asChild variant="outline" size="sm" className="border-[#1E4D3B] text-[#1E4D3B] hover:bg-[#1E4D3B] hover:text-white">
-          <a href={QWEN_URL} target="_blank" rel="noopener noreferrer">
-            <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> নতুন ট্যাবে খুলুন
-          </a>
-        </Button>
       </Card>
     </div>
   );

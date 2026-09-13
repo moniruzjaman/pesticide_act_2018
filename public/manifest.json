@@ -1,0 +1,51 @@
+{
+  "name": "বালাইনাশক আইন, ২০১৮ — সমন্বিত ফিল্ড গাইড",
+  "short_name": "বালাইনাশক আইন",
+  "description": "খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড ও আইনগত নির্দেশিকা — ৩৬ ধারা, ৪৭ স্লাইড, অফলাইন AI সহ",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FAF6EE",
+  "theme_color": "#1E4D3B",
+  "lang": "bn",
+  "dir": "ltr",
+  "categories": ["education", "productivity", "reference"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "আইন পড়ুন",
+      "short_name": "আইন",
+      "description": "৩৬টি ধারার ইন্টারঅ্যাকটিভ রেফারেন্স",
+      "url": "/?tab=act",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "স্লাইড দেখুন",
+      "short_name": "স্লাইড",
+      "description": "৪৭টি স্লাইডের প্রশিক্ষণ ডেক",
+      "url": "/?tab=slides",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "AI সহায়ক",
+      "short_name": "AI",
+      "description": "আইনের উপর ভিত্তি করে প্রশ্নোত্তর",
+      "url": "/?tab=ai",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
