@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>কীটনাশক (পেস্টিসাইডস) আইন, ২০১৮ | Pesticide Act, 2018</title>
+<style>
+  :root{
+    --bd-green:#006a4e; --bd-red:#f42a41; --bd-green-dark:#004d38;
+    --ink:#1c2b26; --paper:#fafdfb; --line:#e2ece7; --gold:#c9a227;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Noto Sans Bengali','SolaimanLipi','Segoe UI',sans-serif;background:var(--paper);color:var(--ink);line-height:1.75}
+
+  /* ── OFFICIAL GOVBRANDING HEADER ── */
+  .govbar{background:var(--bd-green);color:#fff;padding:6px 20px;font-size:13px;display:flex;justify-content:space-between;align-items:center}
+  header{background:linear-gradient(135deg,#006a4e 0%,#00875f 100%);color:#fff;padding:26px 20px 20px;text-align:center;border-bottom:6px solid var(--bd-red)}
+  .seal{width:74px;height:74px;margin:0 auto 12px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.25);position:relative}
+  .seal::before{content:"";position:absolute;inset:5px;border:2px solid var(--bd-green);border-radius:50%}
+  .seal .flag{width:34px;height:22px;background:var(--bd-green);border-radius:2px;position:relative}
+  .seal .flag::after{content:"";position:absolute;left:9px;top:3px;width:14px;height:14px;background:var(--bd-red);border-radius:50%}
+  header h1{font-size:26px;font-weight:700;letter-spacing:.3px}
+  header .sub{font-size:15px;opacity:.92;margin-top:4px}
+  header .act-no{display:inline-block;margin-top:10px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 16px;font-size:13px}
+
+  /* ── TOOLBAR ── */
+  .toolbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .toolbar .grp{display:flex;gap:6px;align-items:center}
+  .btn{border:1px solid var(--bd-green);background:#fff;color:var(--bd-green);padding:7px 14px;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:6px}
+  .btn:hover{background:var(--bd-green);color:#fff}
+  .btn.primary{background:var(--bd-green);color:#fff}
+  .btn.primary:hover{background:var(--bd-green-dark)}
+  .btn.danger{border-color:var(--bd-red);color:var(--bd-red)}
+  .btn.danger:hover{background:var(--bd-red);color:#fff}
+  .langswitch{margin-left:auto;display:flex;border:1px solid var(--bd-green);border-radius:8px;overflow:hidden}
+  .langswitch button{border:none;background:#fff;padding:7px 16px;cursor:pointer;font-family:inherit;font-size:14px;color:var(--bd-green)}
+  .langswitch button.active{background:var(--bd-green);color:#fff;font-weight:700}
+  .readstatus{font-size:13px;color:var(--bd-green);min-width:120px}
+
+  /* ── TABS ── */
+  .tabs{display:flex;gap:4px;padding:14px 16px 0;background:#fff;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .tab{padding:10px 20px;border:none;background:transparent;cursor:pointer;font-family:inherit;font-size:15px;color:#5a6b64;border-bottom:3px solid transparent}
+  .tab.active{color:var(--bd-green);font-weight:700;border-bottom-color:var(--bd-green)}
+
+  main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
+  .panel{display:none;animation:fade .3s}
+  .panel.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* ── OVERVIEW ── */
+  .hero{background:#fff;border:1px solid var(--line);border-left:6px solid var(--bd-green);border-radius:12px;padding:22px;margin-bottom:16px}
+  .hero h2{color:var(--bd-green);font-size:20px;margin-bottom:10px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+  .stat .num{font-size:30px;font-weight:800;color:var(--bd-red)}
+  .stat .lbl{font-size:13px;color:#5a6b64;margin-top:2px}
+
+  /* ── KEY STATEMENTS ── */
+  .key{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;transition:.2s}
+  .key:hover{border-color:var(--bd-green);box-shadow:0 4px 12px rgba(0,106,78,.1)}
+  .key .ico{flex:0 0 40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#006a4e,#00a86b);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px}
+  .key h3{font-size:15px;color:var(--bd-green);margin-bottom:4px}
+  .key p{font-size:14px;color:#3d4f48}
+  .key .ref{font-size:12px;color:#8a9a93;margin-top:4px}
+  .key .rd{margin-left:auto;flex:0 0 auto}
+
+  /* ── SECTIONS LIST ── */
+  .sec{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+  .sec-head{width:100%;display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;background:#fff;border:none;text-align:left;font-family:inherit}
+  .sec-head:hover{background:#f2f8f5}
+  .sec-num{flex:0 0 44px;height:44px;border-radius:10px;background:var(--bd-green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+  .sec-title{flex:1;font-size:15px;font-weight:600;color:var(--ink)}
+  .sec-title small{display:block;font-weight:400;color:#8a9a93;font-size:12px;margin-top:2px}
+  .sec-tools{display:flex;gap:6px}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:6px;padding:5px 8px;cursor:pointer;font-size:13px;color:var(--bd-green)}
+  .chip:hover{background:var(--bd-green);color:#fff}
+  .sec-body{display:none;padding:0 16px 16px 72px;font-size:14px;color:#3d4f48;border-top:1px dashed var(--line)}
+  .sec.open .sec-body{display:block;padding-top:12px}
+  .chev{transition:.25s;color:#8a9a93}
+  .sec.open .chev{transform:rotate(90deg)}
+  .penalty{background:#fff5f5;border-left:4px solid var(--bd-red);padding:8px 12px;border-radius:0 8px 8px 0;margin-top:8px;font-size:13px}
+
+  footer{background:var(--bd-green-dark);color:#cfe6dd;text-align:center;padding:18px;font-size:13px;margin-top:40px}
+  .reading{outline:3px solid var(--gold)!important;outline-offset:-3px}
+  @media(max-width:640px){.sec-body{padding-left:16px}.readstatus{display:none}}
+</style>
+</head>
+<body>
+
+<div class="govbar">
+  <span data-bn="গণপ্রজাতন্ত্রী বাংলাদেশ সরকার" data-en="Government of the People's Republic of Bangladesh">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</span>
+  <span data-bn="বুধবার, ১১ সেপ্টেম্বর ২০২৬" data-en="Friday, 11 September 2026">বুধবার, ১১ সেপ্টেম্বর ২০২৬</span>
+</div>
+
+<header>
+  <div class="seal"><div class="flag"></div></div>
+  <h1 data-bn="কীটনাশক (পেস্টিসাইডস) আইন, ২০১৮" data-en="Pesticide Act, 2018">কীটনাশক (পেস্টিসাইডস) আইন, ২০১৮</h1>
+  <div class="sub" data-bn="কীটনাশক আমদানি, উৎপাদন, পুনঃউৎপাদন, বিক্রয়, বিতরণ ও ব্যবহার নিয়ন্ত্রণ এবং কীটনাশক সংক্রান্ত আনুষঙ্গিক বিষয়ে বিধান প্রণয়নকল্পে প্রণীত আইন" data-en="An Act to regulate the import, manufacture, re-manufacture, sale, distribution and use of pesticides and for ancillary matters">কীটনাশক আমদানি, উৎপাদন, পুনঃউৎপাদন, বিক্রয়, বিতরণ ও ব্যবহার নিয়ন্ত্রণ এবং কীটনাশক সংক্রান্ত আনুষঙ্গিক বিষয়ে বিধান প্রণয়নকল্পে প্রণীত আইন</div>
+  <div class="act-no" data-bn="২০১৮ সালের ২৪ নং আইন | ২৯ জুলাই ২০১৮" data-en="Act No. 24 of 2018 | 29 July 2018">২০১৮ সালের ২৪ নং আইন | ২৯ জুলাই ২০১৮</div>
+</header>
+
+<div class="toolbar">
+  <div class="grp">
+    <button class="btn primary" id="btnPlayAll">🔊 <span data-bn="সম্পূর্ণ শুনুন" data-en="Read All">সম্পূর্ণ শুনুন</span></button>
+    <button class="btn" id="btnPause">⏸ <span data-bn="বিরতি" data-en="Pause">বিরতি</span></button>
+    <button class="btn danger" id="btnStop">⏹ <span data-bn="থামান" data-en="Stop">থামান</span></button>
+  </div>
+  <span class="readstatus" id="readStatus"></span>
+  <div class="langswitch">
+    <button id="btnBn" class="active">বাংলা</button>
+    <button id="btnEn">English</button>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-panel="overview" data-bn="সংক্ষিপ্ত বিবরণ" data-en="Overview">সংক্ষিপ্ত বিবরণ</button>
+  <button class="tab" data-panel="keys" data-bn="মূল বিধানসমূহ" data-en="Key Statements">মূল বিধানসমূহ</button>
+  <button class="tab" data-panel="sections" data-bn="সকল ধারাক্রম" data-en="All Sections (Sequential)">সকল ধারাক্রম</button>
+</div>
+
+<main>
+
+<!-- OVERVIEW -->
+<div class="panel active" id="overview">
+  <div class="hero">
+    <h2 data-bn="আইনটির সারসংক্ষেপ" data-en="Act Summary">আইনটির সারসংক্ষেপ</h2>
+    <p data-bn="এই আইনের মাধ্যমে Pesticides Ordinance, 1971 রহিত করে কীটনাশক ব্যবস্থাপনা আধুনিক ও সময়োপযোগী করা হয়েছে। কীটনাশক নিবন্ধন, লাইসেন্স, আমদানি-উৎপাদন, মান নিয়ন্ত্রণ, ভেজালবিরোধী ব্যবস্থা এবং অপরাধের দণ্ডবিধান এতে অন্তর্ভুক্ত।"
+       data-en="This Act repeals the Pesticides Ordinance, 1971 to modernise pesticide management. It covers registration, licensing, import & manufacture, quality control, anti-adulteration measures and penalties for offences.">এই আইনের মাধ্যমে Pesticides Ordinance, 1971 রহিত করে কীটনাশক ব্যবস্থাপনা আধুনিক ও সময়োপযোগী করা হয়েছে। কীটনাশক নিবন্ধন, লাইসেন্স, আমদানি-উৎপাদন, মান নিয়ন্ত্রণ, ভেজালবিরোধী ব্যবস্থা এবং অপরাধের দণ্ডবিধান এতে অন্তর্ভুক্ত।</p>
+    <div class="stats">
+      <div class="stat"><div class="num">৩৬</div><div class="lbl" data-bn="মোট ধারা" data-en="Total Sections">মোট ধারা</div></div>
+      <div class="stat"><div class="num">৩</div><div class="lbl" data-bn="বছর: নিবন্ধন মেয়াদ" data-en="Years: Registration validity">বছর: নিবন্ধন মেয়াদ</div></div>
+      <div class="stat"><div class="num">২</div><div class="lbl" data-bn="বছর: লাইসেন্স মেয়াদ" data-en="Years: Licence validity">বছর: লাইসেন্স মেয়াদ</div></div>
+      <div class="stat"><div class="num">২৬</div><div class="lbl" data-bn="সদস্য: কারিগরি কমিটি" data-en="Members: Technical Committee">সদস্য: কারিগরি কমিটি</div></div>
+      <div class="stat"><div class="num">২২</div><div class="lbl" data-bn="সংজ্ঞা" data-en="Definitions">সংজ্ঞা</div></div>
+    </div>
+    <button class="btn primary" onclick="readSection('overview-text')">🔊 <span data-bn="সারসংক্ষেপ শুনুন" data-en="Listen to Summary">সারসংক্ষেপ শুনুন</span></button>
+    <p id="overview-text" style="margin-top:10px;font-size:14px;color:#3d4f48"
+       data-bn="কীটনাশক আইন ২০১৮ বাংলাদেশে কীটনাশক আমদানি, উৎপাদন ও বিক্রয়ের জন্য নিবন্ধন ও লাইসেন্স বাধ্যতামূলক করেছে। প্রতিটি কীটনাশকের ব্র্যান্ড নিবন্ধনের মেয়াদ তিন বছর এবং লাইসেন্সের মেয়াদ দুই বছর। ভেজাল বা মিথ্যা তথ্য প্রদানে অর্থদণ্ড ও কারাদণ্ডের বিধান রয়েছে।"
+       data-en="The Pesticide Act 2018 makes registration and licensing mandatory for import, manufacture and sale of pesticides in Bangladesh. Brand registration is valid for three years and licences for two years. Adulteration or providing false information is punishable with fines and imprisonment.">কীটনাশক আইন ২০১৮ বাংলাদেশে কীটনাশক আমদানি, উৎপাদন ও বিক্রয়ের জন্য নিবন্ধন ও লাইসেন্স বাধ্যতামূলক করেছে। প্রতিটি কীটনাশকের ব্র্যান্ড নিবন্ধনের মেয়াদ তিন বছর এবং লাইসেন্সের মেয়াদ দুই বছর। ভেজাল বা মিথ্যা তথ্য প্রদানে অর্থদণ্ড ও কারাদণ্ডের বিধান রয়েছে।</p>
+  </div>
+</div>
+
+<!-- KEY STATEMENTS -->
+<div class="panel" id="keys"></div>
+
+<!-- SECTIONS -->
+<div class="panel" id="sections">
+  <div style="margin-bottom:14px;display:flex;gap:8px">
+    <button class="btn" id="btnExpandAll" data-bn="সব খুলুন" data-en="Expand All">সব খুলুন</button>
+    <button class="btn" id="btnCollapseAll" data-bn="সব বন্ধ করুন" data-en="Collapse All">সব বন্ধ করুন</button>
+  </div>
+  <div id="secList"></div>
+</div>
+
+</main>
+
+<footer>
+  <span data-bn="© গণপ্রজাতন্ত্রী বাংলাদেশ সরকার | কীটনাশক (পেস্টিসাইডস) আইন, ২০১৮ — ডিজিটাল ইন্টারঅ্যাক্টিভ সংস্করণ" data-en="© Government of Bangladesh | Pesticide Act, 2018 — Digital Interactive Edition">© গণপ্রজাতন্ত্রী বাংলাদেশ সরকার | কীটনাশক (পেস্টিসাইডস) আইন, ২০১৮ — ডিজিটাল ইন্টারঅ্যাক্টিভ সংস্করণ</span>
+</footer>
+
+<script>
+/* ═══════════ DATA: 36 SECTIONS (SEQUENTIAL) ═══════════ */
+const SECTIONS=[
+{n:"১",bn:"সংক্ষিপ্ত শিরোনাম ও প্রবর্তন",en:"Short Title & Commencement",bd:"এই আইন কীটনাশক (পেস্টিসাইডস) আইন, ২০১৮ নামে অভিহিত হবে এবং অবিলম্বে কার্যকর হবে।",be:"This Act shall be called the Pesticide Act, 2018 and shall come into force immediately.",p:0},
+{n:"২",bn:"সংজ্ঞা",en:"Definitions",bd:"আইনে ২২টি সংজ্ঞা রয়েছে — আগাছা, উপাদান, কারিগরি উপদেষ্টা কমিটি, ক্ষুদ্র উৎপাদনকারী, গ্যারান্টি, নিবন্ধন, নিবন্ধন কর্তৃপক্ষ, নিবন্ধিত, পরিদর্শক, প্যাকেজ, পুনঃউৎপাদন, কীটনাশক, ব্র্যান্ড, বিজ্ঞাপন, বিধি, বিশ্লেষক, ব্যক্তি, ভেজাল কীটনাশক, লাইসেন্স, লাইসেন্সধারী, লাইসেন্সিং কর্তৃপক্ষ ও লেবেল।",be:"Contains 22 definitions including pesticide, registration, licence, label, brand, adulterated pesticide, inspector, analyst, etc.",p:0},
+{n:"৩",bn:"অন্যান্য আইনের অতিরিক্ততা",en:"Overriding Effect",bd:"এই আইনের বিধানাবলী অন্য যেকোনো আইনের বিপক্ষ নয় এবং এর অতিরিক্ত হিসেবে প্রযোজ্য হবে।",be:"The provisions of this Act shall have effect notwithstanding anything inconsistent in any other law.",p:0},
+{n:"৪",bn:"কীটনাশক নিবন্ধন",en:"Registration of Pesticide",bd:"নিবন্ধিত ব্র্যান্ড ব্যতীত কোনো ব্যক্তি কীটনাশক আমদানি, উৎপাদন, পুনঃউৎপাদন, বিক্রয় বা বিজ্ঞাপন প্রচার করতে পারবেন না।",be:"No person shall import, manufacture, sell or advertise any pesticide without a registered brand.",p:0},
+{n:"৫",bn:"নিবন্ধনের জন্য আবেদন ও প্রদান",en:"Application & Grant of Registration",bd:"নিবন্ধন কর্তৃপক্ষের নিকট আবেদন করতে হবে; গ্যারান্টি, উপাদান ও ব্যবহারের উদ্দেশ্য যাচাই করে নিবন্ধন প্রদান করা হবে।",be:"Application to be made to the Registration Authority, which grants registration after verifying warranty, ingredients and intended use.",p:0},
+{n:"৬",bn:"নিবন্ধনের মেয়াদ",en:"Validity of Registration",bd:"কীটনাশক ব্র্যান্ডের নিবন্ধনের মেয়াদ নিবন্ধনের তারিখ থেকে ৩ (তিন) বছর।",be:"Registration of a pesticide brand is valid for 3 years from the date of registration.",p:0},
+{n:"৭",bn:"নিবন্ধন নবায়ন",en:"Renewal of Registration",bd:"মেয়াদ শেষের ৩০ দিন পূর্বে নবায়নের জন্য আবেদন করতে হবে; নবায়নের মেয়াদ ৩ বছর।",be:"Renewal application must be filed 30 days before expiry; renewed registration is valid for 3 years.",p:0},
+{n:"৮",bn:"নিবন্ধন বাতিল",en:"Cancellation of Registration",bd:"বিধান লঙ্ঘন, মিথ্যা তথ্য প্রদান, কীটনাশক নিষ্ক্রিয় হলে বা স্বাস্থ্যের জন্য ঝুঁকিপূর্ণ হলে নিবন্ধন বাতিল করা যাবে।",be:"Registration may be cancelled for violation of provisions, false information, ineffectiveness or health hazard.",p:0},
+{n:"৯",bn:"আমদানি, উৎপাদন ইত্যাদির জন্য লাইসেন্স",en:"Licence for Import, Manufacture, etc.",bd:"লাইসেন্স গ্রহণ ব্যতীত নিবন্ধিত কীটনাশক আমদানি, উৎপাদন, বিক্রয়, প্যাকেজিং ও বিজ্ঞাপন করা যাবে না।",be:"No import, manufacture, sale, packaging or advertising of registered pesticide without a licence.",p:0},
+{n:"১০",bn:"লাইসেন্সের জন্য আবেদন ও প্রদান",en:"Application & Grant of Licence",bd:"লাইসেন্সিং কর্তৃপক্ষের নিকট আবেদন; নির্ধারিত পদ্ধতি ও শর্ত সাপেক্ষে লাইসেন্স প্রদান করা হবে।",be:"Apply to the Licensing Authority; licence granted subject to prescribed procedure and conditions.",p:0},
+{n:"১১",bn:"লাইসেন্সের মেয়াদ",en:"Validity of Licence",bd:"লাইসেন্স প্রদানের তারিখ থেকে মেয়াদ ২ (দুই) বছর।",be:"A licence is valid for 2 years from the date of issue.",p:0},
+{n:"১২",bn:"লাইসেন্স নবায়ন",en:"Renewal of Licence",bd:"মেয়াদ শেষের ৩০ দিন পূর্বে আবেদন করতে হবে; নবায়নের মেয়াদ ২ বছর।",be:"Renewal application 30 days before expiry; renewed licence valid for 2 years.",p:0},
+{n:"১৩",bn:"লাইসেন্স হস্তান্তর",en:"Transfer of Licence",bd:"লাইসেন্সধারীর মৃত্যু বা ব্যবসা পরিচালনায় অক্ষম হলে তাঁর আইনানুগ উত্তরাধিকারীর অনুকূলে লাইসেন্স হস্তান্তর করা যাবে।",be:"On death or incapacity of the licensee, the licence may be transferred to the legal heir.",p:0},
+{n:"১৪",bn:"লাইসেন্স স্থগিত ও বাতিল",en:"Suspension & Cancellation of Licence",bd:"শর্ত ভঙ্গ করলে লাইসেন্স স্থগিত বা বাতিল; শুনানির সুযোগ না দিয়ে স্থগিত/বাতিল করা যাবে না। ৬০ দিনের মধ্যে আপিল করা যাবে।",be:"Licence may be suspended/cancelled for breach of conditions, after hearing. Appeal lies within 60 days.",p:0},
+{n:"১৫",bn:"আমদানি নিয়ন্ত্রণ ও নিষিদ্ধকরণ",en:"Control & Prohibition of Import",bd:"ভেজাল বা বিভ্রান্তিকর লেবেলযুক্ত কীটনাশক চিহ্নিত হলে লাইসেন্সিং কর্তৃপক্ষ পরবর্তী আমদানি নিষিদ্ধ করতে পারবে।",be:"The Licensing Authority may prohibit further import of adulterated or mislabelled pesticides.",p:0},
+{n:"১৬",bn:"লেবেল ব্যবহারে বাধ্যবাধকতা",en:"Mandatory Use of Label",bd:"প্রতিটি কীটনাশকের প্যাকেজে নির্ধারিত পদ্ধতিতে স্পষ্ট অক্ষরে নাম, উপাদান ও তথ্য লেবেল আকারে মুদ্রিত হতে হবে।",be:"Every pesticide package must bear a label with name, ingredients and information in clear letters.",p:0},
+{n:"১৭",bn:"সর্বোচ্চ বিক্রয় মূল্য নির্ধারণ",en:"Fixing Maximum Retail Price",bd:"সরকার, সরকারি গেজেটে প্রজ্ঞাপন দ্বারা, কোনো কীটনাশকের সর্বোচ্চ বিক্রয় মূল্য নির্ধারণ করতে পারবে।",be:"The Government may fix the maximum retail price of any pesticide by gazette notification.",p:0},
+{n:"১৮",bn:"কীটনাশক মজুত ও ব্যবহার",en:"Storage & Use of Pesticide",bd:"নির্ধারিত পদ্ধতি ব্যতীত কেউ কীটনাশক মজুত বা ব্যবহার করতে পারবেন না।",be:"No person shall store or use any pesticide except in the prescribed manner.",p:0},
+{n:"১৯",bn:"কীটনাশক কারিগরি উপদেষ্টা কমিটি",en:"Technical Advisory Committee",bd:"২৬ সদস্যবিশিষ্ট কারিগরি উপদেষ্টা কমিটি গঠিত হবে, যারা সরকারকে পরামর্শ প্রদান করবে।",be:"A 26-member Technical Advisory Committee shall advise the Government.",p:0},
+{n:"২০",bn:"কীটনাশক গবেষণাগার",en:"Pesticide Research Laboratory",bd:"কীটনাশক গবেষণাগার এই আইনের অধীন প্রতিষ্ঠিত হিসেবে বিবেচিত হবে; পরীক্ষা ও বিশ্লেষণের পদ্ধতি বিধি দ্বারা নির্ধারিত।",be:"The Pesticide Research Laboratory shall be deemed established under this Act; testing procedures governed by rules.",p:0},
+{n:"২১",bn:"বিশ্লেষক",en:"Analysts",bd:"কীটনাশকের নমুনা পরীক্ষা ও বিশ্লেষণের উদ্দেশ্যে সরকার প্রয়োজনীয় সংখ্যক বিশ্লেষক নিয়োগ করতে পারবে।",be:"The Government may appoint analysts for testing and analysis of pesticide samples.",p:0},
+{n:"২২",bn:"বিশ্লেষকের প্রতিবেদন",en:"Report of Analyst",bd:"বিশ্লেষক ৩ কপি প্রতিবেদন পরিদর্শকের নিকট প্রেরণ করবেন; ৩০ দিনের মধ্যে আপত্তি জানানো যাবে।",be:"The analyst submits 3 copies of report to the inspector; objection may be raised within 30 days.",p:0},
+{n:"২৩",bn:"পরীক্ষা ও বিশ্লেষণের ফলাফল প্রকাশনা",en:"Publication of Test Results",bd:"প্রয়োজনীয় মনে হলে সরকার পরীক্ষা ও বিশ্লেষণের ফলাফল প্রকাশ করতে পারবে।",be:"The Government may publish the results of tests and analyses.",p:0},
+{n:"২৪",bn:"পরিদর্শক",en:"Inspectors",bd:"কীটনাশক সংশ্লিষ্ট দায়িত্ব পালনের জন্য সরকার প্রয়োজনীয় সংখ্যক পরিদর্শক নিয়োগ করবে।",be:"The Government shall appoint inspectors for enforcing the Act.",p:0},
+{n:"২৫",bn:"পরিদর্শকের ক্ষমতা",en:"Powers of Inspector",bd:"পরিদর্শক যেকোনো স্থানে প্রবেশ, পরিদর্শন ও পরীক্ষার জন্য নমুনা সংগ্রহ করতে পারবেন।",be:"Inspectors may enter premises, inspect and collect samples.",p:0},
+{n:"২৬",bn:"নমুনা সংগ্রহের পদ্ধতি",en:"Procedure of Sample Collection",bd:"নমুনা সংগ্রহের উদ্দেশ্য লিখিতভাবে জানাতে হবে; নমুনা দুই ভাগে বিভক্ত করে সিলগালা করা হবে — একটি বিশ্লেষকের, একটি গবেষণাগারের নিকট।",be:"Written notice required; sample divided into two sealed parts — one to analyst, one to laboratory.",p:0},
+{n:"২৭",bn:"প্রবেশ, তল্লাশি ও জব্দকরণ",en:"Entry, Search & Seizure",bd:"যুক্তিসংগত কারণে বিশ্বাস হলে পরিদর্শক স্থানে প্রবেশ, তল্লাশি ও অপরাধ সংশ্লিষ্ট কীটনাশক জব্দ করতে পারবেন।",be:"On reasonable suspicion, the inspector may enter, search and seize pesticides connected with an offence.",p:0},
+{n:"২৮",bn:"ক্রয়কারী কর্তৃক বিশ্লেষণ বা পরীক্ষা",en:"Analysis by Purchaser",bd:"ক্রয়কারী ব্যক্তি বিধি দ্বারা নির্ধারিত পদ্ধতিতে বিশ্লেষকের নিকট কীটনাশক পরীক্ষার আবেদন করতে পারবেন।",be:"A purchaser may apply to an analyst for testing of pesticide in the prescribed manner.",p:0},
+{n:"২৯",bn:"প্যাকেজ চিহ্নিত না করা কীটনাশক বিক্রয়ের দণ্ড",en:"Penalty for Unlabelled Pesticide Sale",bd:"লেবেলবিহীন বা ভুল তথ্যযুক্ত কীটনাশক বিক্রয় করলে — প্রথমবার: অনূর্ধ্ব ১.৫ লক্ষ টাকা জরিমানা ও ১.৫ বছর কারাদণ্ড; পুনরাবৃত্তিতে ২.৫ লক্ষ টাকা ও ২.৫ বছর।",be:"Selling unlabelled/misrepresented pesticide: up to Tk 1.5 lakh fine & 1.5 years imprisonment; repeat offence Tk 2.5 lakh & 2.5 years.",p:1},
+{n:"৩০",bn:"মিথ্যা ওয়্যারেন্টি প্রদানের দণ্ড",en:"Penalty for False Warranty",bd:"উৎপাদনকারী ডিলারকে মিথ্যা ওয়্যারেন্টি দিলে — অনূর্ধ্ব ১.৫ লক্ষ টাকা জরিমানা ও ১.৫ বছর কারাদণ্ড।",be:"Manufacturer giving false warranty to dealer: up to Tk 1.5 lakh fine & 1.5 years imprisonment.",p:1},
+{n:"৩১",bn:"নিবন্ধন বহির্ভূত ব্যবহার, মান হ্রাস ও বাধা প্রদানের দণ্ড",en:"Penalty for Unauthorised Use, Adulteration & Obstruction",bd:"নিবন্ধন নম্বর অপব্যবহার, ভেজাল মিশ্রণ, পরিদর্শককে বাধা বা মিথ্যা তথ্য প্রদানে — ৭৫ হাজার থেকে ১.৫ লক্ষ টাকা জরিমানা এবং ১.৫ থেকে ২.৫ বছর কারাদণ্ড।",be:"Misuse of registration number, adulteration, obstructing inspector or false information: Tk 75,000–1.5 lakh fine & 1.5–2.5 years imprisonment.",p:1},
+{n:"৩২",bn:"আদালত কর্তৃক বাজেয়াপ্তকরণের ক্ষমতা",en:"Power of Court to Forfeit",bd:"অপরাধে ব্যবহৃত কীটনাশক ও সংশ্লিষ্ট দ্রব্যাদি আদালত সরকারের অনুকূলে বাজেয়াপ্ত করতে পারবে।",be:"The court may forfeit pesticides and related items used in the offence to the Government.",p:0},
+{n:"৩৩",bn:"অপরাধ বিচারার্থ গ্রহণ ও বিচার",en:"Cognizance & Trial of Offences",bd:"পরিদর্শকের লিখিত অভিযোগ ব্যতীত কোনো আদালত অপরাধ আমলে নেবে না; প্রথম শ্রেণির ম্যাজিস্ট্রেট বা মেট্রোপলিটন ম্যাজিস্ট্রেট বিচার করবেন।",be:"No court takes cognizance except on written complaint of an inspector; trial by 1st Class or Metropolitan Magistrate.",p:0},
+{n:"৩৪",bn:"মোবাইল কোর্ট আইনের প্রয়োগ",en:"Application of Mobile Court Act",bd:"প্রয়োজন ক্ষেত্রে মোবাইল কোর্ট আইন, ২০০৯ এর তফসিলভুক্ত করে বিচার করা যাবে।",be:"Offences may be tried under the Mobile Court Act, 2009 by inclusion in its schedule.",p:0},
+{n:"৩৫",bn:"বিধি প্রণয়নের ক্ষমতা",en:"Power to Make Rules",bd:"এই আইনের উদ্দেশ্য পূরণকল্পে সরকার, সরকারি গেজেটে প্রজ্ঞাপন দ্বারা, বিধি প্রণয়ন করতে পারবে।",be:"The Government may make rules by gazette notification for carrying out the purposes of this Act.",p:0},
+{n:"৩৬",bn:"রহিতকরণ ও হেফাজত",en:"Repeal & Savings",bd:"Pesticides Ordinance, 1971 রহিত করা হলো; তবে রহিত অধ্যাদেশের অধীন গৃহীত কার্যক্রম, বিধি ও লাইসেন্স এই আইনের অধীন বলবৎ থাকবে।",be:"The Pesticides Ordinance, 1971 is repealed; actions, rules and licences under it continue as if under this Act.",p:0}
+];
+
+/* ═══════════ KEY STATEMENTS ═══════════ */
+const KEYS=[
+{i:"📋",bn:"নিবন্ধন বাধ্যতামূলক",en:"Mandatory Registration",d_bn:"কোনো ব্র্যান্ডের কীটনাশক নিবন্ধন ছাড়া আমদানি, উৎপাদন বা বিক্রয় করা যাবে না। মেয়াদ ৩ বছর।",d_en:"No pesticide brand can be imported, manufactured or sold without registration. Validity: 3 years.",ref:"ধারা ৪–৭ / Sections 4–7"},
+{i:"🪪",bn:"লাইসেন্স বাধ্যতামূলক",en:"Mandatory Licence",d_bn:"আমদানি, উৎপাদন, প্যাকেজিং ও বিক্রয়ের জন্য লাইসেন্স আবশ্যক। মেয়াদ ২ বছর।",d_en:"Licence required for import, manufacture, packaging and sale. Validity: 2 years.",ref:"ধারা ৯–১২ / Sections 9–12"},
+{i:"🏷️",bn:"লেবেল বাধ্যতামূলক",en:"Compulsory Labelling",d_bn:"প্রতিটি প্যাকেজে নাম, উপাদান ও ব্যবহারবিধি স্পষ্টভাবে মুদ্রিত হতে হবে।",d_en:"Every package must clearly display name, ingredients and directions for use.",ref:"ধারা ১৬ / Section 16"},
+{i:"💰",bn:"সর্বোচ্চ দাম নির্ধারণ",en:"Price Control",d_bn:"সরকার যেকোনো কীটনাশকের সর্বোচ্চ বিক্রয় মূল্য নির্ধারণ করতে পারবে।",d_en:"Government may fix the maximum retail price of any pesticide.",ref:"ধারা ১৭ / Section 17"},
+{i:"🔬",bn:"গবেষণাগার ও বিশ্লেষক",en:"Laboratory & Analysts",d_bn:"কীটনাশক গবেষণাগার ও বিশ্লেষকদের মাধ্যমে মান পরীক্ষা নিশ্চিত করা হবে।",d_en:"Quality testing ensured through the Pesticide Research Laboratory and appointed analysts.",ref:"ধারা ২০–২৩ / Sections 20–23"},
+{i:"👮",bn:"পরিদর্শক ও নমুনা সংগ্রহ",en:"Inspection & Sampling",d_bn:"পরিদর্শক স্থানে প্রবেশ, তল্লাশি, জব্দ ও নমুনা সংগ্রহের ক্ষমতা রাখেন।",d_en:"Inspectors empowered to enter, search, seize and collect samples.",ref:"ধারা ২৪–২৭ / Sections 24–27"},
+{i:"⚖️",bn:"দণ্ডবিধান",en:"Penalties",d_bn:"ভেজাল, মিথ্যা তথ্য ও লেবেলবিহীন বিক্রয়ে ৭৫ হাজার থেকে ২.৫ লক্ষ টাকা জরিমানা এবং ২.৫ বছর পর্যন্ত কারাদণ্ড।",d_en:"Fines from Tk 75,000 to 2.5 lakh and imprisonment up to 2.5 years for adulteration, false information and unlabelled sale.",ref:"ধারা ২৯–৩১ / Sections 29–31"},
+{i:"⚖️",bn:"মোবাইল কোর্ট",en:"Mobile Court",d_bn:"অপরাধ মোবাইল কোর্ট আইন, ২০০৯ এর মাধ্যমেও বিচারযোগ্য।",d_en:"Offences also triable under the Mobile Court Act, 2009.",ref:"ধারা ৩৪ / Section 34"}
+];
+
+/* ═══════════ STATE ═══════════ */
+let LANG="bn", currentUtter=null, playingAll=false, readIdx=0;
+
+/* ═══════════ RENDER ═══════════ */
+function renderKeys(){
+  document.getElementById("keys").innerHTML=KEYS.map((k,i)=>`
+    <div class="key">
+      <div class="ico">${k.i}</div>
+      <div style="flex:1">
+        <h3>${LANG==="bn"?k.bn:k.en}</h3>
+        <p>${LANG==="bn"?k.d_bn:k.d_en}</p>
+        <div class="ref">${k.ref}</div>
+      </div>
+      <button class="chip rd" onclick="speak('${LANG==="bn"?k.bn+". "+k.d_bn:k.en+". "+k.d_en}',this.closest('.key'))" title="Read aloud">🔊</button>
+    </div>`).join("");
+}
+function renderSections(){
+  document.getElementById("secList").innerHTML=SECTIONS.map((s,i)=>`
+    <div class="sec" id="sec${i}">
+      <button class="sec-head" onclick="toggleSec(${i})">
+        <div class="sec-num">${LANG==="bn"?s.n:toEn(s.n)}</div>
+        <div class="sec-title">${LANG==="bn"?s.bn:s.en}<small>${LANG==="bn"?"ধারা "+s.n:"Section "+toEn(s.n)}</small></div>
+        <div class="sec-tools">
+          <span class="chip" onclick="event.stopPropagation();readSec(${i})" title="Read aloud">🔊</span>
+          <span class="chev">▶</span>
+        </div>
+      </button>
+      <div class="sec-body">
+        <p>${LANG==="bn"?s.bd:s.be}</p>
+        ${s.p?`<div class="penalty"><b>${LANG==="bn"?"⚠️ দণ্ডবিধান সংক্রান্ত ধারা":"⚠️ Penalty Provision"}</b></div>`:""}
+      </div>
+    </div>`).join("");
+}
+function toEn(bn){const m={"০":"0","১":"1","২":"2","৩":"3","৪":"4","৫":"5","৬":"6","৭":"7","৮":"8","৯":"9"};return bn.split("").map(c=>m[c]||c).join("");}
+
+/* ═══════════ INTERACTIONS ═══════════ */
+function toggleSec(i){document.getElementById("sec"+i).classList.toggle("open");}
+document.getElementById("btnExpandAll").onclick=()=>document.querySelectorAll(".sec").forEach(s=>s.classList.add("open"));
+document.getElementById("btnCollapseAll").onclick=()=>document.querySelectorAll(".sec").forEach(s=>s.classList.remove("open"));
+
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+  t.classList.add("active");document.getElementById(t.dataset.panel).classList.add("active");
+});
+
+/* ═══════════ LANGUAGE TOGGLE (BANGLA DEFAULT) ═══════════ */
+function setLang(l){
+  LANG=l;
+  document.getElementById("btnBn").classList.toggle("active",l==="bn");
+  document.getElementById("btnEn").classList.toggle("active",l==="en");
+  document.documentElement.lang=l;
+  document.querySelectorAll("[data-bn]").forEach(el=>el.textContent=l==="bn"?el.dataset.bn:el.dataset.en);
+  renderKeys();renderSections();
+  stopRead();
+}
+document.getElementById("btnBn").onclick=()=>setLang("bn");
+document.getElementById("btnEn").onclick=()=>setLang("en");
+
+/* ═══════════ READ ALOUD (Web Speech API) ═══════════ */
+function bnVoice(){return speechSynthesis.getVoices().find(v=>v.lang.startsWith("bn"))||speechSynthesis.getVoices().find(v=>v.lang.startsWith("hi"))||null;}
+function speak(text,el){
+  stopRead(false);
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=LANG==="bn"?"bn-BD":"en-US";
+  const v=bnVoice();if(v&&LANG==="bn")u.voice=v;
+  u.rate=0.95;u.pitch=1;
+  if(el){el.classList.add("reading");u.onend=()=>el.classList.remove("reading");u.onerror=()=>el.classList.remove("reading");}
+  setStatus(LANG==="bn"?"🔊 পড়া হচ্ছে...":"🔊 Reading...");
+  u.onend=()=>{if(!playingAll)setStatus("");};
+  currentUtter=u;speechSynthesis.speak(u);
+}
+function readSec(i){const s=SECTIONS[i];document.getElementById("sec"+i).classList.add("open");speak(LANG==="bn"?`ধারা ${s.n}। ${s.bn}। ${s.bd}`:`Section ${toEn(s.n)}. ${s.en}. ${s.be}`,document.getElementById("sec"+i));}
+function readSection(id){const el=document.getElementById(id);speak(el.textContent.trim(),el.parentElement);}
+function readAll(){
+  playingAll=true;readIdx=0;
+  document.querySelectorAll(".tab")[2].click();
+  const step=()=>{
+    if(!playingAll||readIdx>=SECTIONS.length){playingAll=false;setStatus("");return;}
+    const s=SECTIONS[readIdx];
+    document.getElementById("sec"+readIdx).classList.add("open");
+    document.getElementById("sec"+readIdx).scrollIntoView({behavior:"smooth",block:"center"});
+    speak(LANG==="bn"?`ধারা ${s.n}। ${s.bn}। ${s.bd}`:`Section ${toEn(s.n)}. ${s.en}. ${s.be}`,document.getElementById("sec"+readIdx));
+    const wait=setInterval(()=>{
+      if(!speechSynthesis.speaking&&!speechSynthesis.paused){clearInterval(wait);readIdx++;step();}
+      if(!playingAll)clearInterval(wait);
+    },300);
+  };
+  step();
+}
+function stopRead(clear=true){playingAll=false;speechSynthesis.cancel();if(clear)setStatus("");document.querySelectorAll(".reading").forEach(e=>e.classList.remove("reading"));}
+function setStatus(t){document.getElementById("readStatus").textContent=t;}
+document.getElementById("btnPlayAll").onclick=readAll;
+document.getElementById("btnStop").onclick=()=>stopRead();
+document.getElementById("btnPause").onclick=()=>{
+  if(speechSynthesis.speaking&&!speechSynthesis.paused){speechSynthesis.pause();setStatus(LANG==="bn"?"⏸ বিরতি":"⏸ Paused");}
+  else if(speechSynthesis.paused){speechSynthesis.resume();setStatus(LANG==="bn"?"🔊 পড়া হচ্ছে...":"🔊 Reading...");}
+};
+speechSynthesis.onvoiceschanged=()=>{};
+
+/* ═══════════ INIT (Bangla default) ═══════════ */
+renderKeys();renderSections();setLang("bn");
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+[
+  {
+    "icon": "📋",
+    "bn": "নিবন্ধন বাধ্যতামূলক",
+    "en": "Mandatory Registration",
+    "d_bn": "কোনো ব্র্যান্ডের কীটনাশক নিবন্ধন ছাড়া আমদানি, উৎপাদন বা বিক্রয় করা যাবে না। মেয়াদ ৩ বছর।",
+    "d_en": "No pesticide brand can be imported, manufactured or sold without registration. Validity: 3 years.",
+    "ref": "ধারা ৪–৭ / Sections 4–7"
+  },
+  {
+    "icon": "🪪",
+    "bn": "লাইসেন্স বাধ্যতামূলক",
+    "en": "Mandatory Licence",
+    "d_bn": "আমদানি, উৎপাদন, প্যাকেজিং ও বিক্রয়ের জন্য লাইসেন্স আবশ্যক। মেয়াদ ২ বছর।",
+    "d_en": "Licence required for import, manufacture, packaging and sale. Validity: 2 years.",
+    "ref": "ধারা ৯–১২ / Sections 9–12"
+  },
+  {
+    "icon": "🏷️",
+    "bn": "লেবেল বাধ্যতামূলক",
+    "en": "Compulsory Labelling",
+    "d_bn": "প্রতিটি প্যাকেজে নাম, উপাদান ও ব্যবহারবিধি স্পষ্টভাবে মুদ্রিত হতে হবে।",
+    "d_en": "Every package must clearly display name, ingredients and directions for use.",
+    "ref": "ধারা ১৬ / Section 16"
+  },
+  {
+    "icon": "💰",
+    "bn": "সর্বোচ্চ দাম নির্ধারণ",
+    "en": "Price Control",
+    "d_bn": "সরকার যেকোনো কীটনাশকের সর্বোচ্চ বিক্রয় মূল্য নির্ধারণ করতে পারবে।",
+    "d_en": "Government may fix the maximum retail price of any pesticide.",
+    "ref": "ধারা ১৭ / Section 17"
+  },
+  {
+    "icon": "🔬",
+    "bn": "গবেষণাগার ও বিশ্লেষক",
+    "en": "Laboratory & Analysts",
+    "d_bn": "কীটনাশক গবেষণাগার ও বিশ্লেষকদের মাধ্যমে মান পরীক্ষা নিশ্চিত করা হবে।",
+    "d_en": "Quality testing ensured through the Pesticide Research Laboratory and appointed analysts.",
+    "ref": "ধারা ২০–২৩ / Sections 20–23"
+  },
+  {
+    "icon": "👮",
+    "bn": "পরিদর্শক ও নমুনা সংগ্রহ",
+    "en": "Inspection & Sampling",
+    "d_bn": "পরিদর্শক স্থানে প্রবেশ, তল্লাশি, জব্দ ও নমুনা সংগ্রহের ক্ষমতা রাখেন।",
+    "d_en": "Inspectors empowered to enter, search, seize and collect samples.",
+    "ref": "ধারা ২৪–২৭ / Sections 24–27"
+  },
+  {
+    "icon": "⚖️",
+    "bn": "দণ্ডবিধান",
+    "en": "Penalties",
+    "d_bn": "ভেজাল, মিথ্যা তথ্য ও লেবেলবিহীন বিক্রয়ে ৭৫ হাজার থেকে ২.৫ লক্ষ টাকা জরিমানা এবং ২.৫ বছর পর্যন্ত কারাদণ্ড।",
+    "d_en": "Fines from Tk 75,000 to 2.5 lakh and imprisonment up to 2.5 years for adulteration, false information and unlabelled sale.",
+    "ref": "ধারা ২৯–৩১ / Sections 29–31"
+  },
+  {
+    "icon": "⚖️",
+    "bn": "মোবাইল কোর্ট",
+    "en": "Mobile Court",
+    "d_bn": "অপরাধ মোবাইল কোর্ট আইন, ২০০৯ এর মাধ্যমেও বিচারযোগ্য।",
+    "d_en": "Offences also triable under the Mobile Court Act, 2009.",
+    "ref": "ধারা ৩৪ / Section 34"
+  }
+]
