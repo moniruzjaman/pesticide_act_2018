@@ -97,7 +97,7 @@ export const metadata: Metadata = {
         alt: "বালাইনাশক আইন, ২০১৮ — সমন্বিত ফিল্ড গাইড",
       },
     ],
-    site: "@pesticide_act",
+    site: "@moniruzjaman",
     creator: "@moniruzjaman",
   },
   robots: {
