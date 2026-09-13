@@ -65,6 +65,40 @@ function GovSealIcon({ className }: { className?: string }) {
 
 const TOTAL_SLIDES = 47;
 
+// Available decks — each has its own PPTX file + slide PNGs folder
+const DECKS = [
+  {
+    id: "khuchra",
+    title: "খুচরা বিক্রেতা গাইড (বড় ফন্ট)",
+    short: "খুচরা গাইড",
+    desc: "৪৭টি স্লাইড · বড় ফন্ট সংস্করণ · ২০ মিটার দূর থেকে পড়ার উপযোগী",
+    slides: 47,
+    pptx: "/decks/Balainashok_Ain_2018_Khuchra_Bikreta_Guide.pptx",
+    imgDir: "/decks/khuchra",
+    color: "#006a4e",
+  },
+  {
+    id: "pictorial",
+    title: "পিক্টোরিয়াল গাইড",
+    short: "পিক্টোরিয়াল",
+    desc: "৫৬টি স্লাইড · চিত্রভিত্তিক ব্যাখ্যা · দ্রুত বোঝার জন্য",
+    slides: 56,
+    pptx: "/decks/Balainashok_Ain_2018_Pictorial_Guide.pptx",
+    imgDir: "/decks/pictorial",
+    color: "#f42a41",
+  },
+  {
+    id: "comprehensive",
+    title: "সমন্বিত ফিল্ড গাইড ও আইনগত নির্দেশিকা",
+    short: "সমন্বিত",
+    desc: "৪৭টি স্লাইড · সম্পূর্ণ আইনি ও ফিল্ড গাইড · প্রশিক্ষণের জন্য আদর্শ",
+    slides: 47,
+    pptx: "/decks/বালাইনাশক আইন, ২০১৮ — খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড ও আইনগত নির্দেশিকা.pptx",
+    imgDir: "/decks/comprehensive",
+    color: "#c9a227",
+  },
+];
+
 // 7 chapter overview (mirrors the deck's TOC)
 const CHAPTERS = [
   { num: "০১", title: "সংকটের প্রেক্ষাপট", range: "স্লাইড ৩–৬", summary: "ভেজাল বালাইনাশক কৃষক, ভোক্তা ও পরিবেশের জন্য বহুমুখী ক্ষতির কারণ — বাংলাদেশে বাজারের ১৫–২০% ভেজাল।" },
@@ -635,8 +669,9 @@ function ActTab() {
   );
 }
 
-/* ============== Slides Tab — image slideshow with autoplay ============== */
+/* ============== Slides Tab — multi-deck viewer with autoplay ============== */
 function SlidesTab() {
+  const [deckId, setDeckId] = useState<string>(DECKS[0].id);
   const [idx, setIdx] = useState(1);
   const [playing, setPlaying] = useState(false);
   const [interval, setIntervalSec] = useState(5);
@@ -645,11 +680,14 @@ function SlidesTab() {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  const deck = DECKS.find((d) => d.id === deckId) || DECKS[0];
+  const total = deck.slides;
+
   const go = (delta: number) => {
     setIdx((prev) => {
       const next = prev + delta;
-      if (next < 1) return TOTAL_SLIDES;
-      if (next > TOTAL_SLIDES) return 1;
+      if (next < 1) return total;
+      if (next > total) return 1;
       return next;
     });
     setProgress(0);
@@ -657,6 +695,13 @@ function SlidesTab() {
 
   const goTo = (n: number) => {
     setIdx(n);
+    setProgress(0);
+  };
+
+  const switchDeck = (id: string) => {
+    setDeckId(id);
+    setIdx(1);
+    setPlaying(false);
     setProgress(0);
   };
 
@@ -672,7 +717,7 @@ function SlidesTab() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [total]);
 
   // Autoplay logic
   useEffect(() => {
@@ -682,7 +727,6 @@ function SlidesTab() {
       return;
     }
 
-    // Smooth progress bar
     const tickMs = 50;
     const totalMs = interval * 1000;
     let elapsed = 0;
@@ -691,14 +735,13 @@ function SlidesTab() {
       setProgress(Math.min(100, (elapsed / totalMs) * 100));
     }, tickMs);
 
-    // Advance slide
     timerRef.current = setTimeout(() => {
       setIdx((prev) => {
         const next = prev + 1;
-        if (next > TOTAL_SLIDES) {
+        if (next > total) {
           setPlaying(false);
           setProgress(0);
-          toast({ title: "প্রেজেন্টেশন সম্পন্ন", description: "৪৭টি স্লাইড প্রদর্শিত হয়েছে" });
+          toast({ title: "প্রেজেন্টেশন সম্পন্ন", description: `${total}টি স্লাইড প্রদর্শিত হয়েছে` });
           return 1;
         }
         return next;
@@ -710,9 +753,8 @@ function SlidesTab() {
       if (timerRef.current) clearTimeout(timerRef.current);
       if (progressRef.current) clearInterval(progressRef.current);
     };
-  }, [playing, idx, interval]);
+  }, [playing, idx, interval, total]);
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -722,23 +764,57 @@ function SlidesTab() {
 
   const slideNum = String(idx).padStart(2, "0");
   const bnIdx = idx.toLocaleString("bn-BD");
-  const bnTotal = TOTAL_SLIDES.toLocaleString("bn-BD");
+  const bnTotal = total.toLocaleString("bn-BD");
 
   return (
     <div className="space-y-4">
+      <div>
+        <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#004d38] flex items-center gap-2">
+          <Presentation className="w-5 h-5 text-[#f42a41]" /> প্রশিক্ষণ ডেক — {DECKS.length}টি সংস্করণ
+        </h3>
+        <p className="text-sm text-[#3d5a4a] mt-1">← → কীবোর্ড তীর · স্পেসবার = প্লে/পজ · অটোপ্লে চালু করুন</p>
+      </div>
+
+      {/* Deck selector */}
+      <div className="grid sm:grid-cols-3 gap-2">
+        {DECKS.map((d) => (
+          <button
+            key={d.id}
+            onClick={() => switchDeck(d.id)}
+            className={`text-left p-3 rounded-lg border-2 transition-all ${
+              deckId === d.id
+                ? "border-[#f42a41] bg-white shadow-md"
+                : "border-[#c8e6d5] bg-white/60 hover:border-[#006a4e] hover:bg-white"
+            }`}
+          >
+            <div className="flex items-center gap-2 mb-1">
+              <div
+                className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                style={{ backgroundColor: d.color }}
+              />
+              <span className="font-serif-bn font-bold text-[#004d38] text-sm">{d.short}</span>
+              <Badge variant="outline" className="ml-auto text-[10px] py-0 border-[#c8e6d5] text-[#5a7568]">
+                {d.slides} স্লাইড
+              </Badge>
+            </div>
+            <p className="text-[11px] text-[#3d5a4a] leading-tight">{d.desc}</p>
+          </button>
+        ))}
+      </div>
+
+      {/* Active deck title + slide counter + download */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#004d38] flex items-center gap-2">
-            <Presentation className="w-5 h-5 text-[#f42a41]" /> প্রশিক্ষণ ডেক — ৪৭টি স্লাইড
-          </h3>
-          <p className="text-sm text-[#3d5a4a] mt-1">← → কীবোর্ড তীর · স্পেসবার = প্লে/পজ · অটোপ্লে চালু করুন</p>
+        <div className="min-w-0">
+          <h4 className="font-serif-bn font-bold text-[#004d38] text-base md:text-lg truncate">
+            {deck.title}
+          </h4>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           <Badge variant="outline" className="border-[#006a4e] text-[#006a4e] font-num">
             স্লাইড {bnIdx} / {bnTotal}
           </Badge>
           <Button asChild size="sm" className="bg-[#006a4e] hover:bg-[#004d38] text-white">
-            <a href="/assets/Balainashok_Ain_2018_Guide.pptx" download>
+            <a href={deck.pptx} download>
               <Download className="w-4 h-4 mr-1.5" /> PPTX
             </a>
           </Button>
@@ -796,7 +872,7 @@ function SlidesTab() {
       {/* Slide viewer */}
       <div className="slide-frame relative bg-white">
         <img
-          src={`/slides/slide-${slideNum}.png`}
+          src={`${deck.imgDir}/slide-${slideNum}.png`}
           alt={`স্লাইড ${bnIdx}`}
           className="w-full h-full object-contain"
         />
@@ -815,7 +891,6 @@ function SlidesTab() {
           <ChevronRight className="w-5 h-5" />
         </button>
 
-        {/* Playing indicator */}
         {playing && (
           <div className="absolute top-3 right-3 bg-[#006a4e] text-white text-xs px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-md">
             <span className="w-1.5 h-1.5 bg-[#f42a41] rounded-full animate-pulse" />
@@ -826,7 +901,7 @@ function SlidesTab() {
 
       {/* Thumbnail strip */}
       <div className="flex gap-2 overflow-x-auto no-scrollbar py-2">
-        {Array.from({ length: TOTAL_SLIDES }).map((_, i) => {
+        {Array.from({ length: total }).map((_, i) => {
           const n = i + 1;
           const s = String(n).padStart(2, "0");
           const isActive = n === idx;
@@ -838,7 +913,7 @@ function SlidesTab() {
                 isActive ? "border-[#f42a41] scale-105" : "border-transparent opacity-60 hover:opacity-100"
               }`}
             >
-              <img src={`/slides/slide-${s}.png`} alt={`স্লাইড ${n}`} className="w-full h-full object-cover" />
+              <img src={`${deck.imgDir}/slide-${s}.png`} alt={`স্লাইড ${n}`} className="w-full h-full object-cover" />
             </button>
           );
         })}
@@ -937,6 +1012,37 @@ ${s.p === 1 ? "[এই ধারায় শাস্তি বিধান র
           </Button>
         </Card>
       </div>
+
+      {/* All 3 decks download grid */}
+      <Card className="p-5 border-[#c8e6d5]">
+        <h4 className="font-serif-bn font-bold text-[#004d38] text-lg mb-1 flex items-center gap-2">
+          <Presentation className="w-5 h-5 text-[#f42a41]" /> সকল প্রশিক্ষণ ডেক (৩টি সংস্করণ)
+        </h4>
+        <p className="text-sm text-[#3d5a4a] mb-4">তিনটি আলাদা সংস্করণ — প্রয়োজন অনুযায়ী যেকোনো একটি বা সবগুলো ডাউনলোড করুন</p>
+        <div className="grid sm:grid-cols-3 gap-3">
+          {DECKS.map((d) => (
+            <div
+              key={d.id}
+              className="p-4 rounded-lg border-2 border-[#c8e6d5] bg-white flex flex-col"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <div
+                  className="w-3 h-3 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: d.color }}
+                />
+                <span className="font-serif-bn font-bold text-[#004d38] text-sm">{d.short}</span>
+              </div>
+              <p className="text-xs text-[#3d5a4a] mb-1 leading-tight flex-1">{d.title}</p>
+              <p className="text-[11px] text-[#5a7568] mb-3 font-num">{d.slides} স্লাইড · PPTX</p>
+              <Button asChild size="sm" className="bg-[#006a4e] hover:bg-[#004d38] text-white w-full">
+                <a href={d.pptx} download>
+                  <Download className="w-3.5 h-3.5 mr-1.5" /> ডাউনলোড
+                </a>
+              </Button>
+            </div>
+          ))}
+        </div>
+      </Card>
 
       {/* Offline package highlight */}
       <Card className="p-5 border-2 border-[#f42a41] bg-gradient-to-br from-[#fff0f2] to-[#f7fdf9]">
