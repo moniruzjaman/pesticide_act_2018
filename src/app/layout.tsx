@@ -25,7 +25,9 @@ const inter = Inter({
 
 // Use NEXT_PUBLIC_SITE_URL env var if set (production domain), else fallback to GitHub repo
 // When deployed on Vercel/Netlify, set NEXT_PUBLIC_SITE_URL=https://your-domain.com
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://pesticide-act-2018.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://github.com/moniruzjaman/pesticide_act_2018";
+// OG image: use GitHub raw URL so it's always publicly accessible even before deployment
+const OG_IMAGE_URL = process.env.NEXT_PUBLIC_OG_IMAGE_URL || "https://raw.githubusercontent.com/moniruzjaman/pesticide_act_2018/main/public/og-image.png";
 const SITE_TITLE = "বালাইনাশক আইন, ২০১৮ — সমন্বিত ফিল্ড গাইড";
 const SITE_DESC =
   "খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড ও আইনগত নির্দেশিকা — ৩৬টি ধারার ইন্টারঅ্যাকটিভ আইনি রেফারেন্স, ৪৭টি স্লাইডের প্রশিক্ষণ ডেক, ডাউনলোড সেন্টার ও অফলাইন AI সহায়ক।";
@@ -77,7 +79,8 @@ export const metadata: Metadata = {
     description: SITE_DESC,
     images: [
       {
-        url: "/og-image.png",
+        url: OG_IMAGE_URL,
+        secureUrl: OG_IMAGE_URL,
         width: 1200,
         height: 630,
         alt: "বালাইনাশক আইন, ২০১৮ — সমন্বিত ফিল্ড গাইড",
@@ -91,7 +94,7 @@ export const metadata: Metadata = {
     description: SITE_DESC,
     images: [
       {
-        url: "/og-image.png",
+        url: OG_IMAGE_URL,
         width: 1200,
         height: 630,
         alt: "বালাইনাশক আইন, ২০১৮ — সমন্বিত ফিল্ড গাইড",
