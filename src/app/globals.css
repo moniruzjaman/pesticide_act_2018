@@ -121,22 +121,23 @@
   }
 }
 
-/* Pesticide Act deck palette overrides */
+/* Pesticide Act deck palette — Bangladesh Government Green + Red */
 :root {
-  --primary: #1E4D3B;
-  --primary-foreground: #FAF6EE;
-  --accent: #C7912C;
-  --accent-foreground: #1A1A1A;
-  --background: #FAF6EE;
-  --foreground: #1A1A1A;
-  --card: #FFFFFF;
-  --card-foreground: #1A1A1A;
-  --muted: #F2ECDD;
-  --muted-foreground: #4A4A4A;
-  --border: #D9D2BF;
-  --input: #D9D2BF;
-  --ring: #C7912C;
-  --destructive: #B23A2A;
+  --primary: #006a4e;
+  --primary-foreground: #ffffff;
+  --accent: #f42a41;
+  --accent-foreground: #ffffff;
+  --background: #f7fdf9;
+  --foreground: #0a1f15;
+  --card: #ffffff;
+  --card-foreground: #0a1f15;
+  --muted: #e6f4ed;
+  --muted-foreground: #3d5a4a;
+  --border: #c8e6d5;
+  --input: #c8e6d5;
+  --ring: #006a4e;
+  --destructive: #f42a41;
+  --gold: #c9a227;
 }
 
 .font-serif-bn {

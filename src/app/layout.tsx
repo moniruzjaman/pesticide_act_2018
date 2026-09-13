@@ -103,13 +103,13 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   other: {
-    "msapplication-TileColor": "#1E4D3B",
-    "theme-color": "#1E4D3B",
+    "msapplication-TileColor": "#006a4e",
+    "theme-color": "#006a4e",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1E4D3B",
+  themeColor: "#006a4e",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,

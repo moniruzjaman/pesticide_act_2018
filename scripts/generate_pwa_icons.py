@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
-"""Generate government-style PWA icons — seal + lotus + water waves."""
+"""Generate Bangladesh government-style PWA icons — flag-inspired green + red."""
 from PIL import Image, ImageDraw, ImageFont
 import os
 import math
 
 OUTPUT_DIR = "/home/z/my-project/public"
-PRIMARY = (30, 77, 59)         # #1E4D3B deep forest green
-PRIMARY_DEEP = (20, 52, 42)    # #14342A
-ACCENT = (199, 145, 44)        # #C7912C harvest gold
-ACCENT_SOFT = (224, 182, 89)   # #E0B659
-CREAM = (250, 246, 238)        # #FAF6EE
+# Bangladesh government official colors
+BD_GREEN = (0, 106, 78)       # #006a4e — Bangladesh flag green
+BD_RED = (244, 42, 65)        # #f42a41 — Bangladesh flag red
+CREAM = (247, 253, 249)       # #f7fdf9 — soft background
 WHITE = (255, 255, 255)
 
 def find_font(size, bold=True):
@@ -27,162 +26,133 @@ def find_font(size, bold=True):
                 pass
     return ImageFont.load_default()
 
-def draw_lotus(d, cx, cy, size, color):
-    """Draw stylized lotus with 5 petals."""
-    petal_h = size
-    petal_w = size * 0.45
-    # Center petal (tallest)
-    points = [
-        (cx, cy - petal_h),
-        (cx - petal_w * 0.3, cy - petal_h * 0.3),
-        (cx, cy),
-        (cx + petal_w * 0.3, cy - petal_h * 0.3),
-    ]
-    d.polygon(points, fill=color)
-    # Side petals (4)
-    for angle_deg in [-50, -25, 25, 50]:
-        rad = math.radians(angle_deg - 90)
-        tip_x = cx + math.cos(rad) * petal_h * 0.85
-        tip_y = cy + math.sin(rad) * petal_h * 0.85
-        base_x = cx + math.cos(rad) * petal_h * 0.2
-        base_y = cy + math.sin(rad) * petal_h * 0.2
-        # Approximate petal with ellipse
-        d.ellipse([
-            tip_x - petal_w * 0.35, tip_y - petal_h * 0.5,
-            tip_x + petal_w * 0.35, tip_y + petal_h * 0.5
-        ], fill=color)
-
-def draw_waves(d, cx, cy, width, color, wave_height=8):
-    """Draw 2 stylized water waves."""
-    for offset_y in [0, wave_height * 1.6]:
-        points = []
-        for x in range(int(cx - width / 2), int(cx + width / 2) + 1, 2):
-            t = (x - (cx - width / 2)) / width
-            y = cy + offset_y + math.sin(t * math.pi * 2) * wave_height * 0.5
-            points.append((x, y))
-        if len(points) >= 2:
-            d.line(points, fill=color, width=max(2, wave_height // 3))
-
-def draw_govt_seal(size, out_path, with_text=True, bg="green"):
-    """Draw a government-style seal icon.
-    bg: "green" (filled green bg) or "transparent" (just the seal).
+def draw_bd_flag_seal(size, out_path, with_text=True, bg="green"):
+    """Draw a Bangladesh flag-inspired government seal icon.
+    bg: "green" (filled green bg) or "transparent".
+    Design: green background, central red disc (flag), thin ring border, "2018" text.
     """
     if bg == "green":
-        img = Image.new("RGBA", (size, size), PRIMARY + (255,))
+        img = Image.new("RGBA", (size, size), BD_GREEN + (255,))
     else:
         img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
 
-    # If green background, add subtle border accent at top/bottom
-    if bg == "green":
-        strip_h = max(3, size // 30)
-        d.rectangle([0, 0, size, strip_h], fill=ACCENT + (255,))
-        d.rectangle([0, size - strip_h, size, size], fill=ACCENT + (255,))
-
     cx, cy = size / 2, size / 2
 
-    # Outer seal ring
-    ring_r_outer = size * 0.42
-    ring_r_inner = size * 0.38
-    seal_color = CREAM if bg == "green" else PRIMARY
-    # Draw ring (annulus)
-    d.ellipse([cx - ring_r_outer, cy - ring_r_outer, cx + ring_r_outer, cy + ring_r_outer],
-              outline=seal_color, width=max(2, size // 60))
-    # Inner thin ring
-    d.ellipse([cx - ring_r_inner, cy - ring_r_inner, cx + ring_r_inner, cy + ring_r_inner],
-              outline=seal_color, width=max(1, size // 120))
+    # Subtle thin border ring (cream/white) — gives "seal" feel
+    ring_r = size * 0.46
+    ring_width = max(2, size // 50)
+    border_color = CREAM if bg == "green" else BD_GREEN
+    d.ellipse(
+        [cx - ring_r, cy - ring_r, cx + ring_r, cy + ring_r],
+        outline=border_color,
+        width=ring_width,
+    )
 
-    # Lotus in center
-    lotus_size = size * 0.18
-    lotus_cy = cy - size * 0.05
-    lotus_color = CREAM if bg == "green" else PRIMARY
-    # Draw lotus using polygon (simplified, more reliable)
-    # Center petal
-    petal_h = lotus_size * 1.4
-    petal_w = lotus_size * 0.4
-    d.polygon([
-        (cx, lotus_cy - petal_h),
-        (cx - petal_w, lotus_cy),
-        (cx + petal_w, lotus_cy),
-    ], fill=lotus_color)
-    # Side petals (4) — rotated ellipses approximation
-    for angle_deg in [-45, -22, 22, 45]:
-        rad = math.radians(angle_deg - 90)
-        tip_x = cx + math.cos(rad) * petal_h * 0.85
-        tip_y = lotus_cy + math.sin(rad) * petal_h * 0.85
-        # Draw small ellipse as petal
-        pw = petal_w * 0.6
-        ph = petal_h * 0.5
-        # Simple circle at tip
-        d.ellipse([tip_x - pw, tip_y - pw, tip_x + pw, tip_y + pw], fill=lotus_color)
+    # Inner thin ring (decorative)
+    inner_r = size * 0.40
+    d.ellipse(
+        [cx - inner_r, cy - inner_r, cx + inner_r, cy + inner_r],
+        outline=border_color,
+        width=max(1, size // 100),
+    )
 
-    # Water waves below lotus
-    waves_y = lotus_cy + petal_h * 0.5
-    waves_width = size * 0.45
-    wave_color = ACCENT_SOFT if bg == "green" else ACCENT
-    draw_waves(d, cx, waves_y, waves_width, wave_color, wave_height=size // 35)
-    draw_waves(d, cx, waves_y + size * 0.08, waves_width, wave_color, wave_height=size // 40)
+    # Central red disc — Bangladesh flag's signature element
+    # The flag's red disc is slightly offset toward the hoist side; here we keep it centered for icon balance
+    disc_r = size * 0.22
+    d.ellipse(
+        [cx - disc_r, cy - disc_r, cx + disc_r, cy + disc_r],
+        fill=BD_RED + (255,),
+    )
 
-    if with_text and bg == "green":
-        # "২০১৮" at top inside ring, "আইন" at bottom
-        f_top = find_font(max(10, size // 12))
-        text_top = "২০১৮" if size >= 100 else ""
-        if text_top:
-            bbox = d.textbbox((0, 0), text_top, font=f_top)
+    # 4 decorative dots at cardinal points (seal pattern)
+    dot_r = max(2, size // 40)
+    dot_offset = size * 0.43
+    for dx, dy in [(0, -1), (0, 1), (-1, 0), (1, 0)]:
+        dx_px = cx + dx * dot_offset
+        dy_px = cy + dy * dot_offset
+        d.ellipse(
+            [dx_px - dot_r, dy_px - dot_r, dx_px + dot_r, dy_px + dot_r],
+            fill=border_color,
+        )
+
+    if with_text and size >= 180:
+        # "২০১৮" at top inside ring (Bengali numerals may not render — fallback to "2018")
+        f = find_font(max(12, size // 14))
+        # Try Bengali "২০১৮", fallback "2018"
+        text = "2018"
+        try:
+            bbox = d.textbbox((0, 0), text, font=f)
             tw = bbox[2] - bbox[0]
-            d.text((cx - tw / 2, cy - ring_r_outer * 0.95), text_top, fill=CREAM, font=f_top)
+            th = bbox[3] - bbox[1]
+            d.text((cx - tw / 2, cy - ring_r * 0.95 - th / 2), text, fill=CREAM, font=f)
+        except Exception:
+            pass
+
+        # "আইন" / "ACT" at bottom inside ring
+        f2 = find_font(max(10, size // 16))
+        text2 = "ACT 2018"
+        try:
+            bbox2 = d.textbbox((0, 0), text2, font=f2)
+            tw2 = bbox2[2] - bbox2[0]
+            d.text((cx - tw2 / 2, cy + ring_r * 0.75), text2, fill=CREAM, font=f2)
+        except Exception:
+            pass
 
     img.save(out_path, "PNG", optimize=True)
     print(f"  Wrote {out_path} ({size}x{size})")
 
-print("Generating government-style PWA icons...")
-draw_govt_seal(192, f"{OUTPUT_DIR}/icon-192.png", with_text=True, bg="green")
-draw_govt_seal(512, f"{OUTPUT_DIR}/icon-512.png", with_text=True, bg="green")
-draw_govt_seal(180, f"{OUTPUT_DIR}/apple-touch-icon.png", with_text=False, bg="green")
-draw_govt_seal(32, f"{OUTPUT_DIR}/favicon-32.png", with_text=False, bg="green")
-draw_govt_seal(16, f"{OUTPUT_DIR}/favicon-16.png", with_text=False, bg="green")
+print("Generating Bangladesh government-style PWA icons...")
+draw_bd_flag_seal(192, f"{OUTPUT_DIR}/icon-192.png", with_text=True, bg="green")
+draw_bd_flag_seal(512, f"{OUTPUT_DIR}/icon-512.png", with_text=True, bg="green")
+draw_bd_flag_seal(180, f"{OUTPUT_DIR}/apple-touch-icon.png", with_text=False, bg="green")
+draw_bd_flag_seal(32, f"{OUTPUT_DIR}/favicon-32.png", with_text=False, bg="green")
+draw_bd_flag_seal(16, f"{OUTPUT_DIR}/favicon-16.png", with_text=False, bg="green")
 
-# Transparent (no bg) version for inline use
-draw_govt_seal(512, f"{OUTPUT_DIR}/seal-transparent.png", with_text=False, bg="transparent")
+# Transparent version
+draw_bd_flag_seal(512, f"{OUTPUT_DIR}/seal-transparent.png", with_text=False, bg="transparent")
 
-print("\nGenerating updated OG image (1200x630)...")
-og = Image.new("RGB", (1200, 630), PRIMARY)
+print("\nGenerating updated OG image (1200x630) — BD green + red theme...")
+og = Image.new("RGB", (1200, 630), BD_GREEN)
 d = ImageDraw.Draw(og)
 
-# Top + bottom accent strips
-d.rectangle([0, 0, 1200, 30], fill=ACCENT)
-d.rectangle([0, 600, 1200, 630], fill=ACCENT)
+# Left red accent column (flag-inspired)
+d.rectangle([0, 0, 12, 630], fill=BD_RED)
 
-# Left vertical accent
-d.rectangle([0, 30, 8, 600], fill=ACCENT)
+# Top + bottom thin cream strips
+d.rectangle([12, 0, 1200, 8], fill=CREAM)
+d.rectangle([12, 622, 1200, 630], fill=CREAM)
 
 # Big seal in top-right corner
-seal_img = Image.open(f"{OUTPUT_DIR}/seal-transparent.png").resize((220, 220), Image.LANCZOS)
-og.paste(seal_img, (920, 60), seal_img)
+seal_img = Image.open(f"{OUTPUT_DIR}/seal-transparent.png").resize((240, 240), Image.LANCZOS)
+og.paste(seal_img, (920, 50), seal_img)
+
+# Red disc decoration in bottom-left
+d.ellipse([80, 470, 80 + 90, 470 + 90], fill=BD_RED)
 
 # Title (English) — large
 f_title = find_font(78)
 f_sub = find_font(40, bold=False)
 f_meta = find_font(28, bold=False)
 
-d.text((80, 130), "Pesticide Act, 2018", fill=CREAM, font=f_title)
-d.text((80, 230), "Bangladesh Government", fill=ACCENT_SOFT, font=f_sub)
+d.text((100, 110), "Pesticide Act, 2018", fill=CREAM, font=f_title)
+d.text((100, 210), "Government of Bangladesh", fill=BD_RED, font=f_sub)
 
-# Bengali title (may not render with DejaVu, but try)
+# Bengali title
 try:
-    f_bn = find_font(60)
-    d.text((80, 310), "বালাইনাশক আইন, ২০১৮", fill=CREAM, font=f_bn)
+    f_bn = find_font(58)
+    d.text((100, 290), "বালাইনাশক আইন, ২০১৮", fill=CREAM, font=f_bn)
 except Exception:
     pass
 
 # Subtitle
-d.text((80, 400), "Retailer's Integrated Field Guide", fill=CREAM, font=f_sub)
+d.text((100, 380), "Retailer's Integrated Field Guide", fill=CREAM, font=f_sub)
 
 # Features line
-d.text((80, 470), "36 Sections  ·  47 Slides  ·  Offline AI  ·  PWA  ·  Bengali", fill=ACCENT_SOFT, font=f_meta)
+d.text((100, 450), "36 Sections  ·  47 Slides  ·  Offline AI  ·  PWA  ·  Bengali", fill=CREAM, font=f_meta)
 
 # Bottom line
-d.text((80, 540), "Act No. 24 of 2018  ·  29 July 2018  ·  2026 Edition", fill=(200, 220, 210), font=f_meta)
+d.text((200, 510), "Act No. 24 of 2018  ·  29 July 2018  ·  2026 Edition", fill=(220, 240, 230), font=f_meta)
 
 og.save(f"{OUTPUT_DIR}/og-image.png", "PNG", optimize=True)
 print(f"  Wrote {OUTPUT_DIR}/og-image.png (1200x630)")

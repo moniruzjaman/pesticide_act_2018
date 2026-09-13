@@ -35,7 +35,7 @@ import {
   WifiOff,
 } from "lucide-react";
 
-// Custom Government Seal Icon — stylized lotus + water waves (Bangladesh national emblem)
+// Custom Government seal icon — Bangladesh flag inspired (green ring + red disc)
 function GovSealIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -48,19 +48,17 @@ function GovSealIcon({ className }: { className?: string }) {
       className={className}
       aria-hidden="true"
     >
-      {/* Outer circle (seal) */}
-      <circle cx="12" cy="12" r="10" strokeWidth="1.4" />
-      {/* Inner ring */}
-      <circle cx="12" cy="12" r="8" strokeWidth="0.8" opacity="0.5" />
-      {/* Stylized lotus (center) — 5 petals */}
-      <path d="M12 6.5 C 10.5 8.5, 10.5 10, 12 11 C 13.5 10, 13.5 8.5, 12 6.5 Z" fill="currentColor" opacity="0.9" />
-      <path d="M9 8 C 8.5 9.5, 9 10.5, 10.5 11 C 10.5 9.5, 10 8.5, 9 8 Z" fill="currentColor" opacity="0.7" />
-      <path d="M15 8 C 15.5 9.5, 15 10.5, 13.5 11 C 13.5 9.5, 14 8.5, 15 8 Z" fill="currentColor" opacity="0.7" />
-      <path d="M7.5 10.5 C 7 11.5, 7.5 12.5, 9.5 12.5 C 9 11.5, 8.5 10.5, 7.5 10.5 Z" fill="currentColor" opacity="0.6" />
-      <path d="M16.5 10.5 C 17 11.5, 16.5 12.5, 14.5 12.5 C 15 11.5, 15.5 10.5, 16.5 10.5 Z" fill="currentColor" opacity="0.6" />
-      {/* Water waves (bottom — Bangladesh emblem) */}
-      <path d="M5 16 Q 7 14.5, 9 16 T 13 16 T 17 16 T 19 16" />
-      <path d="M5 18 Q 7 16.5, 9 18 T 13 18 T 17 18 T 19 18" opacity="0.6" />
+      {/* Outer green seal ring */}
+      <circle cx="12" cy="12" r="10" strokeWidth="1.6" />
+      {/* Inner thin ring */}
+      <circle cx="12" cy="12" r="8" strokeWidth="0.6" opacity="0.6" />
+      {/* Central red disc — Bangladesh flag inspired */}
+      <circle cx="12" cy="12" r="4" fill="#f42a41" stroke="none" />
+      {/* Decorative dots around ring (law/justice seal pattern) */}
+      <circle cx="12" cy="2.5" r="0.6" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="21.5" r="0.6" fill="currentColor" stroke="none" />
+      <circle cx="2.5" cy="12" r="0.6" fill="currentColor" stroke="none" />
+      <circle cx="21.5" cy="12" r="0.6" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -161,6 +159,9 @@ export default function Home() {
       case "whatsapp":
         target = `https://wa.me/?text=${encodedText}%20${encodedUrl}`;
         break;
+      case "messenger":
+        target = `https://www.facebook.com/dialog/send?app_id=291494419107518&link=${encodedUrl}&redirect_uri=${encodedUrl}`;
+        break;
       case "facebook":
         target = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`;
         break;
@@ -197,22 +198,22 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF6EE]">
+    <div className="min-h-screen flex flex-col bg-[#f7fdf9]">
       {/* Top accent bar */}
-      <div className="h-1.5 bg-gradient-to-r from-[#1E4D3B] from-70% to-[#C7912C] to-70%" />
+      <div className="h-1.5 bg-gradient-to-r from-[#006a4e] from-70% to-[#f42a41] to-70%" />
 
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-[#FAF6EE]/95 backdrop-blur border-b border-[#D9D2BF]">
+      <header className="sticky top-0 z-40 bg-[#f7fdf9]/95 backdrop-blur border-b border-[#c8e6d5]">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-10 h-10 rounded-lg bg-[#1E4D3B] flex items-center justify-center text-[#FAF6EE] flex-shrink-0">
+            <div className="w-10 h-10 rounded-lg bg-[#006a4e] flex items-center justify-center text-[#f7fdf9] flex-shrink-0">
               <GovSealIcon className="w-6 h-6" />
             </div>
             <div className="min-w-0">
-              <h1 className="font-serif-bn font-bold text-[#14342A] text-base md:text-lg leading-tight truncate">
+              <h1 className="font-serif-bn font-bold text-[#004d38] text-base md:text-lg leading-tight truncate">
                 বালাইনাশক আইন, ২০১৮
               </h1>
-              <p className="text-[10px] md:text-xs text-[#6B6B6B] truncate">খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড</p>
+              <p className="text-[10px] md:text-xs text-[#5a7568] truncate">খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড</p>
             </div>
           </div>
 
@@ -227,7 +228,7 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <button
               onClick={handleShare}
-              className="hidden sm:inline-flex items-center justify-center w-8 h-8 rounded-md border border-[#D9D2BF] text-[#1E4D3B] hover:bg-[#F2ECDD]"
+              className="inline-flex items-center justify-center w-9 h-9 rounded-md border border-[#c8e6d5] text-[#006a4e] hover:bg-[#e6f4ed] transition-colors"
               title="শেয়ার করুন"
               aria-label="শেয়ার"
             >
@@ -235,7 +236,7 @@ export default function Home() {
             </button>
             <Button
               size="sm"
-              className="bg-[#C7912C] hover:bg-[#9A6E1E] text-white hidden sm:inline-flex"
+              className="bg-[#f42a41] hover:bg-[#c41e2e] text-white hidden sm:inline-flex"
               onClick={() => setActiveTab("ai")}
             >
               <Sparkles className="w-4 h-4 mr-1.5" /> AI
@@ -243,7 +244,7 @@ export default function Home() {
             <Button
               variant="outline"
               size="icon"
-              className="md:hidden border-[#D9D2BF]"
+              className="md:hidden border-[#c8e6d5]"
               onClick={() => setMobileNavOpen(!mobileNavOpen)}
             >
               {mobileNavOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -253,7 +254,7 @@ export default function Home() {
 
         {/* Mobile nav */}
         {mobileNavOpen && (
-          <div className="md:hidden border-t border-[#D9D2BF] bg-[#FAF6EE] p-2 grid grid-cols-2 gap-1">
+          <div className="md:hidden border-t border-[#c8e6d5] bg-[#f7fdf9] p-2 grid grid-cols-2 gap-1">
             <TabButton id="overview" active={activeTab} onClick={(t) => { setActiveTab(t); setMobileNavOpen(false); }} full>সূচি</TabButton>
             <TabButton id="act" active={activeTab} onClick={(t) => { setActiveTab(t); setMobileNavOpen(false); }} full>আইন</TabButton>
             <TabButton id="slides" active={activeTab} onClick={(t) => { setActiveTab(t); setMobileNavOpen(false); }} full>স্লাইড</TabButton>
@@ -265,15 +266,15 @@ export default function Home() {
 
       {/* Offline indicator + install banner */}
       {!online && (
-        <div className="bg-[#B23A2A] text-white text-center py-1.5 text-xs md:text-sm font-sans-bn flex items-center justify-center gap-2">
+        <div className="bg-[#f42a41] text-white text-center py-1.5 text-xs md:text-sm font-sans-bn flex items-center justify-center gap-2">
           <WifiOff className="w-3.5 h-3.5" />
           আপনি অফলাইনে আছেন — তবে আইন, স্লাইড ও AI সহায়ক কাজ করবে
         </div>
       )}
       {installPrompt && (
-        <div className="bg-[#1E4D3B] text-[#FAF6EE] py-2 px-4 text-xs md:text-sm flex items-center justify-between gap-3">
+        <div className="bg-[#006a4e] text-[#f7fdf9] py-2 px-4 text-xs md:text-sm flex items-center justify-between gap-3">
           <span className="font-sans-bn">📱 অ্যাপ হোম স্ক্রিনে ইনস্টল করুন — অফলাইনে ব্যবহার করুন</span>
-          <button onClick={handleInstall} className="bg-[#C7912C] hover:bg-[#9A6E1E] text-white px-3 py-1 rounded text-xs font-semibold">
+          <button onClick={handleInstall} className="bg-[#f42a41] hover:bg-[#c41e2e] text-white px-3 py-1 rounded text-xs font-semibold">
             ইনস্টল
           </button>
         </div>
@@ -289,19 +290,29 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#14342A] text-[#CDE6DD] text-center py-5 text-xs md:text-sm">
+      <footer className="bg-[#004d38] text-[#c8e6d5] text-center py-5 text-xs md:text-sm">
         বালাইনাশক আইন, ২০১৮ · খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড · সমন্বিত সংস্করণ ২০২৬ · অফলাইন AI সহ
       </footer>
 
-      {/* Floating AI button */}
-      <button
-        onClick={() => setActiveTab("ai")}
-        className="fixed bottom-5 right-5 z-40 bg-[#C7912C] hover:bg-[#9A6E1E] text-white rounded-full shadow-2xl px-4 py-3 md:px-5 md:py-4 flex items-center gap-2 transition-all hover:scale-105"
-        aria-label="AI সহায়ক খুলুন"
-      >
-        <Sparkles className="w-5 h-5" />
-        <span className="font-sans-bn font-semibold text-sm hidden sm:inline">AI সহায়ক</span>
-      </button>
+      {/* Floating action buttons — AI + Share (visible in PWA too) */}
+      <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-2.5 items-end">
+        <button
+          onClick={handleShare}
+          className="bg-[#006a4e] hover:bg-[#004d38] text-white rounded-full shadow-2xl w-12 h-12 md:w-14 md:h-14 flex items-center justify-center transition-all hover:scale-105"
+          aria-label="শেয়ার করুন"
+          title="শেয়ার করুন"
+        >
+          <Share2 className="w-5 h-5" />
+        </button>
+        <button
+          onClick={() => setActiveTab("ai")}
+          className="bg-[#f42a41] hover:bg-[#c41e2e] text-white rounded-full shadow-2xl px-4 py-3 md:px-5 md:py-4 flex items-center gap-2 transition-all hover:scale-105"
+          aria-label="AI সহায়ক খুলুন"
+        >
+          <Sparkles className="w-5 h-5" />
+          <span className="font-sans-bn font-semibold text-sm hidden sm:inline">AI সহায়ক</span>
+        </button>
+      </div>
 
       {/* Share Dialog — 1200x630 preview + platform buttons */}
       {shareOpen && (
@@ -310,17 +321,17 @@ export default function Home() {
           onClick={() => setShareOpen(false)}
         >
           <div
-            className="bg-[#FAF6EE] rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+            className="bg-[#f7fdf9] rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-[#D9D2BF]">
-              <h3 className="font-serif-bn font-bold text-[#14342A] text-lg flex items-center gap-2">
-                <Share2 className="w-5 h-5 text-[#C7912C]" /> শেয়ার করুন
+            <div className="flex items-center justify-between p-4 border-b border-[#c8e6d5]">
+              <h3 className="font-serif-bn font-bold text-[#004d38] text-lg flex items-center gap-2">
+                <Share2 className="w-5 h-5 text-[#f42a41]" /> শেয়ার করুন
               </h3>
               <button
                 onClick={() => setShareOpen(false)}
-                className="w-8 h-8 rounded-md hover:bg-[#F2ECDD] flex items-center justify-center text-[#1E4D3B]"
+                className="w-8 h-8 rounded-md hover:bg-[#e6f4ed] flex items-center justify-center text-[#006a4e]"
                 aria-label="বন্ধ করুন"
               >
                 <X className="w-4 h-4" />
@@ -329,8 +340,8 @@ export default function Home() {
 
             {/* 1200x630 Preview Card */}
             <div className="p-4">
-              <p className="text-xs text-[#6B6B6B] mb-2 font-sans-bn">শেয়ার প্রিভিউ (১২০০×৬৩০)</p>
-              <div className="rounded-xl overflow-hidden border-2 border-[#D9D2BF] shadow-lg">
+              <p className="text-xs text-[#5a7568] mb-2 font-sans-bn">শেয়ার প্রিভিউ (১২০০×৬৩০)</p>
+              <div className="rounded-xl overflow-hidden border-2 border-[#c8e6d5] shadow-lg">
                 {/* 1200x630 aspect ratio preview */}
                 <div className="relative w-full" style={{ aspectRatio: "1200/630" }}>
                   <img
@@ -340,14 +351,14 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <p className="text-[11px] text-[#6B6B6B] mt-2 leading-relaxed">
+              <p className="text-[11px] text-[#5a7568] mt-2 leading-relaxed">
                 এই প্রিভিউটি WhatsApp, Facebook, Twitter, LinkedIn সব প্ল্যাটফর্মে একইভাবে দেখাবে।
               </p>
             </div>
 
             {/* Platform buttons */}
             <div className="px-4 pb-2">
-              <p className="text-sm font-semibold text-[#14342A] mb-3 font-sans-bn">যেকোনো মাধ্যমে শেয়ার করুন</p>
+              <p className="text-sm font-semibold text-[#004d38] mb-3 font-sans-bn">যেকোনো মাধ্যমে শেয়ার করুন</p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <SharePlatformBtn
                   label="WhatsApp"
@@ -358,6 +369,16 @@ export default function Home() {
                     </svg>
                   }
                   onClick={() => shareToPlatform("whatsapp")}
+                />
+                <SharePlatformBtn
+                  label="Messenger"
+                  color="#0084FF"
+                  icon={
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                      <path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.614 4.469 8.652V24l4.088-2.242c1.092.301 2.246.464 3.443.464 6.627 0 12-4.975 12-11.111C24 4.974 18.627 0 12 0zm1.191 14.963l-3.055-3.26-5.963 3.26L10.732 8l3.131 3.259L19.752 8l-6.561 6.963z"/>
+                    </svg>
+                  }
+                  onClick={() => shareToPlatform("messenger")}
                 />
                 <SharePlatformBtn
                   label="Facebook"
@@ -401,21 +422,21 @@ export default function Home() {
                 />
                 <SharePlatformBtn
                   label="Email"
-                  color="#6B6B6B"
+                  color="#5a7568"
                   icon={<FileText className="w-5 h-5" />}
                   onClick={() => shareToPlatform("email")}
                 />
                 {typeof navigator !== "undefined" && navigator.share && (
                   <SharePlatformBtn
                     label="আরও..."
-                    color="#1E4D3B"
+                    color="#006a4e"
                     icon={<Share2 className="w-5 h-5" />}
                     onClick={() => shareToPlatform("native")}
                   />
                 )}
                 <SharePlatformBtn
                   label="লিঙ্ক কপি"
-                  color="#C7912C"
+                  color="#f42a41"
                   icon={<Copy className="w-5 h-5" />}
                   onClick={() => shareToPlatform("copy")}
                 />
@@ -423,19 +444,19 @@ export default function Home() {
             </div>
 
             {/* URL display */}
-            <div className="p-4 border-t border-[#D9D2BF] mt-2">
-              <label className="text-xs text-[#6B6B6B] mb-1.5 block font-sans-bn">লিঙ্ক</label>
+            <div className="p-4 border-t border-[#c8e6d5] mt-2">
+              <label className="text-xs text-[#5a7568] mb-1.5 block font-sans-bn">লিঙ্ক</label>
               <div className="flex gap-2">
                 <input
                   readOnly
                   value={shareUrl}
-                  className="flex-1 px-3 py-2 text-sm bg-[#F2ECDD] border border-[#D9D2BF] rounded-md text-[#4A4A4A] font-num"
+                  className="flex-1 px-3 py-2 text-sm bg-[#e6f4ed] border border-[#c8e6d5] rounded-md text-[#3d5a4a] font-num"
                   onClick={(e) => (e.target as HTMLInputElement).select()}
                 />
                 <Button
                   onClick={() => shareToPlatform("copy")}
                   size="sm"
-                  className="bg-[#1E4D3B] hover:bg-[#14342A] text-white"
+                  className="bg-[#006a4e] hover:bg-[#004d38] text-white"
                 >
                   <Copy className="w-3.5 h-3.5 mr-1.5" /> কপি
                 </Button>
@@ -466,8 +487,8 @@ function TabButton({ id, active, onClick, children, full }: {
         full ? "w-full text-left" : ""
       } ${
         isActive
-          ? "bg-[#1E4D3B] text-[#FAF6EE]"
-          : "text-[#1E4D3B] hover:bg-[#F2ECDD]"
+          ? "bg-[#006a4e] text-[#f7fdf9]"
+          : "text-[#006a4e] hover:bg-[#e6f4ed]"
       }`}
     >
       {children}
@@ -480,15 +501,15 @@ function OverviewTab({ onNavigate }: { onNavigate: (t: TabId) => void }) {
   return (
     <div className="space-y-6">
       {/* Hero */}
-      <Card className="bg-gradient-to-br from-[#1E4D3B] to-[#14342A] text-[#FAF6EE] border-none p-6 md:p-10">
-        <Badge className="bg-[#C7912C] text-white hover:bg-[#C7912C] mb-3">খুচরা বিক্রেতার ফিল্ড গাইড</Badge>
+      <Card className="bg-gradient-to-br from-[#006a4e] to-[#004d38] text-[#f7fdf9] border-none p-6 md:p-10">
+        <Badge className="bg-[#f42a41] text-white hover:bg-[#f42a41] mb-3">খুচরা বিক্রেতার ফিল্ড গাইড</Badge>
         <h2 className="font-serif-bn text-3xl md:text-5xl font-bold leading-tight mb-3">
           বালাইনাশক আইন, ২০১৮
         </h2>
-        <p className="font-serif-bn text-xl md:text-2xl text-[#E0B659] mb-4">
+        <p className="font-serif-bn text-xl md:text-2xl text-[#ff6b7a] mb-4">
           সমন্বিত ফিল্ড গাইড ও আইনগত নির্দেশিকা
         </p>
-        <p className="text-[#FAF6EE]/85 max-w-3xl text-sm md:text-base leading-relaxed mb-6">
+        <p className="text-[#f7fdf9]/85 max-w-3xl text-sm md:text-base leading-relaxed mb-6">
           ভেজাল বালাইনাশক শনাক্তকরণ, আইনি বিধান, এবং নৈতিক ব্যবসায়িক অনুশীলন —
           ৪৭টি স্লাইডের প্রশিক্ষণ ডেক, ৩৬টি ধারার ইন্টারঅ্যাকটিভ আইনি রেফারেন্স, এবং Qwen AI সহ
           সমন্বিত ওয়েব অ্যাপ্লিকেশন।
@@ -500,7 +521,7 @@ function OverviewTab({ onNavigate }: { onNavigate: (t: TabId) => void }) {
           <Badge variant="outline" className="bg-white/10 text-white border-white/30">Qwen AI সহ</Badge>
         </div>
         <div className="flex flex-wrap gap-3 mt-6">
-          <Button onClick={() => onNavigate("act")} className="bg-[#C7912C] hover:bg-[#9A6E1E] text-white">
+          <Button onClick={() => onNavigate("act")} className="bg-[#f42a41] hover:bg-[#c41e2e] text-white">
             <BookOpen className="w-4 h-4 mr-2" /> আইন পড়ুন
           </Button>
           <Button onClick={() => onNavigate("slides")} variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white/20 hover:text-white">
@@ -515,34 +536,34 @@ function OverviewTab({ onNavigate }: { onNavigate: (t: TabId) => void }) {
       {/* Quick stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { num: "৩০%", label: "উন্নয়নশীল দেশে ভেজালের হার", color: "#B23A2A" },
-          { num: "৪৮০ crore ৳", label: "বাংলাদেশের বার্ষিক বাজার", color: "#1E4D3B" },
-          { num: "৩২", label: "সীমান্ত জেলায় প্রবেশ", color: "#C7912C" },
-          { num: "৩৬", label: "আইনি ধারা", color: "#2E7D44" },
+          { num: "৩০%", label: "উন্নয়নশীল দেশে ভেজালের হার", color: "#f42a41" },
+          { num: "৪৮০ crore ৳", label: "বাংলাদেশের বার্ষিক বাজার", color: "#006a4e" },
+          { num: "৩২", label: "সীমান্ত জেলায় প্রবেশ", color: "#f42a41" },
+          { num: "৩৬", label: "আইনি ধারা", color: "#006a4e" },
         ].map((s, i) => (
-          <Card key={i} className="p-4 text-center border-[#D9D2BF]">
+          <Card key={i} className="p-4 text-center border-[#c8e6d5]">
             <div className="font-num font-bold text-2xl md:text-3xl" style={{ color: s.color }}>{s.num}</div>
-            <div className="text-xs text-[#4A4A4A] mt-1.5 leading-tight">{s.label}</div>
+            <div className="text-xs text-[#3d5a4a] mt-1.5 leading-tight">{s.label}</div>
           </Card>
         ))}
       </div>
 
       {/* Chapters */}
       <div>
-        <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#14342A] mb-4 flex items-center gap-2">
-          <ListTree className="w-5 h-5 text-[#C7912C]" /> সাতটি অধ্যায় — এক নজরে
+        <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#004d38] mb-4 flex items-center gap-2">
+          <ListTree className="w-5 h-5 text-[#f42a41]" /> সাতটি অধ্যায় — এক নজরে
         </h3>
         <div className="grid md:grid-cols-2 gap-3">
           {CHAPTERS.map((c) => (
-            <Card key={c.num} className="p-4 border-[#D9D2BF] hover:border-[#C7912C] hover:shadow-md transition-all">
+            <Card key={c.num} className="p-4 border-[#c8e6d5] hover:border-[#f42a41] hover:shadow-md transition-all">
               <div className="flex gap-3">
-                <div className="w-11 h-11 rounded-full bg-[#1E4D3B] text-white flex items-center justify-center font-num font-bold text-base flex-shrink-0">
+                <div className="w-11 h-11 rounded-full bg-[#006a4e] text-white flex items-center justify-center font-num font-bold text-base flex-shrink-0">
                   {c.num}
                 </div>
                 <div className="min-w-0">
-                  <h4 className="font-serif-bn font-bold text-[#14342A] text-base mb-0.5">{c.title}</h4>
-                  <p className="text-xs text-[#6B6B6B] mb-1.5 font-num">{c.range}</p>
-                  <p className="text-sm text-[#4A4A4A] leading-relaxed">{c.summary}</p>
+                  <h4 className="font-serif-bn font-bold text-[#004d38] text-base mb-0.5">{c.title}</h4>
+                  <p className="text-xs text-[#5a7568] mb-1.5 font-num">{c.range}</p>
+                  <p className="text-sm text-[#3d5a4a] leading-relaxed">{c.summary}</p>
                 </div>
               </div>
             </Card>
@@ -552,20 +573,20 @@ function OverviewTab({ onNavigate }: { onNavigate: (t: TabId) => void }) {
 
       {/* Feature cards */}
       <div className="grid md:grid-cols-3 gap-3">
-        <Card className="p-5 border-[#D9D2BF]">
-          <BookOpen className="w-7 h-7 text-[#1E4D3B] mb-2" />
-          <h4 className="font-serif-bn font-bold text-[#14342A] mb-1">ইন্টারঅ্যাকটিভ আইন</h4>
-          <p className="text-sm text-[#4A4A4A]">৩৬টি ধারা — বাংলা/English দ্বিভাষিক, TTS অডিও, ট্যাব ভিউ, সার্চ সুবিধা সহ।</p>
+        <Card className="p-5 border-[#c8e6d5]">
+          <BookOpen className="w-7 h-7 text-[#006a4e] mb-2" />
+          <h4 className="font-serif-bn font-bold text-[#004d38] mb-1">ইন্টারঅ্যাকটিভ আইন</h4>
+          <p className="text-sm text-[#3d5a4a]">৩৬টি ধারা — বাংলা/English দ্বিভাষিক, TTS অডিও, ট্যাব ভিউ, সার্চ সুবিধা সহ।</p>
         </Card>
-        <Card className="p-5 border-[#D9D2BF]">
-          <Presentation className="w-7 h-7 text-[#1E4D3B] mb-2" />
-          <h4 className="font-serif-bn font-bold text-[#14342A] mb-1">স্লাইড ভিউয়ার</h4>
-          <p className="text-sm text-[#4A4A4A]">৪৭টি স্লাইডের প্রশিক্ষণ ডেক — প্রিভিউ, নেক্সট, কীবোর্ড নেভিগেশন সহ।</p>
+        <Card className="p-5 border-[#c8e6d5]">
+          <Presentation className="w-7 h-7 text-[#006a4e] mb-2" />
+          <h4 className="font-serif-bn font-bold text-[#004d38] mb-1">স্লাইড ভিউয়ার</h4>
+          <p className="text-sm text-[#3d5a4a]">৪৭টি স্লাইডের প্রশিক্ষণ ডেক — প্রিভিউ, নেক্সট, কীবোর্ড নেভিগেশন সহ।</p>
         </Card>
-        <Card className="p-5 border-[#D9D2BF]">
-          <Sparkles className="w-7 h-7 text-[#C7912C] mb-2" />
-          <h4 className="font-serif-bn font-bold text-[#14342A] mb-1">অফলাইন AI সহায়ক</h4>
-          <p className="text-sm text-[#4A4A4A]">আইনের ৩৬ ধারার উপর ভিত্তি করে স্মার্ট উত্তর — সম্পূর্ণ অফলাইনে, কোনো ইন্টারনেট ছাড়াই।</p>
+        <Card className="p-5 border-[#c8e6d5]">
+          <Sparkles className="w-7 h-7 text-[#f42a41] mb-2" />
+          <h4 className="font-serif-bn font-bold text-[#004d38] mb-1">অফলাইন AI সহায়ক</h4>
+          <p className="text-sm text-[#3d5a4a]">আইনের ৩৬ ধারার উপর ভিত্তি করে স্মার্ট উত্তর — সম্পূর্ণ অফলাইনে, কোনো ইন্টারনেট ছাড়াই।</p>
         </Card>
       </div>
     </div>
@@ -578,12 +599,12 @@ function ActTab() {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#14342A] flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-[#C7912C]" /> কীটনাশক আইন, ২০১৮ — সম্পূর্ণ রেফারেন্স
+          <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#004d38] flex items-center gap-2">
+            <BookOpen className="w-5 h-5 text-[#f42a41]" /> কীটনাশক আইন, ২০১৮ — সম্পূর্ণ রেফারেন্স
           </h3>
-          <p className="text-sm text-[#4A4A4A] mt-1">৩৬টি ধারা · বাংলা/English দ্বিভাষিক · TTS অডিও সহ</p>
+          <p className="text-sm text-[#3d5a4a] mt-1">৩৬টি ধারা · বাংলা/English দ্বিভাষিক · TTS অডিও সহ</p>
         </div>
-        <Button asChild variant="outline" className="border-[#1E4D3B] text-[#1E4D3B] hover:bg-[#1E4D3B] hover:text-white">
+        <Button asChild variant="outline" className="border-[#006a4e] text-[#006a4e] hover:bg-[#006a4e] hover:text-white">
           <a href="/assets/pesticide-act-2018.html" download>
             <Download className="w-4 h-4 mr-2" /> HTML ডাউনলোড
           </a>
@@ -694,16 +715,16 @@ function SlidesTab() {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#14342A] flex items-center gap-2">
-            <Presentation className="w-5 h-5 text-[#C7912C]" /> প্রশিক্ষণ ডেক — ৪৭টি স্লাইড
+          <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#004d38] flex items-center gap-2">
+            <Presentation className="w-5 h-5 text-[#f42a41]" /> প্রশিক্ষণ ডেক — ৪৭টি স্লাইড
           </h3>
-          <p className="text-sm text-[#4A4A4A] mt-1">← → কীবোর্ড তীর · স্পেসবার = প্লে/পজ · অটোপ্লে চালু করুন</p>
+          <p className="text-sm text-[#3d5a4a] mt-1">← → কীবোর্ড তীর · স্পেসবার = প্লে/পজ · অটোপ্লে চালু করুন</p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
-          <Badge variant="outline" className="border-[#1E4D3B] text-[#1E4D3B] font-num">
+          <Badge variant="outline" className="border-[#006a4e] text-[#006a4e] font-num">
             স্লাইড {bnIdx} / {bnTotal}
           </Badge>
-          <Button asChild size="sm" className="bg-[#1E4D3B] hover:bg-[#14342A] text-white">
+          <Button asChild size="sm" className="bg-[#006a4e] hover:bg-[#004d38] text-white">
             <a href="/assets/Balainashok_Ain_2018_Guide.pptx" download>
               <Download className="w-4 h-4 mr-1.5" /> PPTX
             </a>
@@ -712,13 +733,13 @@ function SlidesTab() {
       </div>
 
       {/* Autoplay controls */}
-      <Card className="p-3 border-[#D9D2BF] bg-[#F2ECDD]">
+      <Card className="p-3 border-[#c8e6d5] bg-[#e6f4ed]">
         <div className="flex flex-wrap items-center gap-3 justify-between">
           <div className="flex items-center gap-2">
             <Button
               onClick={() => setPlaying((p) => !p)}
               size="sm"
-              className={playing ? "bg-[#B23A2A] hover:bg-[#8B2D20] text-white" : "bg-[#1E4D3B] hover:bg-[#14342A] text-white"}
+              className={playing ? "bg-[#f42a41] hover:bg-[#8B2D20] text-white" : "bg-[#006a4e] hover:bg-[#004d38] text-white"}
             >
               {playing ? (<><Pause className="w-4 h-4 mr-1.5" /> বিরতি</>) : (<><Play className="w-4 h-4 mr-1.5" /> অটোপ্লে</>)}
             </Button>
@@ -726,22 +747,22 @@ function SlidesTab() {
               onClick={() => { setPlaying(false); setIdx(1); setProgress(0); }}
               size="sm"
               variant="outline"
-              className="border-[#1E4D3B] text-[#1E4D3B] hover:bg-[#1E4D3B] hover:text-white"
+              className="border-[#006a4e] text-[#006a4e] hover:bg-[#006a4e] hover:text-white"
             >
               <Square className="w-3.5 h-3.5 mr-1.5" /> শুরু থেকে
             </Button>
           </div>
 
           <div className="flex items-center gap-2 text-sm">
-            <span className="text-[#4A4A4A] font-sans-bn">বিরতি:</span>
+            <span className="text-[#3d5a4a] font-sans-bn">বিরতি:</span>
             {[3, 5, 8, 12].map((s) => (
               <button
                 key={s}
                 onClick={() => { setIntervalSec(s); setProgress(0); }}
                 className={`px-2.5 py-1 rounded text-xs font-num font-semibold transition-colors ${
                   interval === s
-                    ? "bg-[#C7912C] text-white"
-                    : "bg-white text-[#1E4D3B] border border-[#D9D2BF] hover:bg-[#EBE3CE]"
+                    ? "bg-[#f42a41] text-white"
+                    : "bg-white text-[#006a4e] border border-[#c8e6d5] hover:bg-[#d4ebde]"
                 }`}
               >
                 {s}s
@@ -751,9 +772,9 @@ function SlidesTab() {
         </div>
 
         {/* Progress bar */}
-        <div className="mt-3 h-1.5 bg-[#D9D2BF] rounded-full overflow-hidden">
+        <div className="mt-3 h-1.5 bg-[#c8e6d5] rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-[#1E4D3B] to-[#C7912C] transition-all duration-100 ease-linear"
+            className="h-full bg-gradient-to-r from-[#006a4e] to-[#f42a41] transition-all duration-100 ease-linear"
             style={{ width: `${playing ? progress : 0}%` }}
           />
         </div>
@@ -783,8 +804,8 @@ function SlidesTab() {
 
         {/* Playing indicator */}
         {playing && (
-          <div className="absolute top-3 right-3 bg-[#1E4D3B] text-white text-xs px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-md">
-            <span className="w-1.5 h-1.5 bg-[#C7912C] rounded-full animate-pulse" />
+          <div className="absolute top-3 right-3 bg-[#006a4e] text-white text-xs px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-md">
+            <span className="w-1.5 h-1.5 bg-[#f42a41] rounded-full animate-pulse" />
             <span className="font-sans-bn">চলছে</span>
           </div>
         )}
@@ -801,7 +822,7 @@ function SlidesTab() {
               key={n}
               onClick={() => goTo(n)}
               className={`flex-shrink-0 w-20 h-12 rounded border-2 overflow-hidden transition-all ${
-                isActive ? "border-[#C7912C] scale-105" : "border-transparent opacity-60 hover:opacity-100"
+                isActive ? "border-[#f42a41] scale-105" : "border-transparent opacity-60 hover:opacity-100"
               }`}
             >
               <img src={`/slides/slide-${s}.png`} alt={`স্লাইড ${n}`} className="w-full h-full object-cover" />
@@ -874,29 +895,29 @@ ${s.p === 1 ? "[এই ধারায় শাস্তি বিধান র
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#14342A] flex items-center gap-2">
-          <Download className="w-5 h-5 text-[#C7912C]" /> ডাউনলোড সেন্টার
+        <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#004d38] flex items-center gap-2">
+          <Download className="w-5 h-5 text-[#f42a41]" /> ডাউনলোড সেন্টার
         </h3>
-        <p className="text-sm text-[#4A4A4A] mt-1">সম্পূর্ণ প্যাকেজ বা আলাদা অংশ — যা খুশি ডাউনলোড করুন</p>
+        <p className="text-sm text-[#3d5a4a] mt-1">সম্পূর্ণ প্যাকেজ বা আলাদা অংশ — যা খুশি ডাউনলোড করুন</p>
       </div>
 
       {/* Main downloads */}
       <div className="grid md:grid-cols-2 gap-3">
-        <Card className="p-5 border-[#D9D2BF] bg-[#1E4D3B] text-[#FAF6EE]">
-          <Presentation className="w-8 h-8 text-[#E0B659] mb-2" />
+        <Card className="p-5 border-[#c8e6d5] bg-[#006a4e] text-[#f7fdf9]">
+          <Presentation className="w-8 h-8 text-[#ff6b7a] mb-2" />
           <h4 className="font-serif-bn font-bold text-lg mb-1">সম্পূর্ণ প্রশিক্ষণ ডেক (PPTX)</h4>
-          <p className="text-sm text-[#FAF6EE]/80 mb-4">৪৭টি স্লাইড — কভার, সূচি, ৭টি অধ্যায়, কেসস্টাডি, সমাপ্তি।</p>
-          <Button asChild className="bg-[#C7912C] hover:bg-[#9A6E1E] text-white">
+          <p className="text-sm text-[#f7fdf9]/80 mb-4">৪৭টি স্লাইড — কভার, সূচি, ৭টি অধ্যায়, কেসস্টাডি, সমাপ্তি।</p>
+          <Button asChild className="bg-[#f42a41] hover:bg-[#c41e2e] text-white">
             <a href="/assets/Balainashok_Ain_2018_Guide.pptx" download>
               <Download className="w-4 h-4 mr-2" /> ২৯ মেগাবাইট PPTX
             </a>
           </Button>
         </Card>
-        <Card className="p-5 border-[#D9D2BF]">
-          <FileText className="w-8 h-8 text-[#1E4D3B] mb-2" />
-          <h4 className="font-serif-bn font-bold text-lg mb-1 text-[#14342A]">ইন্টারঅ্যাকটিভ আইন HTML</h4>
-          <p className="text-sm text-[#4A4A4A] mb-4">৩৬টি ধারা · TTS অডিও · বাংলা/English দ্বিভাষিক · অফলাইন কাজ করে।</p>
-          <Button asChild variant="outline" className="border-[#1E4D3B] text-[#1E4D3B] hover:bg-[#1E4D3B] hover:text-white">
+        <Card className="p-5 border-[#c8e6d5]">
+          <FileText className="w-8 h-8 text-[#006a4e] mb-2" />
+          <h4 className="font-serif-bn font-bold text-lg mb-1 text-[#004d38]">ইন্টারঅ্যাকটিভ আইন HTML</h4>
+          <p className="text-sm text-[#3d5a4a] mb-4">৩৬টি ধারা · TTS অডিও · বাংলা/English দ্বিভাষিক · অফলাইন কাজ করে।</p>
+          <Button asChild variant="outline" className="border-[#006a4e] text-[#006a4e] hover:bg-[#006a4e] hover:text-white">
             <a href="/assets/pesticide-act-2018.html" download>
               <Download className="w-4 h-4 mr-2" /> ৪৩ কিলোবাইট HTML
             </a>
@@ -905,22 +926,22 @@ ${s.p === 1 ? "[এই ধারায় শাস্তি বিধান র
       </div>
 
       {/* Offline package highlight */}
-      <Card className="p-5 border-2 border-[#C7912C] bg-gradient-to-br from-[#F7EED6] to-[#FAF6EE]">
+      <Card className="p-5 border-2 border-[#f42a41] bg-gradient-to-br from-[#fff0f2] to-[#f7fdf9]">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex gap-4 items-start min-w-0 flex-1">
-            <div className="w-12 h-12 rounded-xl bg-[#C7912C] text-white flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-[#f42a41] text-white flex items-center justify-center flex-shrink-0">
               <Download className="w-6 h-6" />
             </div>
             <div className="min-w-0">
-              <h4 className="font-serif-bn font-bold text-[#14342A] text-lg mb-1">সম্পূর্ণ অফলাইন প্যাকেজ (ZIP)</h4>
-              <p className="text-sm text-[#4A4A4A] leading-relaxed">
+              <h4 className="font-serif-bn font-bold text-[#004d38] text-lg mb-1">সম্পূর্ণ অফলাইন প্যাকেজ (ZIP)</h4>
+              <p className="text-sm text-[#3d5a4a] leading-relaxed">
                 সব একসাথে — অ্যাপ + ৪৭ স্লাইড + আইন HTML + PPTX + ৩৬ ধারার ডেটা। কোনো ইন্টারনেট ছাড়াই কাজ করে।
-                শুধু <code className="bg-white px-1.5 py-0.5 rounded border border-[#D9D2BF] text-xs">index.html</code> খুলুন।
+                শুধু <code className="bg-white px-1.5 py-0.5 rounded border border-[#c8e6d5] text-xs">index.html</code> খুলুন।
               </p>
-              <p className="text-xs text-[#6B6B6B] mt-2">৩৪ মেগাবাইট · ৫৬টি ফাইল · কোনো ইনস্টল প্রয়োজন নেই</p>
+              <p className="text-xs text-[#5a7568] mt-2">৩৪ মেগাবাইট · ৫৬টি ফাইল · কোনো ইনস্টল প্রয়োজন নেই</p>
             </div>
           </div>
-          <Button asChild size="lg" className="bg-[#C7912C] hover:bg-[#9A6E1E] text-white flex-shrink-0">
+          <Button asChild size="lg" className="bg-[#f42a41] hover:bg-[#c41e2e] text-white flex-shrink-0">
             <a href="/assets/Balainashok_Ain_2018_Offline_Package.zip" download>
               <Download className="w-5 h-5 mr-2" /> ZIP ডাউনলোড
             </a>
@@ -929,24 +950,24 @@ ${s.p === 1 ? "[এই ধারায় শাস্তি বিধান র
       </Card>
 
       {/* Per-section downloads */}
-      <Card className="p-5 border-[#D9D2BF]">
+      <Card className="p-5 border-[#c8e6d5]">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
           <div>
-            <h4 className="font-serif-bn font-bold text-[#14342A] text-lg">আলাদা ধারা ডাউনলোড</h4>
-            <p className="text-sm text-[#4A4A4A]">৩৬টি ধারা থেকে যেকোনো একটি আলাদাভাবে ডাউনলোড করুন</p>
+            <h4 className="font-serif-bn font-bold text-[#004d38] text-lg">আলাদা ধারা ডাউনলোড</h4>
+            <p className="text-sm text-[#3d5a4a]">৩৬টি ধারা থেকে যেকোনো একটি আলাদাভাবে ডাউনলোড করুন</p>
           </div>
-          <Button onClick={downloadAllSections} size="sm" className="bg-[#1E4D3B] hover:bg-[#14342A] text-white">
+          <Button onClick={downloadAllSections} size="sm" className="bg-[#006a4e] hover:bg-[#004d38] text-white">
             <Download className="w-4 h-4 mr-1.5" /> সকল ধারা (TXT)
           </Button>
         </div>
 
         <div className="relative mb-4">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B6B6B]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5a7568]" />
           <Input
             placeholder="ধারা নম্বর বা শিরোনাম দিয়ে খুঁজুন..."
             value={filterText}
             onChange={(e) => setFilterText(e.target.value)}
-            className="pl-9 border-[#D9D2BF]"
+            className="pl-9 border-[#c8e6d5]"
           />
         </div>
 
@@ -954,31 +975,31 @@ ${s.p === 1 ? "[এই ধারায় শাস্তি বিধান র
           {filtered.map((s) => (
             <div
               key={s.n}
-              className="flex items-start gap-3 p-3 bg-[#F2ECDD] rounded-lg hover:bg-[#EBE3CE] transition-colors"
+              className="flex items-start gap-3 p-3 bg-[#e6f4ed] rounded-lg hover:bg-[#d4ebde] transition-colors"
             >
-              <div className="w-9 h-9 rounded-md bg-[#1E4D3B] text-white flex items-center justify-center font-num font-bold text-sm flex-shrink-0">
+              <div className="w-9 h-9 rounded-md bg-[#006a4e] text-white flex items-center justify-center font-num font-bold text-sm flex-shrink-0">
                 {s.n}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <h5 className="font-serif-bn font-semibold text-[#14342A] text-sm">{s.bn}</h5>
-                  {s.p === 1 && <Badge variant="outline" className="border-[#B23A2A] text-[#B23A2A] text-[10px] py-0">শাস্তি</Badge>}
+                  <h5 className="font-serif-bn font-semibold text-[#004d38] text-sm">{s.bn}</h5>
+                  {s.p === 1 && <Badge variant="outline" className="border-[#f42a41] text-[#f42a41] text-[10px] py-0">শাস্তি</Badge>}
                 </div>
-                <p className="text-xs text-[#6B6B6B] mt-0.5">{s.en}</p>
-                <p className="text-xs text-[#4A4A4A] mt-1 line-clamp-2">{s.bd}</p>
+                <p className="text-xs text-[#5a7568] mt-0.5">{s.en}</p>
+                <p className="text-xs text-[#3d5a4a] mt-1 line-clamp-2">{s.bd}</p>
               </div>
               <Button
                 onClick={() => downloadSection(s)}
                 size="sm"
                 variant="ghost"
-                className="text-[#1E4D3B] hover:bg-[#1E4D3B] hover:text-white flex-shrink-0"
+                className="text-[#006a4e] hover:bg-[#006a4e] hover:text-white flex-shrink-0"
               >
                 <Download className="w-4 h-4" />
               </Button>
             </div>
           ))}
           {filtered.length === 0 && (
-            <div className="text-center py-8 text-sm text-[#6B6B6B]">কোনো ধারা পাওয়া যায়নি। অন্য শব্দ দিয়ে চেষ্টা করুন।</div>
+            <div className="text-center py-8 text-sm text-[#5a7568]">কোনো ধারা পাওয়া যায়নি। অন্য শব্দ দিয়ে চেষ্টা করুন।</div>
           )}
         </div>
       </Card>
@@ -1127,26 +1148,26 @@ function AiTab() {
   return (
     <div className="space-y-4">
       <div>
-        <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#14342A] flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-[#C7912C]" /> AI সহায়ক — বালাইনাশক আইন, ২০১৮
+        <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#004d38] flex items-center gap-2">
+          <Sparkles className="w-5 h-5 text-[#f42a41]" /> AI সহায়ক — বালাইনাশক আইন, ২০১৮
         </h3>
-        <p className="text-sm text-[#4A4A4A] mt-1 flex items-center gap-1.5">
-          <ShieldCheck className="w-3.5 h-3.5 text-[#2E7D44]" />
+        <p className="text-sm text-[#3d5a4a] mt-1 flex items-center gap-1.5">
+          <ShieldCheck className="w-3.5 h-3.5 text-[#006a4e]" />
           সম্পূর্ণ অফলাইন · ৩৬টি ধারার উপর ভিত্তি · কোনো ইন্টারনেট প্রয়োজন নেই
         </p>
       </div>
 
       {/* Chat window */}
-      <Card className="border-[#D9D2BF] overflow-hidden">
+      <Card className="border-[#c8e6d5] overflow-hidden">
         <div
           ref={scrollRef}
-          className="bg-[#FAF6EE] p-4 space-y-3 max-h-[400px] overflow-y-auto"
+          className="bg-[#f7fdf9] p-4 space-y-3 max-h-[400px] overflow-y-auto"
         >
           {messages.map((m, i) => (
             <div key={i} className={`flex gap-2.5 ${m.role === "user" ? "flex-row-reverse" : ""}`}>
               <div
                 className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-white text-xs ${
-                  m.role === "user" ? "bg-[#C7912C]" : "bg-[#1E4D3B]"
+                  m.role === "user" ? "bg-[#f42a41]" : "bg-[#006a4e]"
                 }`}
               >
                 {m.role === "user" ? "আপ" : "⚖"}
@@ -1154,15 +1175,15 @@ function AiTab() {
               <div
                 className={`max-w-[80%] rounded-lg p-3 text-sm whitespace-pre-wrap leading-relaxed ${
                   m.role === "user"
-                    ? "bg-[#C7912C] text-white"
-                    : "bg-white border border-[#D9D2BF] text-[#1A1A1A]"
+                    ? "bg-[#f42a41] text-white"
+                    : "bg-white border border-[#c8e6d5] text-[#0a1f15]"
                 }`}
               >
                 {m.text}
                 {m.refs && m.refs.length > 0 && (
-                  <div className="mt-2 pt-2 border-t border-[#D9D2BF] flex flex-wrap gap-1">
+                  <div className="mt-2 pt-2 border-t border-[#c8e6d5] flex flex-wrap gap-1">
                     {m.refs.map((r) => (
-                      <span key={r} className="text-[10px] bg-[#F2ECDD] text-[#1E4D3B] px-2 py-0.5 rounded">
+                      <span key={r} className="text-[10px] bg-[#e6f4ed] text-[#006a4e] px-2 py-0.5 rounded">
                         ধারা {r}
                       </span>
                     ))}
@@ -1173,8 +1194,8 @@ function AiTab() {
           ))}
           {loading && (
             <div className="flex gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-[#1E4D3B] text-white flex items-center justify-center text-xs">⚖</div>
-              <div className="bg-white border border-[#D9D2BF] rounded-lg p-3 text-sm text-[#6B6B6B] flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-[#006a4e] text-white flex items-center justify-center text-xs">⚖</div>
+              <div className="bg-white border border-[#c8e6d5] rounded-lg p-3 text-sm text-[#5a7568] flex items-center gap-2">
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
                 চিন্তা করছি...
               </div>
@@ -1183,18 +1204,18 @@ function AiTab() {
         </div>
 
         {/* Input */}
-        <div className="border-t border-[#D9D2BF] p-3 bg-white flex gap-2">
+        <div className="border-t border-[#c8e6d5] p-3 bg-white flex gap-2">
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendQuestion(input)}
             placeholder="যেমন: ভেজাল বালাইনাশক বিক্রি করলে কী শাস্তি?"
-            className="border-[#D9D2BF]"
+            className="border-[#c8e6d5]"
             disabled={loading}
           />
           <Button
             onClick={() => sendQuestion(input)}
-            className="bg-[#1E4D3B] hover:bg-[#14342A] text-white"
+            className="bg-[#006a4e] hover:bg-[#004d38] text-white"
             disabled={loading || !input.trim()}
           >
             <Send className="w-4 h-4" />
@@ -1204,8 +1225,8 @@ function AiTab() {
 
       {/* Suggested questions */}
       <div>
-        <h4 className="font-serif-bn font-bold text-[#14342A] mb-3 flex items-center gap-2 text-sm">
-          <MessageCircle className="w-4 h-4 text-[#C7912C]" /> সাজেস্টেড প্রশ্ন — এক ক্লিকে জিজ্ঞাসা
+        <h4 className="font-serif-bn font-bold text-[#004d38] mb-3 flex items-center gap-2 text-sm">
+          <MessageCircle className="w-4 h-4 text-[#f42a41]" /> সাজেস্টেড প্রশ্ন — এক ক্লিকে জিজ্ঞাসা
         </h4>
         <div className="grid sm:grid-cols-2 gap-2">
           {AI_SUGGESTIONS.map((s, i) => (
@@ -1213,19 +1234,19 @@ function AiTab() {
               key={i}
               onClick={() => sendQuestion(s.q)}
               disabled={loading}
-              className="text-left p-2.5 bg-white border border-[#D9D2BF] rounded-lg hover:border-[#C7912C] hover:shadow-sm transition-all flex gap-2.5 items-center disabled:opacity-50"
+              className="text-left p-2.5 bg-white border border-[#c8e6d5] rounded-lg hover:border-[#f42a41] hover:shadow-sm transition-all flex gap-2.5 items-center disabled:opacity-50"
             >
-              <Badge className="bg-[#F2ECDD] text-[#1E4D3B] hover:bg-[#F2ECDD] text-[10px] flex-shrink-0">{s.tag}</Badge>
-              <span className="text-xs text-[#1A1A1A] leading-relaxed flex-1">{s.q}</span>
+              <Badge className="bg-[#e6f4ed] text-[#006a4e] hover:bg-[#e6f4ed] text-[10px] flex-shrink-0">{s.tag}</Badge>
+              <span className="text-xs text-[#0a1f15] leading-relaxed flex-1">{s.q}</span>
             </button>
           ))}
         </div>
       </div>
 
       {/* Info card */}
-      <Card className="p-3 border-[#D9D2BF] bg-[#F2ECDD]">
-        <p className="text-xs text-[#4A4A4A] flex items-start gap-2">
-          <ShieldCheck className="w-3.5 h-3.5 text-[#1E4D3B] flex-shrink-0 mt-0.5" />
+      <Card className="p-3 border-[#c8e6d5] bg-[#e6f4ed]">
+        <p className="text-xs text-[#3d5a4a] flex items-start gap-2">
+          <ShieldCheck className="w-3.5 h-3.5 text-[#006a4e] flex-shrink-0 mt-0.5" />
           <span>
             এই AI সহায়ক সম্পূর্ণ অফলাইনে কাজ করে — কোনো ডেটা সার্ভারে পাঠানো হয় না।
             উত্তরগুলো সরাসরি বালাইনাশক আইন, ২০১৮-এর ৩৬টি ধারা থেকে নেওয়া। জটিল প্রশ্নের জন্য
@@ -1252,7 +1273,7 @@ function SharePlatformBtn({
   return (
     <button
       onClick={onClick}
-      className="flex flex-col items-center gap-1.5 p-3 bg-white border border-[#D9D2BF] rounded-lg hover:shadow-md hover:border-[#C7912C] transition-all"
+      className="flex flex-col items-center gap-1.5 p-3 bg-white border border-[#c8e6d5] rounded-lg hover:shadow-md hover:border-[#f42a41] transition-all"
     >
       <div
         className="w-10 h-10 rounded-full flex items-center justify-center text-white"
@@ -1260,7 +1281,7 @@ function SharePlatformBtn({
       >
         {icon}
       </div>
-      <span className="text-[11px] text-[#1A1A1A] font-sans-bn font-medium text-center leading-tight">{label}</span>
+      <span className="text-[11px] text-[#0a1f15] font-sans-bn font-medium text-center leading-tight">{label}</span>
     </button>
   );
 }
