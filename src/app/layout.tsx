@@ -23,7 +23,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const SITE_URL = "https://github.com/moniruzjaman/pesticide_act_2018";
+// Use NEXT_PUBLIC_SITE_URL env var if set (production domain), else fallback to GitHub repo
+// When deployed on Vercel/Netlify, set NEXT_PUBLIC_SITE_URL=https://your-domain.com
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://pesticide-act-2018.vercel.app";
 const SITE_TITLE = "বালাইনাশক আইন, ২০১৮ — সমন্বিত ফিল্ড গাইড";
 const SITE_DESC =
   "খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড ও আইনগত নির্দেশিকা — ৩৬টি ধারার ইন্টারঅ্যাকটিভ আইনি রেফারেন্স, ৪৭টি স্লাইডের প্রশিক্ষণ ডেক, ডাউনলোড সেন্টার ও অফলাইন AI সহায়ক।";
@@ -87,7 +89,16 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESC,
-    images: ["/og-image.png"],
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "বালাইনাশক আইন, ২০১৮ — সমন্বিত ফিল্ড গাইড",
+      },
+    ],
+    site: "@pesticide_act",
+    creator: "@moniruzjaman",
   },
   robots: {
     index: true,
