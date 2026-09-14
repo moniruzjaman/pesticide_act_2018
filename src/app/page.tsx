@@ -238,7 +238,9 @@ export default function Home() {
   };
 
   // Dynamic share data based on active tab — each tab gets its own title/text/URL
-  const BASE_URL = typeof window !== "undefined" ? window.location.origin : "https://github.com/moniruzjaman/pesticide_act_2018";
+  // Uses NEXT_PUBLIC_SITE_URL if set (Vercel domain), else window.location.origin (auto-detects deployed URL)
+  const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL
+    || (typeof window !== "undefined" ? window.location.origin : "https://pesticide-act-2018.vercel.app");
 
   const tabShareData: Record<TabId, { title: string; text: string; url: string; sub: string }> = {
     overview: {

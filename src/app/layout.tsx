@@ -23,9 +23,10 @@ const inter = Inter({
   display: "swap",
 });
 
-// Use NEXT_PUBLIC_SITE_URL env var if set (production domain), else fallback to GitHub repo
-// When deployed on Vercel/Netlify, set NEXT_PUBLIC_SITE_URL=https://your-domain.com
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://github.com/moniruzjaman/pesticide_act_2018";
+// When deployed on Vercel, window.location.origin is used for share URLs (see page.tsx).
+// For OG meta tags (server-side), use NEXT_PUBLIC_SITE_URL or default to Vercel pattern.
+// After deploying, set NEXT_PUBLIC_SITE_URL env var in Vercel project settings.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://pesticide-act-2018.vercel.app";
 // OG image: use GitHub raw URL so it's always publicly accessible even before deployment
 const OG_IMAGE_URL = process.env.NEXT_PUBLIC_OG_IMAGE_URL || "https://raw.githubusercontent.com/moniruzjaman/pesticide_act_2018/main/public/og-image.png";
 const SITE_TITLE = "বালাইনাশক আইন, ২০১৮ — সমন্বিত ফিল্ড গাইড";
