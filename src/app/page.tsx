@@ -162,6 +162,62 @@ export default function Home() {
     setInstallPrompt(null);
   };
 
+  // Visitor tracking — fire once on mount
+  const [visitCount, setVisitCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    // Track this visit
+    fetch("/api/track-visit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        path: typeof window !== "undefined" ? window.location.pathname + window.location.search : "/",
+        referrer: typeof document !== "undefined" ? document.referrer || null : null,
+      }),
+    }).catch(() => {});
+
+    // Fetch total visit count for display
+    fetch("/api/stats")
+      .then((r) => r.json())
+      .then((d) => setVisitCount(d.totalVisits || 0))
+      .catch(() => {});
+  }, []);
+
+  // Email-gated download — shows modal, stores email, then downloads
+  const [emailGate, setEmailGate] = useState<{ url: string; name: string } | null>(null);
+  const [emailInput, setEmailInput] = useState("");
+  const [emailLoading, setEmailLoading] = useState(false);
+
+  const requestDownload = (url: string, name: string) => {
+    setEmailGate({ url, name });
+    setEmailInput("");
+  };
+
+  const submitEmailAndDownload = async () => {
+    if (!emailInput.trim() || !emailInput.includes("@") || !emailGate) return;
+    setEmailLoading(true);
+    try {
+      await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: emailInput.trim(), downloadItem: emailGate.name }),
+      });
+      // Trigger download
+      const a = document.createElement("a");
+      a.href = emailGate.url;
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      toast({ title: "ডাউনলোড শুরু হয়েছে", description: "ধন্যবাদ! আপনার ইমেইল সংরক্ষিত হয়েছে।" });
+      setEmailGate(null);
+      setEmailInput("");
+    } catch {
+      toast({ title: "সমস্যা হয়েছে", description: "আবার চেষ্টা করুন", variant: "destructive" });
+    }
+    setEmailLoading(false);
+  };
+
   // Read tab from URL query (?tab=ai) — runs once on mount
   const [initialTab] = useState<TabId>(() => {
     if (typeof window === "undefined") return "overview";
@@ -359,8 +415,8 @@ export default function Home() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-6 md:py-10">
         {activeTab === "overview" && <OverviewTab onNavigate={setActiveTab} />}
         {activeTab === "act" && <ActTab />}
-        {activeTab === "slides" && <SlidesTab />}
-        {activeTab === "downloads" && <DownloadsTab />}
+        {activeTab === "slides" && <SlidesTab onDownload={requestDownload} />}
+        {activeTab === "downloads" && <DownloadsTab onDownload={requestDownload} />}
         {activeTab === "ai" && <AiTab />}
       </main>
 
@@ -368,6 +424,11 @@ export default function Home() {
       <footer className="bg-[#004d38] text-[#c8e6d5] text-center py-5 text-xs md:text-sm">
         <div className="max-w-7xl mx-auto px-4">
           বালাইনাশক আইন, ২০১৮ · খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড · সমন্বিত সংস্করণ ২০২৬ · অফলাইন AI সহ
+          {visitCount !== null && visitCount > 0 && (
+            <div className="mt-1 text-[10px] text-[#5a7568] font-num">
+              👁 {visitCount.toLocaleString("bn-BD")} জন ভিজিটর
+            </div>
+          )}
           <div className="mt-2">
             <a
               href="https://agrichem-guide.vercel.app/"
@@ -571,6 +632,73 @@ export default function Home() {
                   <Copy className="w-3.5 h-3.5 mr-1.5" /> কপি
                 </Button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Email Gate Modal — before downloads */}
+      {emailGate && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          onClick={() => !emailLoading && setEmailGate(null)}
+        >
+          <div
+            className="bg-[#f7fdf9] rounded-2xl max-w-md w-full shadow-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="bg-gradient-to-r from-[#006a4e] to-[#004d38] text-white p-5">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
+                  <Download className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-serif-bn font-bold text-lg">ডাউনলোড করুন</h3>
+                  <p className="text-xs text-white/80">{emailGate.name}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Body */}
+            <div className="p-5 space-y-3">
+              <p className="text-sm text-[#3d5a4a] leading-relaxed">
+                ডাউনলোড করার আগে অনুগ্রহ করে আপনার ইমেইল ঠিকানা দিন। আমরা আপনাকে
+                আপডেট ও গুরুত্বপূর্ণ তথ্য পাঠাতে পারি। আপনার তথ্য সুরক্ষিত থাকবে।
+              </p>
+              <Input
+                type="email"
+                value={emailInput}
+                onChange={(e) => setEmailInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && !emailLoading && submitEmailAndDownload()}
+                placeholder="আপনার ইমেইল ঠিকানা"
+                className="border-[#c8e6d5] text-sm"
+                disabled={emailLoading}
+              />
+              <div className="flex gap-2">
+                <Button
+                  onClick={submitEmailAndDownload}
+                  disabled={!emailInput.trim() || !emailInput.includes("@") || emailLoading}
+                  className="bg-[#006a4e] hover:bg-[#004d38] text-white flex-1"
+                >
+                  {emailLoading ? (
+                    <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> প্রসেসিং...</>
+                  ) : (
+                    <><Download className="w-4 h-4 mr-2" /> ডাউনলোড শুরু করুন</>
+                  )}
+                </Button>
+                <Button
+                  onClick={() => setEmailGate(null)}
+                  variant="outline"
+                  className="border-[#c8e6d5] text-[#5a7568] hover:bg-[#e6f4ed]"
+                  disabled={emailLoading}
+                >
+                  বাতিল
+                </Button>
+              </div>
+              <p className="text-[10px] text-[#5a7568] text-center">
+                🔒 আপনার ইমেইল কোনো তৃতীয় পক্ষের সাথে শেয়ার করা হবে না
+              </p>
             </div>
           </div>
         </div>
@@ -798,7 +926,7 @@ function ActTab() {
 }
 
 /* ============== Slides Tab — multi-deck viewer with autoplay ============== */
-function SlidesTab() {
+function SlidesTab({ onDownload }: { onDownload: (url: string, name: string) => void }) {
   const [deckId, setDeckId] = useState<string>(DECKS[0].id);
   const [idx, setIdx] = useState(1);
   const [playing, setPlaying] = useState(false);
@@ -941,10 +1069,12 @@ function SlidesTab() {
           <Badge variant="outline" className="border-[#006a4e] text-[#006a4e] font-num">
             স্লাইড {bnIdx} / {bnTotal}
           </Badge>
-          <Button asChild size="sm" className="bg-[#006a4e] hover:bg-[#004d38] text-white">
-            <a href={deck.pptx} download>
-              <Download className="w-4 h-4 mr-1.5" /> PPTX
-            </a>
+          <Button
+            onClick={() => onDownload(deck.pptx, `${deck.short}.pptx`)}
+            size="sm"
+            className="bg-[#006a4e] hover:bg-[#004d38] text-white"
+          >
+            <Download className="w-4 h-4 mr-1.5" /> PPTX
           </Button>
         </div>
       </div>
@@ -1051,7 +1181,7 @@ function SlidesTab() {
 }
 
 /* ============== Downloads Tab ============== */
-function DownloadsTab() {
+function DownloadsTab({ onDownload }: { onDownload: (url: string, name: string) => void }) {
   const { toast } = useToast();
   const [sections, setSections] = useState<any[]>([]);
   const [filterText, setFilterText] = useState("");
@@ -1123,20 +1253,23 @@ ${s.p === 1 ? "[এই ধারায় শাস্তি বিধান র
           <Presentation className="w-8 h-8 text-[#ff6b7a] mb-2" />
           <h4 className="font-serif-bn font-bold text-lg mb-1">সম্পূর্ণ প্রশিক্ষণ ডেক (PPTX)</h4>
           <p className="text-sm text-[#f7fdf9]/80 mb-4">৪৭টি স্লাইড — কভার, সূচি, ৭টি অধ্যায়, কেসস্টাডি, সমাপ্তি।</p>
-          <Button asChild className="bg-[#f42a41] hover:bg-[#c41e2e] text-white">
-            <a href="/assets/Balainashok_Ain_2018_Guide.pptx" download>
-              <Download className="w-4 h-4 mr-2" /> ২৯ মেগাবাইট PPTX
-            </a>
+          <Button
+            onClick={() => onDownload("/assets/Balainashok_Ain_2018_Guide.pptx", "Balainashok_Ain_2018_Guide.pptx")}
+            className="bg-[#f42a41] hover:bg-[#c41e2e] text-white"
+          >
+            <Download className="w-4 h-4 mr-2" /> ২৯ মেগাবাইট PPTX
           </Button>
         </Card>
         <Card className="p-5 border-[#c8e6d5]">
           <FileText className="w-8 h-8 text-[#006a4e] mb-2" />
           <h4 className="font-serif-bn font-bold text-lg mb-1 text-[#004d38]">ইন্টারঅ্যাকটিভ আইন HTML</h4>
           <p className="text-sm text-[#3d5a4a] mb-4">৩৬টি ধারা · TTS অডিও · বাংলা/English দ্বিভাষিক · অফলাইন কাজ করে।</p>
-          <Button asChild variant="outline" className="border-[#006a4e] text-[#006a4e] hover:bg-[#006a4e] hover:text-white">
-            <a href="/assets/pesticide-act-2018.html" download>
-              <Download className="w-4 h-4 mr-2" /> ৪৩ কিলোবাইট HTML
-            </a>
+          <Button
+            onClick={() => onDownload("/assets/pesticide-act-2018.html", "pesticide-act-2018.html")}
+            variant="outline"
+            className="border-[#006a4e] text-[#006a4e] hover:bg-[#006a4e] hover:text-white"
+          >
+            <Download className="w-4 h-4 mr-2" /> ৪৩ কিলোবাইট HTML
           </Button>
         </Card>
       </div>
@@ -1162,10 +1295,12 @@ ${s.p === 1 ? "[এই ধারায় শাস্তি বিধান র
               </div>
               <p className="text-xs text-[#3d5a4a] mb-1 leading-tight flex-1">{d.title}</p>
               <p className="text-[11px] text-[#5a7568] mb-3 font-num">{d.slides} স্লাইড · PPTX</p>
-              <Button asChild size="sm" className="bg-[#006a4e] hover:bg-[#004d38] text-white w-full">
-                <a href={d.pptx} download>
-                  <Download className="w-3.5 h-3.5 mr-1.5" /> ডাউনলোড
-                </a>
+              <Button
+                onClick={() => onDownload(d.pptx, `${d.short}.pptx`)}
+                size="sm"
+                className="bg-[#006a4e] hover:bg-[#004d38] text-white w-full"
+              >
+                <Download className="w-3.5 h-3.5 mr-1.5" /> ডাউনলোড
               </Button>
             </div>
           ))}
@@ -1188,10 +1323,12 @@ ${s.p === 1 ? "[এই ধারায় শাস্তি বিধান র
               <p className="text-xs text-[#5a7568] mt-2">৩৪ মেগাবাইট · ৫৬টি ফাইল · কোনো ইনস্টল প্রয়োজন নেই</p>
             </div>
           </div>
-          <Button asChild size="lg" className="bg-[#f42a41] hover:bg-[#c41e2e] text-white flex-shrink-0">
-            <a href="/assets/Balainashok_Ain_2018_Offline_Package.zip" download>
-              <Download className="w-5 h-5 mr-2" /> ZIP ডাউনলোড
-            </a>
+          <Button
+            onClick={() => onDownload("/assets/Balainashok_Ain_2018_Offline_Package.zip", "Offline_Package.zip")}
+            size="lg"
+            className="bg-[#f42a41] hover:bg-[#c41e2e] text-white flex-shrink-0"
+          >
+            <Download className="w-5 h-5 mr-2" /> ZIP ডাউনলোড
           </Button>
         </div>
       </Card>
