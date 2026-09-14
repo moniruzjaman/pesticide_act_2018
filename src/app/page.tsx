@@ -181,9 +181,46 @@ export default function Home() {
     setShareOpen(true);
   };
 
-  const shareUrl = typeof window !== "undefined" ? window.location.href : "https://github.com/moniruzjaman/pesticide_act_2018";
-  const shareTitle = "বালাইনাশক আইন, ২০১৮ — সমন্বিত ফিল্ড গাইড";
-  const shareText = "৩৬ ধারা · ৪৭ স্লাইড · অফলাইন AI · বাংলা — খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড";
+  // Dynamic share data based on active tab — each tab gets its own title/text/URL
+  const BASE_URL = typeof window !== "undefined" ? window.location.origin : "https://github.com/moniruzjaman/pesticide_act_2018";
+
+  const tabShareData: Record<TabId, { title: string; text: string; url: string; sub: string }> = {
+    overview: {
+      title: "বালাইনাশক আইন, ২০১৮ — সমন্বিত ফিল্ড গাইড",
+      text: "৩৬ ধারা · ৪৭ স্লাইড · অফলাইন AI · বাংলা — খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড ও আইনগত নির্দেশিকা।",
+      url: `${BASE_URL}/`,
+      sub: "সূচি",
+    },
+    act: {
+      title: "কীটনাশক আইন, ২০১৮ — ৩৬টি ধারার সম্পূর্ণ রেফারেন্স",
+      text: "বাংলা/English দ্বিভাষিক · TTS অডিও · সার্চ সহ — ৩৬টি ধারার ইন্টারঅ্যাকটিভ আইনি রেফারেন্স।",
+      url: `${BASE_URL}/?tab=act`,
+      sub: "আইন",
+    },
+    slides: {
+      title: "বালাইনাশক আইন প্রশিক্ষণ ডেক — ৩টি সংস্করণ, ১৫০টি স্লাইড",
+      text: "অটোপ্লে সহ স্লাইড ভিউয়ার — খুচরা গাইড, পিক্টোরিয়াল ও সমন্বিত সংস্করণ।",
+      url: `${BASE_URL}/?tab=slides`,
+      sub: "স্লাইড",
+    },
+    downloads: {
+      title: "বালাইনাশক আইন — ডাউনলোড সেন্টার",
+      text: "৩টি PPTX ডেক · আইন HTML · ৩৬ ধারা আলাদা · অফলাইন ZIP — সব একসাথে।",
+      url: `${BASE_URL}/?tab=downloads`,
+      sub: "ডাউনলোড",
+    },
+    ai: {
+      title: "বালাইনাশক আইন অফলাইন AI সহায়ক",
+      text: "আইনের ৩৬ ধারার উপর ভিত্তি করে স্মার্ট উত্তর — সম্পূর্ণ অফলাইনে, কোনো ইন্টারনেট ছাড়াই।",
+      url: `${BASE_URL}/?tab=ai`,
+      sub: "AI সহায়ক",
+    },
+  };
+
+  const currentShare = tabShareData[activeTab];
+  const shareUrl = currentShare.url;
+  const shareTitle = currentShare.title;
+  const shareText = currentShare.text;
 
   const shareToPlatform = async (platform: string) => {
     const encodedUrl = encodeURIComponent(shareUrl);
@@ -376,9 +413,13 @@ export default function Home() {
           >
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-[#c8e6d5]">
-              <h3 className="font-serif-bn font-bold text-[#004d38] text-lg flex items-center gap-2">
-                <Share2 className="w-5 h-5 text-[#f42a41]" /> শেয়ার করুন
-              </h3>
+              <div className="flex items-center gap-2">
+                <Share2 className="w-5 h-5 text-[#f42a41]" />
+                <h3 className="font-serif-bn font-bold text-[#004d38] text-lg">শেয়ার করুন</h3>
+                <Badge className="bg-[#e6f4ed] text-[#006a4e] hover:bg-[#e6f4ed] text-[10px] ml-1">
+                  {currentShare.sub}
+                </Badge>
+              </div>
               <button
                 onClick={() => setShareOpen(false)}
                 className="w-8 h-8 rounded-md hover:bg-[#e6f4ed] flex items-center justify-center text-[#006a4e]"
@@ -386,6 +427,15 @@ export default function Home() {
               >
                 <X className="w-4 h-4" />
               </button>
+            </div>
+
+            {/* Current page share context */}
+            <div className="px-4 pt-3 pb-1">
+              <div className="bg-[#e6f4ed] rounded-lg p-3 border border-[#c8e6d5]">
+                <p className="text-[11px] text-[#5a7568] mb-1 font-sans-bn">শেয়ার হচ্ছে:</p>
+                <p className="font-serif-bn font-bold text-[#004d38] text-sm leading-tight">{shareTitle}</p>
+                <p className="text-xs text-[#3d5a4a] mt-1 leading-relaxed">{shareText}</p>
+              </div>
             </div>
 
             {/* 1200x630 Preview Card */}
