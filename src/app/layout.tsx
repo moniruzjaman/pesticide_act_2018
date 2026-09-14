@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Noto_Serif_Bengali, Noto_Sans_Bengali, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { Analytics } from "@vercel/analytics/next";
 
 const notoSerifBn = Noto_Serif_Bengali({
   variable: "--font-serif-bn",
@@ -155,6 +156,7 @@ export default function RootLayout({
       >
         {children}
         <Toaster />
+        <Analytics />
         <script
           dangerouslySetInnerHTML={{
             __html: `
