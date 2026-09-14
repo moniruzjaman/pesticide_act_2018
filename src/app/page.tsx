@@ -240,7 +240,7 @@ export default function Home() {
   // Dynamic share data based on active tab — each tab gets its own title/text/URL
   // Uses NEXT_PUBLIC_SITE_URL if set (Vercel domain), else window.location.origin (auto-detects deployed URL)
   const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL
-    || (typeof window !== "undefined" ? window.location.origin : "https://pesticide-act-2018.vercel.app");
+    || (typeof window !== "undefined" ? window.location.origin : "https://pesticideact2018.vercel.app");
 
   const tabShareData: Record<TabId, { title: string; text: string; url: string; sub: string }> = {
     overview: {
