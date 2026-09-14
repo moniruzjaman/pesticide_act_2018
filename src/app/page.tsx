@@ -27,6 +27,7 @@ import {
   Scale,
   Landmark,
   Share2,
+  ExternalLink,
   AlertTriangle,
   ShieldCheck,
   Send,
@@ -328,7 +329,19 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-[#004d38] text-[#c8e6d5] text-center py-5 text-xs md:text-sm">
-        বালাইনাশক আইন, ২০১৮ · খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড · সমন্বিত সংস্করণ ২০২৬ · অফলাইন AI সহ
+        <div className="max-w-7xl mx-auto px-4">
+          বালাইনাশক আইন, ২০১৮ · খুচরা বিক্রেতার সমন্বিত ফিল্ড গাইড · সমন্বিত সংস্করণ ২০২৬ · অফলাইন AI সহ
+          <div className="mt-2">
+            <a
+              href="https://agrichem-guide.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#ff6b7a] hover:underline"
+            >
+              ⚡ AgriChem Guide — কৃষি রাসায়নিক ডেটাবেস ও পেস্ট কন্ট্রোল গাইড
+            </a>
+          </div>
+        </div>
       </footer>
 
       {/* Floating action buttons — AI + Share (visible in PWA too) */}
@@ -558,14 +571,14 @@ function OverviewTab({ onNavigate }: { onNavigate: (t: TabId) => void }) {
         </p>
         <p className="text-[#f7fdf9]/85 max-w-3xl text-sm md:text-base leading-relaxed mb-6">
           ভেজাল বালাইনাশক শনাক্তকরণ, আইনি বিধান, এবং নৈতিক ব্যবসায়িক অনুশীলন —
-          ৪৭টি স্লাইডের প্রশিক্ষণ ডেক, ৩৬টি ধারার ইন্টারঅ্যাকটিভ আইনি রেফারেন্স, এবং Qwen AI সহ
-          সমন্বিত ওয়েব অ্যাপ্লিকেশন।
+          ৪৭টি স্লাইডের প্রশিক্ষণ ডেক, ৩৬টি ধারার ইন্টারঅ্যাকটিভ আইনি রেফারেন্স, এবং অফলাইন AI
+          সহায়ক সমন্বিত ওয়েব অ্যাপ্লিকেশন।
         </p>
         <div className="flex flex-wrap gap-2">
           <Badge variant="outline" className="bg-white/10 text-white border-white/30">৪৭ স্লাইড</Badge>
           <Badge variant="outline" className="bg-white/10 text-white border-white/30">৭ অধ্যায়</Badge>
           <Badge variant="outline" className="bg-white/10 text-white border-white/30">৩৬ ধারা</Badge>
-          <Badge variant="outline" className="bg-white/10 text-white border-white/30">Qwen AI সহ</Badge>
+          <Badge variant="outline" className="bg-white/10 text-white border-white/30">অফলাইন AI সহ</Badge>
         </div>
         <div className="flex flex-wrap gap-3 mt-6">
           <Button onClick={() => onNavigate("act")} className="bg-[#f42a41] hover:bg-[#c41e2e] text-white">
@@ -577,6 +590,59 @@ function OverviewTab({ onNavigate }: { onNavigate: (t: TabId) => void }) {
           <Button onClick={() => onNavigate("ai")} variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white/20 hover:text-white">
             <Sparkles className="w-4 h-4 mr-2" /> AI সহায়ক
           </Button>
+        </div>
+      </Card>
+
+      {/* AgriChem Guide — featured companion app */}
+      <Card className="border-2 border-[#006a4e] bg-white overflow-hidden">
+        <div className="flex flex-col md:flex-row items-stretch">
+          {/* Left: icon/preview */}
+          <div className="md:w-48 flex-shrink-0 bg-gradient-to-br from-[#006a4e] to-[#004d38] flex items-center justify-center p-6">
+            <img
+              src="/agrichem-256.png"
+              alt="AgriChem Guide"
+              className="w-28 h-28 md:w-32 md:h-32 rounded-2xl shadow-lg"
+            />
+          </div>
+          {/* Right: content */}
+          <div className="flex-1 p-5 md:p-6 flex flex-col justify-center">
+            <div className="flex items-center gap-2 mb-2">
+              <Badge className="bg-[#f42a41] text-white hover:bg-[#f42a41] text-[10px]">নতুন</Badge>
+              <span className="text-[11px] text-[#5a7568] font-sans-bn">সহযোগী অ্যাপ</span>
+            </div>
+            <h3 className="font-serif-bn font-bold text-[#004d38] text-lg md:text-xl mb-1.5">
+              AgriChem Guide & Pest Control Database
+            </h3>
+            <p className="text-sm text-[#3d5a4a] leading-relaxed mb-3">
+              বাংলাদেশের কৃষি রাসায়নিক নিয়ন্ত্রণের সমন্বিত গাইড — MoA রোটেশন প্ল্যানার, ফিল্ড ডোজ ক্যালকুলেটর,
+              সেফটি চেকলিস্ট, এবং অফলাইন ফিল্ড ম্যানুয়াল সহ। বালাইনাশক শনাক্তকরণ ও সঠিক ব্যবহারের জন্য এই অ্যাপটি একসাথে ব্যবহার করুন।
+            </p>
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              <span className="text-[10px] bg-[#e6f4ed] text-[#006a4e] px-2 py-0.5 rounded-full font-medium">MoA রোটেশন</span>
+              <span className="text-[10px] bg-[#e6f4ed] text-[#006a4e] px-2 py-0.5 rounded-full font-medium">ডোজ ক্যালকুলেটর</span>
+              <span className="text-[10px] bg-[#e6f4ed] text-[#006a4e] px-2 py-0.5 rounded-full font-medium">সেফটি চেকলিস্ট</span>
+              <span className="text-[10px] bg-[#e6f4ed] text-[#006a4e] px-2 py-0.5 rounded-full font-medium">অফলাইন ম্যানুয়াল</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <a
+                href="https://agrichem-guide.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#006a4e] hover:bg-[#004d38] text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" />
+                AgriChem Guide খুলুন
+              </a>
+              <a
+                href="https://agrichem-guide.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-[#006a4e] text-[#006a4e] hover:bg-[#e6f4ed] px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
+              >
+                বিস্তারিত জানুন
+              </a>
+            </div>
+          </div>
         </div>
       </Card>
 
@@ -619,7 +685,7 @@ function OverviewTab({ onNavigate }: { onNavigate: (t: TabId) => void }) {
       </div>
 
       {/* Feature cards */}
-      <div className="grid md:grid-cols-3 gap-3">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
         <Card className="p-5 border-[#c8e6d5]">
           <BookOpen className="w-7 h-7 text-[#006a4e] mb-2" />
           <h4 className="font-serif-bn font-bold text-[#004d38] mb-1">ইন্টারঅ্যাকটিভ আইন</h4>
@@ -628,13 +694,25 @@ function OverviewTab({ onNavigate }: { onNavigate: (t: TabId) => void }) {
         <Card className="p-5 border-[#c8e6d5]">
           <Presentation className="w-7 h-7 text-[#006a4e] mb-2" />
           <h4 className="font-serif-bn font-bold text-[#004d38] mb-1">স্লাইড ভিউয়ার</h4>
-          <p className="text-sm text-[#3d5a4a]">৪৭টি স্লাইডের প্রশিক্ষণ ডেক — প্রিভিউ, নেক্সট, কীবোর্ড নেভিগেশন সহ।</p>
+          <p className="text-sm text-[#3d5a4a]">৩টি ডেক · ১৫০টি স্লাইড · অটোপ্লে, প্রিভিউ, ডাউনলোড সহ।</p>
         </Card>
         <Card className="p-5 border-[#c8e6d5]">
           <Sparkles className="w-7 h-7 text-[#f42a41] mb-2" />
           <h4 className="font-serif-bn font-bold text-[#004d38] mb-1">অফলাইন AI সহায়ক</h4>
-          <p className="text-sm text-[#3d5a4a]">আইনের ৩৬ ধারার উপর ভিত্তি করে স্মার্ট উত্তর — সম্পূর্ণ অফলাইনে, কোনো ইন্টারনেট ছাড়াই।</p>
+          <p className="text-sm text-[#3d5a4a]">আইনের ৩৬ ধারার উপর ভিত্তি করে স্মার্ট উত্তর — সম্পূর্ণ অফলাইনে।</p>
         </Card>
+        <a
+          href="https://agrichem-guide.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block"
+        >
+          <Card className="p-5 border-2 border-[#f42a41] hover:shadow-lg transition-all h-full cursor-pointer">
+            <img src="/agrichem-256.png" alt="AgriChem" className="w-7 h-7 mb-2 rounded-lg" />
+            <h4 className="font-serif-bn font-bold text-[#004d38] mb-1">AgriChem Guide</h4>
+            <p className="text-sm text-[#3d5a4a]">MoA রোটেশন, ডোজ ক্যালকুলেটর, সেফটি চেকলিস্ট — কৃষি রাসায়নিক ডেটাবেস।</p>
+          </Card>
+        </a>
       </div>
     </div>
   );
