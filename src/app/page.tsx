@@ -50,11 +50,11 @@ function GovSealIcon({ className }: { className?: string }) {
       aria-hidden="true"
     >
       {/* Outer red ring */}
-      <circle cx="12" cy="12" r="10.5" stroke="red" strokeWidth="1.8" />
+      <circle cx="12" cy="12" r="10.5" stroke="#f42a41" strokeWidth="1.8" />
       {/* Inner green ring */}
-      <circle cx="12" cy="12" r="7.5" stroke="green" strokeWidth="1.8" />
+      <circle cx="12" cy="12" r="7.5" stroke="#006a4e" strokeWidth="1.8" />
       {/* Central red circle */}
-      <circle cx="12" cy="12" r="4.5" fill="red" stroke="none" />
+      <circle cx="12" cy="12" r="4.5" fill="#f42a41" stroke="none" />
     </svg>
   );
 }

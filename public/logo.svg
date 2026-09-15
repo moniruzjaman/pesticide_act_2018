@@ -1,30 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
-  <!-- Outer red ring -->
-  <circle cx="128" cy="128" r="120" fill="red"/>
-  
-  <!-- Inner green ring -->
-  <circle cx="128" cy="128" r="90" fill="green"/>
-  
-  <!-- Central red circle -->
-  <circle cx="128" cy="128" r="60" fill="red"/>
-  
-  <!-- Text: Pesticide Act 2018 -->
-  <text x="128" y="220" font-family="sans-serif" font-size="20" fill="white" text-anchor="middle">
-    Pesticide Act 2018
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <path id="textArc" d="M63.72,204.6 A100,100 0 0,0 192.28,204.6" />
+  </defs>
+
+  <!-- Base: everything red (rim + bottom band + central disc all share this layer) -->
+  <circle cx="128" cy="128" r="122" fill="#f42a41"/>
+
+  <!-- Outer crisp white trim -->
+  <circle cx="128" cy="128" r="122" fill="none" stroke="#ffffff" stroke-width="2"/>
+
+  <!-- Green C-ring (open at the bottom where the red text band shows) -->
+  <path d="M40.67,201.28 A114,114 0 1,1 215.33,201.28 L193.88,183.28 A86,86 0 1,0 62.12,183.28 Z"
+        fill="#006a4e" stroke="#ffffff" stroke-width="3"/>
+
+  <!-- Decorative inner highlight arc -->
+  <path d="M34.03,162.2 A100,100 0 1,1 221.97,162.2" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.55"/>
+
+  <!-- Left icon: spray bottle with skull & crossbones, spraying -->
+  <g transform="translate(70,108) rotate(-8)">
+    <!-- trigger + nozzle -->
+    <path d="M14,-32 L26,-42 M26,-42 L23,-46 M26,-42 L30,-40" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M2,-30 Q-2,-24 2,-18 L14,-18 L14,-30 Z" fill="#ffffff"/>
+    <!-- spray droplets -->
+    <circle cx="34" cy="-46" r="2.4" fill="#ffffff"/>
+    <circle cx="41" cy="-50" r="2" fill="#ffffff"/>
+    <circle cx="30" cy="-52" r="1.7" fill="#ffffff"/>
+    <!-- bottle body -->
+    <rect x="-14" y="-18" width="28" height="46" rx="6" fill="#ffffff"/>
+    <!-- skull -->
+    <circle cx="0" cy="-1" r="8" fill="#006a4e"/>
+    <circle cx="-3.2" cy="-2" r="1.7" fill="#ffffff"/>
+    <circle cx="3.2" cy="-2" r="1.7" fill="#ffffff"/>
+    <path d="M-2,3 L-1,6 L1,6 L2,3 Z" fill="#ffffff"/>
+    <!-- crossbones -->
+    <path d="M-11,12 L11,22 M11,12 L-11,22" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+  </g>
+
+  <!-- Right icon: scales of justice resting on an open book -->
+  <g transform="translate(188,120)">
+    <line x1="0" y1="-34" x2="0" y2="12" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+    <line x1="-26" y1="-30" x2="26" y2="-30" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+    <line x1="-26" y1="-30" x2="-26" y2="-16" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <line x1="26" y1="-30" x2="26" y2="-16" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <path d="M-34,-16 A8,9 0 0,0 -18,-16 Z" fill="#ffffff"/>
+    <path d="M18,-16 A8,9 0 0,0 34,-16 Z" fill="#ffffff"/>
+    <polygon points="0,-6 -5,4 5,4" fill="#ffffff"/>
+    <!-- open book -->
+    <path d="M-30,12 Q-15,4 0,12 Q15,4 30,12 L30,20 Q15,13 0,20 Q-15,13 -30,20 Z" fill="#ffffff"/>
+    <line x1="0" y1="12" x2="0" y2="20" stroke="#006a4e" stroke-width="1.4"/>
+  </g>
+
+  <!-- Curved bottom text -->
+  <text font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#ffffff">
+    <textPath href="#textArc" startOffset="50%" text-anchor="middle">Pesticide Act 2018</textPath>
   </text>
-  
-  <!-- Left icon: pesticide spray bottle -->
-  <rect x="60" y="100" width="25" height="50" rx="5" fill="white"/>
-  <text x="72" y="130" font-family="sans-serif" font-size="14" fill="black" text-anchor="middle">☠</text>
-  <line x1="85" y1="100" x2="95" y2="90" stroke="white" stroke-width="3"/>
-  <circle cx="98" cy="88" r="2" fill="white"/>
-  <circle cx="102" cy="85" r="2" fill="white"/>
-  <circle cx="106" cy="82" r="2" fill="white"/>
-  
-  <!-- Right icon: scales of justice on book -->
-  <rect x="170" y="140" width="40" height="10" fill="white"/>
-  <line x1="190" y1="100" x2="190" y2="140" stroke="white" stroke-width="3"/>
-  <line x1="170" y1="100" x2="210" y2="100" stroke="white" stroke-width="3"/>
-  <circle cx="175" cy="115" r="10" stroke="white" stroke-width="2" fill="none"/>
-  <circle cx="205" cy="115" r="10" stroke="white" stroke-width="2" fill="none"/>
 </svg>
