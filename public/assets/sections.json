@@ -1,0 +1,290 @@
+[
+  {
+    "n": "১",
+    "bn": "সংক্ষিপ্ত শিরোনাম ও প্রবর্তন",
+    "en": "Short Title & Commencement",
+    "bd": "এই আইন কীটনাশক (পেস্টিসাইডস) আইন, ২০১৮ নামে অভিহিত হবে এবং অবিলম্বে কার্যকর হবে।",
+    "be": "This Act shall be called the Pesticide Act, 2018 and shall come into force immediately.",
+    "p": 0
+  },
+  {
+    "n": "২",
+    "bn": "সংজ্ঞা",
+    "en": "Definitions",
+    "bd": "আইনে ২২টি সংজ্ঞা রয়েছে — আগাছা, উপাদান, কারিগরি উপদেষ্টা কমিটি, ক্ষুদ্র উৎপাদনকারী, গ্যারান্টি, নিবন্ধন, নিবন্ধন কর্তৃপক্ষ, নিবন্ধিত, পরিদর্শক, প্যাকেজ, পুনঃউৎপাদন, কীটনাশক, ব্র্যান্ড, বিজ্ঞাপন, বিধি, বিশ্লেষক, ব্যক্তি, ভেজাল কীটনাশক, লাইসেন্স, লাইসেন্সধারী, লাইসেন্সিং কর্তৃপক্ষ ও লেবেল।",
+    "be": "Contains 22 definitions including pesticide, registration, licence, label, brand, adulterated pesticide, inspector, analyst, etc.",
+    "p": 0
+  },
+  {
+    "n": "৩",
+    "bn": "অন্যান্য আইনের অতিরিক্ততা",
+    "en": "Overriding Effect",
+    "bd": "এই আইনের বিধানাবলী অন্য যেকোনো আইনের বিপক্ষ নয় এবং এর অতিরিক্ত হিসেবে প্রযোজ্য হবে।",
+    "be": "The provisions of this Act shall have effect notwithstanding anything inconsistent in any other law.",
+    "p": 0
+  },
+  {
+    "n": "৪",
+    "bn": "কীটনাশক নিবন্ধন",
+    "en": "Registration of Pesticide",
+    "bd": "নিবন্ধিত ব্র্যান্ড ব্যতীত কোনো ব্যক্তি কীটনাশক আমদানি, উৎপাদন, পুনঃউৎপাদন, বিক্রয় বা বিজ্ঞাপন প্রচার করতে পারবেন না।",
+    "be": "No person shall import, manufacture, sell or advertise any pesticide without a registered brand.",
+    "p": 0
+  },
+  {
+    "n": "৫",
+    "bn": "নিবন্ধনের জন্য আবেদন ও প্রদান",
+    "en": "Application & Grant of Registration",
+    "bd": "নিবন্ধন কর্তৃপক্ষের নিকট আবেদন করতে হবে; গ্যারান্টি, উপাদান ও ব্যবহারের উদ্দেশ্য যাচাই করে নিবন্ধন প্রদান করা হবে।",
+    "be": "Application to be made to the Registration Authority, which grants registration after verifying warranty, ingredients and intended use.",
+    "p": 0
+  },
+  {
+    "n": "৬",
+    "bn": "নিবন্ধনের মেয়াদ",
+    "en": "Validity of Registration",
+    "bd": "কীটনাশক ব্র্যান্ডের নিবন্ধনের মেয়াদ নিবন্ধনের তারিখ থেকে ৩ (তিন) বছর।",
+    "be": "Registration of a pesticide brand is valid for 3 years from the date of registration.",
+    "p": 0
+  },
+  {
+    "n": "৭",
+    "bn": "নিবন্ধন নবায়ন",
+    "en": "Renewal of Registration",
+    "bd": "মেয়াদ শেষের ৩০ দিন পূর্বে নবায়নের জন্য আবেদন করতে হবে; নবায়নের মেয়াদ ৩ বছর।",
+    "be": "Renewal application must be filed 30 days before expiry; renewed registration is valid for 3 years.",
+    "p": 0
+  },
+  {
+    "n": "৮",
+    "bn": "নিবন্ধন বাতিল",
+    "en": "Cancellation of Registration",
+    "bd": "বিধান লঙ্ঘন, মিথ্যা তথ্য প্রদান, কীটনাশক নিষ্ক্রিয় হলে বা স্বাস্থ্যের জন্য ঝুঁকিপূর্ণ হলে নিবন্ধন বাতিল করা যাবে।",
+    "be": "Registration may be cancelled for violation of provisions, false information, ineffectiveness or health hazard.",
+    "p": 0
+  },
+  {
+    "n": "৯",
+    "bn": "আমদানি, উৎপাদন ইত্যাদির জন্য লাইসেন্স",
+    "en": "Licence for Import, Manufacture, etc.",
+    "bd": "লাইসেন্স গ্রহণ ব্যতীত নিবন্ধিত কীটনাশক আমদানি, উৎপাদন, বিক্রয়, প্যাকেজিং ও বিজ্ঞাপন করা যাবে না।",
+    "be": "No import, manufacture, sale, packaging or advertising of registered pesticide without a licence.",
+    "p": 0
+  },
+  {
+    "n": "১০",
+    "bn": "লাইসেন্সের জন্য আবেদন ও প্রদান",
+    "en": "Application & Grant of Licence",
+    "bd": "লাইসেন্সিং কর্তৃপক্ষের নিকট আবেদন; নির্ধারিত পদ্ধতি ও শর্ত সাপেক্ষে লাইসেন্স প্রদান করা হবে।",
+    "be": "Apply to the Licensing Authority; licence granted subject to prescribed procedure and conditions.",
+    "p": 0
+  },
+  {
+    "n": "১১",
+    "bn": "লাইসেন্সের মেয়াদ",
+    "en": "Validity of Licence",
+    "bd": "লাইসেন্স প্রদানের তারিখ থেকে মেয়াদ ২ (দুই) বছর।",
+    "be": "A licence is valid for 2 years from the date of issue.",
+    "p": 0
+  },
+  {
+    "n": "১২",
+    "bn": "লাইসেন্স নবায়ন",
+    "en": "Renewal of Licence",
+    "bd": "মেয়াদ শেষের ৩০ দিন পূর্বে আবেদন করতে হবে; নবায়নের মেয়াদ ২ বছর।",
+    "be": "Renewal application 30 days before expiry; renewed licence valid for 2 years.",
+    "p": 0
+  },
+  {
+    "n": "১৩",
+    "bn": "লাইসেন্স হস্তান্তর",
+    "en": "Transfer of Licence",
+    "bd": "লাইসেন্সধারীর মৃত্যু বা ব্যবসা পরিচালনায় অক্ষম হলে তাঁর আইনানুগ উত্তরাধিকারীর অনুকূলে লাইসেন্স হস্তান্তর করা যাবে।",
+    "be": "On death or incapacity of the licensee, the licence may be transferred to the legal heir.",
+    "p": 0
+  },
+  {
+    "n": "১৪",
+    "bn": "লাইসেন্স স্থগিত ও বাতিল",
+    "en": "Suspension & Cancellation of Licence",
+    "bd": "শর্ত ভঙ্গ করলে লাইসেন্স স্থগিত বা বাতিল; শুনানির সুযোগ না দিয়ে স্থগিত/বাতিল করা যাবে না। ৬০ দিনের মধ্যে আপিল করা যাবে।",
+    "be": "Licence may be suspended/cancelled for breach of conditions, after hearing. Appeal lies within 60 days.",
+    "p": 0
+  },
+  {
+    "n": "১৫",
+    "bn": "আমদানি নিয়ন্ত্রণ ও নিষিদ্ধকরণ",
+    "en": "Control & Prohibition of Import",
+    "bd": "ভেজাল বা বিভ্রান্তিকর লেবেলযুক্ত কীটনাশক চিহ্নিত হলে লাইসেন্সিং কর্তৃপক্ষ পরবর্তী আমদানি নিষিদ্ধ করতে পারবে।",
+    "be": "The Licensing Authority may prohibit further import of adulterated or mislabelled pesticides.",
+    "p": 0
+  },
+  {
+    "n": "১৬",
+    "bn": "লেবেল ব্যবহারে বাধ্যবাধকতা",
+    "en": "Mandatory Use of Label",
+    "bd": "প্রতিটি কীটনাশকের প্যাকেজে নির্ধারিত পদ্ধতিতে স্পষ্ট অক্ষরে নাম, উপাদান ও তথ্য লেবেল আকারে মুদ্রিত হতে হবে।",
+    "be": "Every pesticide package must bear a label with name, ingredients and information in clear letters.",
+    "p": 0
+  },
+  {
+    "n": "১৭",
+    "bn": "সর্বোচ্চ বিক্রয় মূল্য নির্ধারণ",
+    "en": "Fixing Maximum Retail Price",
+    "bd": "সরকার, সরকারি গেজেটে প্রজ্ঞাপন দ্বারা, কোনো কীটনাশকের সর্বোচ্চ বিক্রয় মূল্য নির্ধারণ করতে পারবে।",
+    "be": "The Government may fix the maximum retail price of any pesticide by gazette notification.",
+    "p": 0
+  },
+  {
+    "n": "১৮",
+    "bn": "কীটনাশক মজুত ও ব্যবহার",
+    "en": "Storage & Use of Pesticide",
+    "bd": "নির্ধারিত পদ্ধতি ব্যতীত কেউ কীটনাশক মজুত বা ব্যবহার করতে পারবেন না।",
+    "be": "No person shall store or use any pesticide except in the prescribed manner.",
+    "p": 0
+  },
+  {
+    "n": "১৯",
+    "bn": "কীটনাশক কারিগরি উপদেষ্টা কমিটি",
+    "en": "Technical Advisory Committee",
+    "bd": "২৬ সদস্যবিশিষ্ট কারিগরি উপদেষ্টা কমিটি গঠিত হবে, যারা সরকারকে পরামর্শ প্রদান করবে।",
+    "be": "A 26-member Technical Advisory Committee shall advise the Government.",
+    "p": 0
+  },
+  {
+    "n": "২০",
+    "bn": "কীটনাশক গবেষণাগার",
+    "en": "Pesticide Research Laboratory",
+    "bd": "কীটনাশক গবেষণাগার এই আইনের অধীন প্রতিষ্ঠিত হিসেবে বিবেচিত হবে; পরীক্ষা ও বিশ্লেষণের পদ্ধতি বিধি দ্বারা নির্ধারিত।",
+    "be": "The Pesticide Research Laboratory shall be deemed established under this Act; testing procedures governed by rules.",
+    "p": 0
+  },
+  {
+    "n": "২১",
+    "bn": "বিশ্লেষক",
+    "en": "Analysts",
+    "bd": "কীটনাশকের নমুনা পরীক্ষা ও বিশ্লেষণের উদ্দেশ্যে সরকার প্রয়োজনীয় সংখ্যক বিশ্লেষক নিয়োগ করতে পারবে।",
+    "be": "The Government may appoint analysts for testing and analysis of pesticide samples.",
+    "p": 0
+  },
+  {
+    "n": "২২",
+    "bn": "বিশ্লেষকের প্রতিবেদন",
+    "en": "Report of Analyst",
+    "bd": "বিশ্লেষক ৩ কপি প্রতিবেদন পরিদর্শকের নিকট প্রেরণ করবেন; ৩০ দিনের মধ্যে আপত্তি জানানো যাবে।",
+    "be": "The analyst submits 3 copies of report to the inspector; objection may be raised within 30 days.",
+    "p": 0
+  },
+  {
+    "n": "২৩",
+    "bn": "পরীক্ষা ও বিশ্লেষণের ফলাফল প্রকাশনা",
+    "en": "Publication of Test Results",
+    "bd": "প্রয়োজনীয় মনে হলে সরকার পরীক্ষা ও বিশ্লেষণের ফলাফল প্রকাশ করতে পারবে।",
+    "be": "The Government may publish the results of tests and analyses.",
+    "p": 0
+  },
+  {
+    "n": "২৪",
+    "bn": "পরিদর্শক",
+    "en": "Inspectors",
+    "bd": "কীটনাশক সংশ্লিষ্ট দায়িত্ব পালনের জন্য সরকার প্রয়োজনীয় সংখ্যক পরিদর্শক নিয়োগ করবে।",
+    "be": "The Government shall appoint inspectors for enforcing the Act.",
+    "p": 0
+  },
+  {
+    "n": "২৫",
+    "bn": "পরিদর্শকের ক্ষমতা",
+    "en": "Powers of Inspector",
+    "bd": "পরিদর্শক যেকোনো স্থানে প্রবেশ, পরিদর্শন ও পরীক্ষার জন্য নমুনা সংগ্রহ করতে পারবেন।",
+    "be": "Inspectors may enter premises, inspect and collect samples.",
+    "p": 0
+  },
+  {
+    "n": "২৬",
+    "bn": "নমুনা সংগ্রহের পদ্ধতি",
+    "en": "Procedure of Sample Collection",
+    "bd": "নমুনা সংগ্রহের উদ্দেশ্য লিখিতভাবে জানাতে হবে; নমুনা দুই ভাগে বিভক্ত করে সিলগালা করা হবে — একটি বিশ্লেষকের, একটি গবেষণাগারের নিকট।",
+    "be": "Written notice required; sample divided into two sealed parts — one to analyst, one to laboratory.",
+    "p": 0
+  },
+  {
+    "n": "২৭",
+    "bn": "প্রবেশ, তল্লাশি ও জব্দকরণ",
+    "en": "Entry, Search & Seizure",
+    "bd": "যুক্তিসংগত কারণে বিশ্বাস হলে পরিদর্শক স্থানে প্রবেশ, তল্লাশি ও অপরাধ সংশ্লিষ্ট কীটনাশক জব্দ করতে পারবেন।",
+    "be": "On reasonable suspicion, the inspector may enter, search and seize pesticides connected with an offence.",
+    "p": 0
+  },
+  {
+    "n": "২৮",
+    "bn": "ক্রয়কারী কর্তৃক বিশ্লেষণ বা পরীক্ষা",
+    "en": "Analysis by Purchaser",
+    "bd": "ক্রয়কারী ব্যক্তি বিধি দ্বারা নির্ধারিত পদ্ধতিতে বিশ্লেষকের নিকট কীটনাশক পরীক্ষার আবেদন করতে পারবেন।",
+    "be": "A purchaser may apply to an analyst for testing of pesticide in the prescribed manner.",
+    "p": 0
+  },
+  {
+    "n": "২৯",
+    "bn": "প্যাকেজ চিহ্নিত না করা কীটনাশক বিক্রয়ের দণ্ড",
+    "en": "Penalty for Unlabelled Pesticide Sale",
+    "bd": "লেবেলবিহীন বা ভুল তথ্যযুক্ত কীটনাশক বিক্রয় করলে — প্রথমবার: অনূর্ধ্ব ১.৫ লক্ষ টাকা জরিমানা ও ১.৫ বছর কারাদণ্ড; পুনরাবৃত্তিতে ২.৫ লক্ষ টাকা ও ২.৫ বছর।",
+    "be": "Selling unlabelled/misrepresented pesticide: up to Tk 1.5 lakh fine & 1.5 years imprisonment; repeat offence Tk 2.5 lakh & 2.5 years.",
+    "p": 1
+  },
+  {
+    "n": "৩০",
+    "bn": "মিথ্যা ওয়্যারেন্টি প্রদানের দণ্ড",
+    "en": "Penalty for False Warranty",
+    "bd": "উৎপাদনকারী ডিলারকে মিথ্যা ওয়্যারেন্টি দিলে — অনূর্ধ্ব ১.৫ লক্ষ টাকা জরিমানা ও ১.৫ বছর কারাদণ্ড।",
+    "be": "Manufacturer giving false warranty to dealer: up to Tk 1.5 lakh fine & 1.5 years imprisonment.",
+    "p": 1
+  },
+  {
+    "n": "৩১",
+    "bn": "নিবন্ধন বহির্ভূত ব্যবহার, মান হ্রাস ও বাধা প্রদানের দণ্ড",
+    "en": "Penalty for Unauthorised Use, Adulteration & Obstruction",
+    "bd": "নিবন্ধন নম্বর অপব্যবহার, ভেজাল মিশ্রণ, পরিদর্শককে বাধা বা মিথ্যা তথ্য প্রদানে — ৭৫ হাজার থেকে ১.৫ লক্ষ টাকা জরিমানা এবং ১.৫ থেকে ২.৫ বছর কারাদণ্ড।",
+    "be": "Misuse of registration number, adulteration, obstructing inspector or false information: Tk 75,000–1.5 lakh fine & 1.5–2.5 years imprisonment.",
+    "p": 1
+  },
+  {
+    "n": "৩২",
+    "bn": "আদালত কর্তৃক বাজেয়াপ্তকরণের ক্ষমতা",
+    "en": "Power of Court to Forfeit",
+    "bd": "অপরাধে ব্যবহৃত কীটনাশক ও সংশ্লিষ্ট দ্রব্যাদি আদালত সরকারের অনুকূলে বাজেয়াপ্ত করতে পারবে।",
+    "be": "The court may forfeit pesticides and related items used in the offence to the Government.",
+    "p": 0
+  },
+  {
+    "n": "৩৩",
+    "bn": "অপরাধ বিচারার্থ গ্রহণ ও বিচার",
+    "en": "Cognizance & Trial of Offences",
+    "bd": "পরিদর্শকের লিখিত অভিযোগ ব্যতীত কোনো আদালত অপরাধ আমলে নেবে না; প্রথম শ্রেণির ম্যাজিস্ট্রেট বা মেট্রোপলিটন ম্যাজিস্ট্রেট বিচার করবেন।",
+    "be": "No court takes cognizance except on written complaint of an inspector; trial by 1st Class or Metropolitan Magistrate.",
+    "p": 0
+  },
+  {
+    "n": "৩৪",
+    "bn": "মোবাইল কোর্ট আইনের প্রয়োগ",
+    "en": "Application of Mobile Court Act",
+    "bd": "প্রয়োজন ক্ষেত্রে মোবাইল কোর্ট আইন, ২০০৯ এর তফসিলভুক্ত করে বিচার করা যাবে।",
+    "be": "Offences may be tried under the Mobile Court Act, 2009 by inclusion in its schedule.",
+    "p": 0
+  },
+  {
+    "n": "৩৫",
+    "bn": "বিধি প্রণয়নের ক্ষমতা",
+    "en": "Power to Make Rules",
+    "bd": "এই আইনের উদ্দেশ্য পূরণকল্পে সরকার, সরকারি গেজেটে প্রজ্ঞাপন দ্বারা, বিধি প্রণয়ন করতে পারবে।",
+    "be": "The Government may make rules by gazette notification for carrying out the purposes of this Act.",
+    "p": 0
+  },
+  {
+    "n": "৩৬",
+    "bn": "রহিতকরণ ও হেফাজত",
+    "en": "Repeal & Savings",
+    "bd": "Pesticides Ordinance, 1971 রহিত করা হলো; তবে রহিত অধ্যাদেশের অধীন গৃহীত কার্যক্রম, বিধি ও লাইসেন্স এই আইনের অধীন বলবৎ থাকবে।",
+    "be": "The Pesticides Ordinance, 1971 is repealed; actions, rules and licences under it continue as if under this Act.",
+    "p": 0
+  }
+]

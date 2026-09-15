@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Rounded container background: Bangladesh Green -->
+  <rect width="512" height="512" rx="112" fill="#006a4e"/>
+  
+  <!-- Bangladesh Red Circle (slightly left of center, like the official flag for dynamic balance) -->
+  <circle cx="236" cy="256" r="130" fill="#f42a41"/>
+  
+  <!-- Modern line-art / minimalist chemistry flask combined with a leaf in white -->
+  <g fill="none" stroke="#ffffff" stroke-width="24" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Erlenmeyer Flask Outline -->
+    <path d="M216 110 h80 M256 110 v80 M180 390 h152 M216 110 v110 L130 390 A 20 20 0 0 0 148 410 h216 a 20 20 0 0 0 18 -20 L296 220 V110" />
+    
+    <!-- Stylized Leaf inside the flask -->
+    <path d="M256 220 C290 260 290 320 256 360 C222 320 222 260 256 220 Z" fill="#ffffff" fill-opacity="0.25" />
+    <path d="M256 220 V360" stroke-width="16" />
+    <path d="M256 270 C270 280 275 295 275 295 M256 300 C238 310 235 325 235 325" stroke-width="16" />
+  </g>
+</svg>
