@@ -36,30 +36,25 @@ import {
   WifiOff,
 } from "lucide-react";
 
-// Custom Government seal icon — Bangladesh flag inspired (green ring + red disc)
+// Custom Pesticide Act 2018 logo icon — Red/Green rings with red center
 function GovSealIcon({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.6"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
       aria-hidden="true"
     >
-      {/* Outer green seal ring */}
-      <circle cx="12" cy="12" r="10" strokeWidth="1.6" />
-      {/* Inner thin ring */}
-      <circle cx="12" cy="12" r="8" strokeWidth="0.6" opacity="0.6" />
-      {/* Central red disc — Bangladesh flag inspired */}
-      <circle cx="12" cy="12" r="4" fill="#f42a41" stroke="none" />
-      {/* Decorative dots around ring (law/justice seal pattern) */}
-      <circle cx="12" cy="2.5" r="0.6" fill="currentColor" stroke="none" />
-      <circle cx="12" cy="21.5" r="0.6" fill="currentColor" stroke="none" />
-      <circle cx="2.5" cy="12" r="0.6" fill="currentColor" stroke="none" />
-      <circle cx="21.5" cy="12" r="0.6" fill="currentColor" stroke="none" />
+      {/* Outer red ring */}
+      <circle cx="12" cy="12" r="10.5" stroke="red" strokeWidth="1.8" />
+      {/* Inner green ring */}
+      <circle cx="12" cy="12" r="7.5" stroke="green" strokeWidth="1.8" />
+      {/* Central red circle */}
+      <circle cx="12" cy="12" r="4.5" fill="red" stroke="none" />
     </svg>
   );
 }
