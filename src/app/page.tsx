@@ -102,13 +102,13 @@ const DECKS = [
 
 // 7 chapter overview (mirrors the deck's TOC)
 const CHAPTERS = [
-  { num: "০১", title: "সংকটের প্রেক্ষাপট", range: "স্লাইড ৩–৬", summary: "ভেজাল বালাইনাশক কৃষক, ভোক্তা ও পরিবেশের জন্য বহুমুখী ক্ষতির কারণ — বাংলাদেশে বাজারের ১৫–২০% ভেজাল।" },
-  { num: "০২", title: "ভেজাল চেনার বিজ্ঞান", range: "স্লাইড ৭–১৩", summary: "WHO সংজ্ঞা ও ৫টি শ্রেণির ভিত্তিতে চাক্ষুষ ও পরীক্ষাগার (HPLC/GC) শনাক্তকরণ।" },
-  { num: "০৩", title: "বালাইনাশক আইন, ২০১৮", range: "স্লাইড ১৪–২০", summary: "নিবন্ধন, লাইসেন্সিং, MRP ও লেবেলিং — ৩৬টি ধারায় সরকারি নিয়ন্ত্রণের কাঠামো।" },
-  { num: "০৪", title: "মাঠ পর্যায়ে শনাক্তকরণ", range: "স্লাইড ২১–২৭", summary: "৫-ধাপ চেকলিস্ট ও ৩-শ্রেণি রেড ফ্ল্যাগ দিয়ে দোকানে ভেজাল ধরা — দুটি বাস্তব কেসস্টাডি সহ।" },
-  { num: "০৫", title: "প্রতিরোধ ক্ষমতা ও দীর্ঘমেয়াদি ক্ষতি", range: "স্লাইড ২৮–৩৪", summary: "অনিয়ন্ত্রিত ব্যবহার পোকা প্রতিরোধী করে — মাটি, পানি ও স্বাস্থ্যের স্থায়ী ক্ষতি।" },
-  { num: "০৬", title: "আইন প্রয়োগ ও দণ্ডবিধি", range: "স্লাইড ৩৫–৩৯", summary: "পরিদর্শকের ক্ষমতা, নমুনা সংগ্রহ, জরিমানা (১–৩ লক্ষ ৳) ও বাজেয়াপ্তকরণ।" },
-  { num: "০৭", title: "খুচরা বিক্রেতার সম্মানের পথ", range: "স্লাইড ৪০–৪৭", summary: "IRM প্রচার, নৈতিক অনুশীলন ও গ্রাহক শিক্ষার মাধ্যমে সম্মান — বিক্রেতা কৃষকের রক্ষক।" },
+  { num: "০১", title: "সংকটের প্রেক্ষাপট", range: "স্লাইড ৩–৬", startSlide: 3, summary: "ভেজাল বালাইনাশক কৃষক, ভোক্তা ও পরিবেশের জন্য বহুমুখী ক্ষতির কারণ — বাংলাদেশে বাজারের ১৫–২০% ভেজাল।" },
+  { num: "০২", title: "ভেজাল চেনার বিজ্ঞান", range: "স্লাইড ৭–১৩", startSlide: 7, summary: "WHO সংজ্ঞা ও ৫টি শ্রেণির ভিত্তিতে চাক্ষুষ ও পরীক্ষাগার (HPLC/GC) শনাক্তকরণ।" },
+  { num: "০৩", title: "বালাইনাশক আইন, ২০১৮", range: "স্লাইড ১৪–২০", startSlide: 14, summary: "নিবন্ধন, লাইসেন্সিং, MRP ও লেবেলিং — ৩৬টি ধারায় সরকারি নিয়ন্ত্রণের কাঠামো।" },
+  { num: "০৪", title: "মাঠ পর্যায়ে শনাক্তকরণ", range: "স্লাইড ২১–২৭", startSlide: 21, summary: "৫-ধাপ চেকলিস্ট ও ৩-শ্রেণি রেড ফ্ল্যাগ দিয়ে দোকানে ভেজাল ধরা — দুটি বাস্তব কেসস্টাডি সহ।" },
+  { num: "০৫", title: "প্রতিরোধ ক্ষমতা ও দীর্ঘমেয়াদি ক্ষতি", range: "স্লাইড ২৮–৩৪", startSlide: 28, summary: "অনিয়ন্ত্রিত ব্যবহার পোকা প্রতিরোধী করে — মাটি, পানি ও স্বাস্থ্যের স্থায়ী ক্ষতি।" },
+  { num: "০৬", title: "আইন প্রয়োগ ও দণ্ডবিধি", range: "স্লাইড ৩৫–৩৯", startSlide: 35, summary: "পরিদর্শকের ক্ষমতা, নমুনা সংগ্রহ, জরিমানা (১–৩ লক্ষ ৳) ও বাজেয়াপ্তকরণ।" },
+  { num: "০৭", title: "খুচরা বিক্রেতার সম্মানের পথ", range: "স্লাইড ৪০–৪৭", startSlide: 40, summary: "IRM প্রচার, নৈতিক অনুশীলন ও গ্রাহক শিক্ষার মাধ্যমে সম্মান — বিক্রেতা কৃষকের রক্ষক।" },
 ];
 
 const AI_SUGGESTIONS = [
@@ -229,6 +229,7 @@ export default function Home() {
     return "overview";
   });
   const [activeTab, setActiveTab] = useState<TabId>(initialTab);
+  const [slideJump, setSlideJump] = useState<number | null>(null);
 
   // Web Share API — opens custom share dialog with 1200x630 preview
   const [shareOpen, setShareOpen] = useState(false);
@@ -415,9 +416,9 @@ export default function Home() {
 
       {/* Main content */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-6 md:py-10">
-        {activeTab === "overview" && <OverviewTab onNavigate={setActiveTab} />}
+        {activeTab === "overview" && <OverviewTab onNavigate={setActiveTab} onChapterClick={(slide) => { setSlideJump(slide); setActiveTab("slides"); }} />}
         {activeTab === "act" && <ActTab />}
-        {activeTab === "slides" && <SlidesTab onDownload={requestDownload} />}
+        {activeTab === "slides" && <SlidesTab onDownload={requestDownload} jumpTo={slideJump} onJumpConsumed={() => setSlideJump(null)} />}
         {activeTab === "downloads" && <DownloadsTab onDownload={requestDownload} />}
         {activeTab === "ai" && <AiTab />}
       </main>
@@ -737,7 +738,7 @@ function TabButton({ id, active, onClick, children, full }: {
 }
 
 /* ============== Overview Tab ============== */
-function OverviewTab({ onNavigate }: { onNavigate: (t: TabId) => void }) {
+function OverviewTab({ onNavigate, onChapterClick }: { onNavigate: (t: TabId) => void; onChapterClick: (slideNum: number) => void }) {
   return (
     <div className="space-y-6">
       {/* Hero */}
@@ -841,26 +842,53 @@ function OverviewTab({ onNavigate }: { onNavigate: (t: TabId) => void }) {
         ))}
       </div>
 
-      {/* Chapters */}
+      {/* Chapters — interactive, click to jump to slides */}
       <div>
         <h3 className="font-serif-bn text-xl md:text-2xl font-bold text-[#004d38] mb-4 flex items-center gap-2">
-          <ListTree className="w-5 h-5 text-[#f42a41]" /> সাতটি অধ্যায় — এক নজরে
+          <ListTree className="w-5 h-5 text-[#f42a41]" /> সাতটি অধ্যায় — ক্লিক করে স্লাইড খুলুন
         </h3>
         <div className="grid md:grid-cols-2 gap-3">
-          {CHAPTERS.map((c) => (
-            <Card key={c.num} className="p-4 border-[#c8e6d5] hover:border-[#f42a41] hover:shadow-md transition-all">
-              <div className="flex gap-3">
-                <div className="w-11 h-11 rounded-full bg-[#006a4e] text-white flex items-center justify-center font-num font-bold text-base flex-shrink-0">
-                  {c.num}
+          {CHAPTERS.map((c) => {
+            const slidePadded = String(c.startSlide).padStart(2, "0");
+            return (
+              <button
+                key={c.num}
+                onClick={() => onChapterClick(c.startSlide)}
+                className="text-left p-0 rounded-xl overflow-hidden border border-[#c8e6d5] hover:border-[#f42a41] hover:shadow-lg transition-all bg-white group cursor-pointer"
+              >
+                <div className="flex gap-0">
+                  {/* Slide thumbnail preview */}
+                  <div className="w-28 h-full flex-shrink-0 bg-[#006a4e] relative overflow-hidden">
+                    <img
+                      src={`/decks/khuchra/slide-${slidePadded}.webp`}
+                      alt={`${c.title} প্রিভিউ`}
+                      className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#006a4e]/80 to-transparent" />
+                    <div className="absolute top-1 left-1 bg-[#006a4e] text-white text-[10px] px-1.5 py-0.5 rounded font-num font-bold">
+                      {c.num}
+                    </div>
+                  </div>
+                  {/* Content */}
+                  <div className="flex-1 p-3 min-w-0">
+                    <h4 className="font-serif-bn font-bold text-[#004d38] text-sm mb-0.5 group-hover:text-[#f42a41] transition-colors">
+                      {c.title}
+                    </h4>
+                    <p className="text-[10px] text-[#5a7568] mb-1 font-num flex items-center gap-1">
+                      <Presentation className="w-2.5 h-2.5" />
+                      {c.range}
+                    </p>
+                    <p className="text-xs text-[#3d5a4a] leading-relaxed line-clamp-2">{c.summary}</p>
+                    <div className="flex items-center gap-1 mt-1.5 text-[#006a4e] group-hover:text-[#f42a41] transition-colors">
+                      <span className="text-[10px] font-sans-bn font-semibold">স্লাইড খুলুন</span>
+                      <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <h4 className="font-serif-bn font-bold text-[#004d38] text-base mb-0.5">{c.title}</h4>
-                  <p className="text-xs text-[#5a7568] mb-1.5 font-num">{c.range}</p>
-                  <p className="text-sm text-[#3d5a4a] leading-relaxed">{c.summary}</p>
-                </div>
-              </div>
-            </Card>
-          ))}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -928,7 +956,7 @@ function ActTab() {
 }
 
 /* ============== Slides Tab — multi-deck viewer with autoplay ============== */
-function SlidesTab({ onDownload }: { onDownload: (url: string, name: string) => void }) {
+function SlidesTab({ onDownload, jumpTo, onJumpConsumed }: { onDownload: (url: string, name: string) => void; jumpTo?: number | null; onJumpConsumed?: () => void }) {
   const [deckId, setDeckId] = useState<string>(DECKS[0].id);
   const [idx, setIdx] = useState(1);
   const [playing, setPlaying] = useState(false);
@@ -962,6 +990,18 @@ function SlidesTab({ onDownload }: { onDownload: (url: string, name: string) => 
     setPlaying(false);
     setProgress(0);
   };
+
+  // Handle jump-to from chapter click — switches to khuchra deck + sets slide
+  useEffect(() => {
+    if (jumpTo && jumpTo > 0) {
+      // Ensure khuchra deck is selected (chapter slides map to khuchra)
+      setDeckId("khuchra");
+      setIdx(jumpTo);
+      setPlaying(false);
+      setProgress(0);
+      onJumpConsumed?.();
+    }
+  }, [jumpTo]);
 
   // Keyboard navigation
   useEffect(() => {
