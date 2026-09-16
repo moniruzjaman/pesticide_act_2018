@@ -102,13 +102,13 @@ const DECKS = [
 
 // 7 chapter overview (mirrors the deck's TOC)
 const CHAPTERS = [
-  { num: "০১", title: "সংকটের প্রেক্ষাপট", range: "স্লাইড ৩–৬", startSlide: 3, summary: "ভেজাল বালাইনাশক কৃষক, ভোক্তা ও পরিবেশের জন্য বহুমুখী ক্ষতির কারণ — বাংলাদেশে বাজারের ১৫–২০% ভেজাল।" },
-  { num: "০২", title: "ভেজাল চেনার বিজ্ঞান", range: "স্লাইড ৭–১৩", startSlide: 7, summary: "WHO সংজ্ঞা ও ৫টি শ্রেণির ভিত্তিতে চাক্ষুষ ও পরীক্ষাগার (HPLC/GC) শনাক্তকরণ।" },
-  { num: "০৩", title: "বালাইনাশক আইন, ২০১৮", range: "স্লাইড ১৪–২০", startSlide: 14, summary: "নিবন্ধন, লাইসেন্সিং, MRP ও লেবেলিং — ৩৬টি ধারায় সরকারি নিয়ন্ত্রণের কাঠামো।" },
-  { num: "০৪", title: "মাঠ পর্যায়ে শনাক্তকরণ", range: "স্লাইড ২১–২৭", startSlide: 21, summary: "৫-ধাপ চেকলিস্ট ও ৩-শ্রেণি রেড ফ্ল্যাগ দিয়ে দোকানে ভেজাল ধরা — দুটি বাস্তব কেসস্টাডি সহ।" },
-  { num: "০৫", title: "প্রতিরোধ ক্ষমতা ও দীর্ঘমেয়াদি ক্ষতি", range: "স্লাইড ২৮–৩৪", startSlide: 28, summary: "অনিয়ন্ত্রিত ব্যবহার পোকা প্রতিরোধী করে — মাটি, পানি ও স্বাস্থ্যের স্থায়ী ক্ষতি।" },
-  { num: "০৬", title: "আইন প্রয়োগ ও দণ্ডবিধি", range: "স্লাইড ৩৫–৩৯", startSlide: 35, summary: "পরিদর্শকের ক্ষমতা, নমুনা সংগ্রহ, জরিমানা (১–৩ লক্ষ ৳) ও বাজেয়াপ্তকরণ।" },
-  { num: "০৭", title: "খুচরা বিক্রেতার সম্মানের পথ", range: "স্লাইড ৪০–৪৭", startSlide: 40, summary: "IRM প্রচার, নৈতিক অনুশীলন ও গ্রাহক শিক্ষার মাধ্যমে সম্মান — বিক্রেতা কৃষকের রক্ষক।" },
+  { num: "০১", title: "সংকটের প্রেক্ষাপট", range: "স্লাইড ৩–৬", startSlide: 3, thumbSlide: 4, summary: "ভেজাল বালাইনাশক কৃষক, ভোক্তা ও পরিবেশের জন্য বহুমুখী ক্ষতির কারণ — বাংলাদেশে বাজারের ১৫–২০% ভেজাল।" },
+  { num: "০২", title: "ভেজাল চেনার বিজ্ঞান", range: "স্লাইড ৭–১৩", startSlide: 7, thumbSlide: 8, summary: "WHO সংজ্ঞা ও ৫টি শ্রেণির ভিত্তিতে চাক্ষুষ ও পরীক্ষাগার (HPLC/GC) শনাক্তকরণ।" },
+  { num: "০৩", title: "বালাইনাশক আইন, ২০১৮", range: "স্লাইড ১৪–২০", startSlide: 14, thumbSlide: 17, summary: "নিবন্ধন, লাইসেন্সিং, MRP ও লেবেলিং — ৩৬টি ধারায় সরকারি নিয়ন্ত্রণের কাঠামো।" },
+  { num: "০৪", title: "মাঠ পর্যায়ে শনাক্তকরণ", range: "স্লাইড ২১–২৭", startSlide: 21, thumbSlide: 25, summary: "৫-ধাপ চেকলিস্ট ও ৩-শ্রেণি রেড ফ্ল্যাগ দিয়ে দোকানে ভেজাল ধরা — দুটি বাস্তব কেসস্টাডি সহ।" },
+  { num: "০৫", title: "প্রতিরোধ ক্ষমতা ও দীর্ঘমেয়াদি ক্ষতি", range: "স্লাইড ২৮–৩৪", startSlide: 28, thumbSlide: 33, summary: "অনিয়ন্ত্রিত ব্যবহার পোকা প্রতিরোধী করে — মাটি, পানি ও স্বাস্থ্যের স্থায়ী ক্ষতি।" },
+  { num: "০৬", title: "আইন প্রয়োগ ও দণ্ডবিধি", range: "স্লাইড ৩৫–৩৯", startSlide: 35, thumbSlide: 42, summary: "পরিদর্শকের ক্ষমতা, নমুনা সংগ্রহ, জরিমানা (১–৩ লক্ষ ৳) ও বাজেয়াপ্তকরণ।" },
+  { num: "০৭", title: "খুচরা বিক্রেতার সম্মানের পথ", range: "স্লাইড ৪০–৪৭", startSlide: 40, thumbSlide: 48, summary: "IRM প্রচার, নৈতিক অনুশীলন ও গ্রাহক শিক্ষার মাধ্যমে সম্মান — বিক্রেতা কৃষকের রক্ষক।" },
 ];
 
 const AI_SUGGESTIONS = [
@@ -849,7 +849,7 @@ function OverviewTab({ onNavigate, onChapterClick }: { onNavigate: (t: TabId) =>
         </h3>
         <div className="grid md:grid-cols-2 gap-3">
           {CHAPTERS.map((c) => {
-            const slidePadded = String(c.startSlide).padStart(2, "0");
+            const thumbPadded = String(c.thumbSlide).padStart(2, "0");
             return (
               <button
                 key={c.num}
@@ -857,12 +857,12 @@ function OverviewTab({ onNavigate, onChapterClick }: { onNavigate: (t: TabId) =>
                 className="text-left p-0 rounded-xl overflow-hidden border border-[#c8e6d5] hover:border-[#f42a41] hover:shadow-lg transition-all bg-white group cursor-pointer"
               >
                 <div className="flex gap-0">
-                  {/* Slide thumbnail preview */}
+                  {/* Pictorial slide thumbnail — more visual, 56 slides */}
                   <div className="w-28 h-full flex-shrink-0 bg-[#006a4e] relative overflow-hidden">
                     <img
-                      src={`/decks/khuchra/slide-${slidePadded}.webp`}
+                      src={`/decks/pictorial/slide-${thumbPadded}.webp`}
                       alt={`${c.title} প্রিভিউ`}
-                      className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                      className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:opacity-100 transition-opacity"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#006a4e]/80 to-transparent" />
