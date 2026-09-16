@@ -416,6 +416,17 @@ export default function Home() {
 
       {/* Main content */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-6 md:py-10">
+        {/* Back button — visible on all tabs except overview */}
+        {activeTab !== "overview" && (
+          <button
+            onClick={() => setActiveTab("overview")}
+            className="mb-4 inline-flex items-center gap-2 text-sm text-[#006a4e] hover:text-[#f42a41] font-sans-bn font-semibold transition-colors group"
+          >
+            <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+            ফিরে যান
+            <span className="text-[#5a7568] text-xs ml-1">· সূচিতে</span>
+          </button>
+        )}
         {activeTab === "overview" && <OverviewTab onNavigate={setActiveTab} onChapterClick={(slide) => { setSlideJump(slide); setActiveTab("slides"); }} />}
         {activeTab === "act" && <ActTab />}
         {activeTab === "slides" && <SlidesTab onDownload={requestDownload} jumpTo={slideJump} onJumpConsumed={() => setSlideJump(null)} />}
